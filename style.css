@@ -9,20 +9,20 @@ section{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 80%;
-    min-width: 15rem;
-    margin: 20vh auto 0 auto;
+    margin: 25vh auto 0 auto;
 }
 figure{
     display: block;
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
     background: gray;
     border-radius: 50%;
     margin: 0.2rem;
+    transition: 0.2s;
 }
 .on{
-background:blue;
+    background: blue;
+    box-shadow: 0 0 2rem 0.2rem blue;
 }
 .hours, .minutes, .seconds{
     display: flex;
