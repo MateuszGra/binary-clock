@@ -1,9 +1,4 @@
 (function() {
-        let currentDate = new Date();
-        let hours = currentDate.getHours();
-        let minutes = currentDate.getMinutes();
-        let seconds = currentDate.getSeconds();
-
         const leds = [
             [
                 document.querySelector(".oneTensHours"),
@@ -32,9 +27,9 @@
                 document.querySelector(".fourUnitiesSeconds"),
                 document.querySelector(".eightUnitiesSeconds"),
             ],
-        ];  
+        ];
 
-        function showtime(variable, section){
+        function showTime(variable, section){
             let tens = variable / 10
             tens = Math.floor(tens);
             let unities = variable - tens * 10;
@@ -76,19 +71,15 @@
             }
         }
 
-        showtime(hours, leds[0]);
-        showtime(minutes, leds[1]);
-        showtime(seconds, leds[2]);
-
         setInterval(function(){ 
-            currentDate = new Date();
-            hours = currentDate.getHours();
-            minutes = currentDate.getMinutes();
-            seconds = currentDate.getSeconds();
+            let currentDate = new Date();
+            let hours = currentDate.getHours();
+            let minutes = currentDate.getMinutes();
+            let seconds = currentDate.getSeconds();
 
             reset();
-            showtime(hours, leds[0]);
-            showtime(minutes, leds[1]);
-            showtime(seconds, leds[2]);
+            showTime(hours, leds[0]);
+            showTime(minutes, leds[1]);
+            showTime(seconds, leds[2]);
          }, 100);
 })();
