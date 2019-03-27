@@ -2,7 +2,7 @@
 binary clock
 ________________________________________
 link:
-https://github.com/MateuszGra/binary-clock
+https://mateuszgra.github.io/binary-clock/
 
 
 How to Read a Binary Clock?
