@@ -1,0 +1,39 @@
+@import url(reset.css);
+html{
+    font-size: 62.5%;
+}
+body{
+    background: black;
+}
+section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    min-width: 15rem;
+    margin: 20vh auto 0 auto;
+}
+figure{
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    background: gray;
+    border-radius: 50%;
+    margin: 0.2rem;
+}
+.on{
+background:blue;
+}
+.hours, .minutes, .seconds{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 0 1rem 0 1rem;
+}
+.tens, .unities{
+    display: flex;
+    flex-direction: column-reverse
+}
+.fourTensHours{
+    display: none;
+}
