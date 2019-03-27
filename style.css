@@ -34,6 +34,3 @@ figure{
     display: flex;
     flex-direction: column-reverse
 }
-.fourTensHours{
-    display: none;
-}
