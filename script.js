@@ -28,47 +28,130 @@
                 document.querySelector(".eightUnitiesSeconds"),
             ],
         ];
+        const colors = [
+                'red',
+                'yellow',
+                'green',
+                'mint',
+                'ice',
+                'blue',
+                'purple',
+                'pink',
+        ];
+
+        const menuLeds = [
+            document.querySelector(".wheel1"),
+            document.querySelector(".wheel2"),
+            document.querySelector(".wheel3"),
+            document.querySelector(".wheel4"),
+            document.querySelector(".wheel5"),
+            document.querySelector(".wheel6"),
+            document.querySelector(".wheel7"),
+            document.querySelector(".wheel8"),
+        ];
+        const ledsOff = [
+            document.getElementById('ledsOff1'),
+            document.getElementById('ledsOff2'),
+            document.getElementById('ledsOff3'),
+            document.getElementById('ledsOff4'),
+            document.getElementById('ledsOff5'),
+            document.getElementById('ledsOff6'),
+            document.getElementById('ledsOff7'),
+            document.getElementById('ledsOff8'),
+            document.getElementById('ledsOff9'),
+            document.getElementById('ledsOff10'),
+            document.getElementById('ledsOff11'),
+            document.getElementById('ledsOff12'),
+            document.getElementById('ledsOff13'),
+            document.getElementById('ledsOff14'),
+            document.getElementById('ledsOff15'),
+            document.getElementById('ledsOff16'),
+            document.getElementById('ledsOff17'),
+            document.getElementById('ledsOff18'),
+            document.getElementById('ledsOff19'),
+            document.getElementById('ledsOff20'),
+            document.getElementById('ledsOff21'),
+            document.getElementById('ledsOff22'),
+            document.getElementById('ledsOff23'),
+            document.getElementById('ledsOff24'),
+        ]
+
+        let classOn = 'blue';
+        let classOff = 'blueOff';
+
+        menuLeds[5].classList.add(classOn);
+
+        for (let i=0; i<colors.length; i++) {
+            menuLeds[i].addEventListener("click", function(){
+                classOn = colors[i];
+                classOff = colors[i] + 'Off';
+                for (let o=0; o<menuLeds.length; o++) {
+                    menuLeds[o].classList.remove(colors[o]);
+                }
+                menuLeds[i].classList.add(colors[i]);
+            });
+            menuLeds[i].addEventListener("touch", function(){
+                classOn = colors[i];
+                classOff = colors[i] + 'Off';
+                for (let o=0; o<menuLeds.length; o++) {
+                    menuLeds[o].classList.remove(colors[o]);
+                }
+                menuLeds[i].classList.add(colors[i]);
+            });
+        }
 
         function showTime(variable, section){
+            for (let i=0; i<ledsOff.length; i++) {
+                ledsOff[i].classList.add(classOff);
+            }
+
             let tens = variable / 10
             tens = Math.floor(tens);
             let unities = variable - tens * 10;
 
             if(unities >= 8){
-                section[6].classList.add('on');
+                section[6].classList.add(classOn);
                 unities = unities - 8
             }
             if(unities >= 4){
-                section[5].classList.add('on');
+                section[5].classList.add(classOn);
                 unities = unities - 4
             }
             if(unities >= 2){
-                section[4].classList.add('on');
+                section[4].classList.add(classOn);
                 unities = unities - 2
             }
             if(unities >= 1){
-                section[3].classList.add('on');
+                section[3].classList.add(classOn);
             }
 
             if(tens >= 4){
-                section[2].classList.add('on');
+                section[2].classList.add(classOn);
                 tens = tens - 4
             }
             if(tens >= 2){
-                section[1].classList.add('on');
+                section[1].classList.add(classOn);
                 tens = tens - 2
             }
             if(tens >= 1){
-                section[0].classList.add('on');
+                section[0].classList.add(classOn);
             }
         }
 
         function reset(){
             for (let i=0; i<leds.length; i++) {
                 for (let o=0; o<leds[i].length; o++) {
-                    leds[i][o].classList.remove('on');
+                    for (let z=0; z<colors.length; z++) {
+                        leds[i][o].classList.remove(colors[z]);
+                    }
                 }
             }
+            for (let i=0; i<ledsOff.length; i++) {
+                for (let o=0; o<colors.length; o++) {
+                    ledsOff[i].classList.remove(colors[o] + 'Off');
+                }
+            }
+
         }
 
         setInterval(function(){ 

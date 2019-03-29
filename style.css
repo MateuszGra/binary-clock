@@ -15,14 +15,9 @@ figure{
     display: block;
     width: 3rem;
     height: 3rem;
-    background: #00003e;
     border-radius: 50%;
     margin: 0.2rem;
     transition: 0.2s;
-}
-.on{
-    background: #0042ff;
-    box-shadow: 0 0 2rem 0.2rem #0042ff;
 }
 .hours, .minutes, .seconds{
     display: flex;
@@ -32,5 +27,76 @@ figure{
 }
 .tens, .unities{
     display: flex;
-    flex-direction: column-reverse
+    flex-direction: column-reverse;
+}
+.display{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 15vh auto 0 auto;
+}
+
+/*  COLORS  */
+.redOff{
+    background: #240000;
+}
+.yellowOff{
+    background: #222500;
+}
+.greenOff{
+    background: #002501;
+}
+.mintOff{
+    background: #002413;
+}
+.iceOff{
+    background: #002324;
+}
+.blueOff{
+    background: #00003e;
+}
+.purpleOff{
+    background: #190024;
+}
+.pinkOff{
+    background: #24001f;
+}
+.red{
+    background: #ff0000;
+    box-shadow: 0 0 2rem 0.2rem #ff0000;
+}
+.yellow{
+    background: #f0ff00;
+    box-shadow: 0 0 2rem 0.2rem #f0ff00;
+}
+.green{
+    background: #44ff03;
+    box-shadow: 0 0 2rem 0.2rem #44ff03;
+}
+.mint{
+    background: #00ff5a;
+    box-shadow: 0 0 2rem 0.2rem #00ff5a;
+}
+.ice{
+    background: #00ffd8;
+    box-shadow: 0 0 2rem 0.2rem #00ffd8;
+}
+.blue{
+    background: #0042ff;
+    box-shadow: 0 0 2rem 0.2rem #0042ff;
+}
+.purple{
+    background: #ba00ff;
+    box-shadow: 0 0 2rem 0.2rem #ba00ff;
+}
+.pink{
+    background: #ff00d8;
+    box-shadow: 0 0 2rem 0.2rem #ff00d8;
+}
+.red, .yellow, .green, .mint, .ice, .blue, .purple, .pink{
+    z-index: 999;
+}
+.wheel1, .wheel2, .wheel3, .wheel4, .wheel5, .wheel6, .wheel7, .wheel8{
+    cursor: pointer;
 }
