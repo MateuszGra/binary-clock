@@ -75,11 +75,14 @@
             document.getElementById('ledsOff23'),
             document.getElementById('ledsOff24'),
         ]
+        let draw;
+        draw = Math.random() * 7;
+        draw = Math.round(draw);
 
-        let classOn = 'blue';
-        let classOff = 'blueOff';
+        let classOn = colors[draw];
+        let classOff = classOn + 'Off';
 
-        menuLeds[5].classList.add(classOn);
+        menuLeds[draw].classList.add(classOn);
 
         for (let i=0; i<colors.length; i++) {
             menuLeds[i].addEventListener("click", function(){
