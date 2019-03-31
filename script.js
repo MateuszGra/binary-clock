@@ -27,6 +27,18 @@
                 document.querySelector(".fourUnitiesSeconds"),
                 document.querySelector(".eightUnitiesSeconds"),
             ],
+            [
+                document.querySelector(".tensHours"),
+                document.querySelector(".unitesHours"),
+            ],
+            [
+                document.querySelector(".tensMinutes"),
+                document.querySelector(".unitesMinutes"), 
+            ],
+            [
+                document.querySelector(".tensSeconds"),
+                document.querySelector(".unitesSeconds"), 
+            ],
         ];
         const colors = [
                 'red',
@@ -81,6 +93,7 @@
 
         let classOn = colors[draw];
         let classOff = classOn + 'Off';
+        let classNumber = classOn + 'Number'
 
         menuLeds[draw].classList.add(classOn);
 
@@ -88,6 +101,7 @@
             menuLeds[i].addEventListener("click", function(){
                 classOn = colors[i];
                 classOff = colors[i] + 'Off';
+                classNumber = colors[i] + 'Number'
                 for (let o=0; o<menuLeds.length; o++) {
                     menuLeds[o].classList.remove(colors[o]);
                 }
@@ -96,6 +110,7 @@
             menuLeds[i].addEventListener("touch", function(){
                 classOn = colors[i];
                 classOff = colors[i] + 'Off';
+                classNumber = colors[i] + 'Number';
                 for (let o=0; o<menuLeds.length; o++) {
                     menuLeds[o].classList.remove(colors[o]);
                 }
@@ -103,14 +118,22 @@
             });
         }
 
-        function showTime(variable, section){
+        function showTime(variable, section, sectionNumber){
             for (let i=0; i<ledsOff.length; i++) {
                 ledsOff[i].classList.add(classOff);
+            }
+            for (let i=0; i<leds[3].length; i++) {
+                leds[3][i].classList.add(classNumber);
+                leds[4][i].classList.add(classNumber);
+                leds[5][i].classList.add(classNumber);
             }
 
             let tens = variable / 10
             tens = Math.floor(tens);
             let unities = variable - tens * 10;
+
+            sectionNumber[0].textContent = tens;
+            sectionNumber[1].textContent = unities;
 
             if(unities >= 8){
                 section[6].classList.add(classOn);
@@ -154,7 +177,13 @@
                     ledsOff[i].classList.remove(colors[o] + 'Off');
                 }
             }
-
+            for (let i=0; i<leds[3].length; i++) {
+                for (let o=0; o<colors.length; o++) {
+                    leds[3][i].classList.remove(colors[o] + 'Number');
+                    leds[4][i].classList.remove(colors[o] + 'Number');
+                    leds[5][i].classList.remove(colors[o] + 'Number');
+                }
+            }
         }
 
         setInterval(function(){ 
@@ -164,8 +193,8 @@
             let seconds = currentDate.getSeconds();
 
             reset();
-            showTime(hours, leds[0]);
-            showTime(minutes, leds[1]);
-            showTime(seconds, leds[2]);
+            showTime(hours, leds[0], leds[3]);
+            showTime(minutes, leds[1], leds[4]);
+            showTime(seconds, leds[2],leds[5]);
          }, 100);
 })();

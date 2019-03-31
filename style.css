@@ -1,11 +1,12 @@
 @import url(reset.css);
 html{
     font-size: 62.5%;
+    font-family: 'Play', sans-serif;
 }
 body{
     background: black;
 }
-section{
+.clock{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -23,7 +24,7 @@ figure{
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    margin: 0 1rem 0 1rem;
+    margin: 0 1.2rem 0 1.2rem;
 }
 .tens, .unities{
     display: flex;
@@ -35,6 +36,10 @@ figure{
     justify-content: center;
     align-items: center;
     margin: 15vh auto 0 auto;
+}
+p{
+    margin: 2rem 1rem 1rem 1rem;
+    font-size: 2rem;
 }
 
 /*  COLORS  */
@@ -99,4 +104,28 @@ figure{
 }
 .wheel1, .wheel2, .wheel3, .wheel4, .wheel5, .wheel6, .wheel7, .wheel8{
     cursor: pointer;
+}
+.redNumber{
+    color: #ff0000;
+}
+.yellowNumber{
+    color: #f0ff00;
+}
+.greenNumber{
+    color: #44ff03;
+}
+.mintNumber{
+    color: #00ff5a;
+}
+.iceNumber{
+    color: #00ffd8;
+}
+.blueNumber{
+    color: #0042ff;
+}
+.purpleNumber{
+    color: #ba00ff;
+}
+.pinkNumber{
+    color: #ff00d8;
 }
