@@ -1,147 +1,168 @@
 (function() {
-        const leds = [
-            [
-                document.querySelector(".oneTensHours"),
-                document.querySelector(".twoTensHours"),
-                document.querySelector(".fourTensHours"),
-                document.querySelector(".oneUnitesHours"),
-                document.querySelector(".twoUnitesHours"),
-                document.querySelector(".fourUnitesHours"),
-                document.querySelector(".eightUnitesHours"),
-            ],
-            [
-                document.querySelector(".oneTensMinutes"),
-                document.querySelector(".twoTensMinutes"),
-                document.querySelector(".fourTensMinutes"),
-                document.querySelector(".oneUnitiesMinutes"),
-                document.querySelector(".twoUnitiesMinutes"),
-                document.querySelector(".fourUnitiesMinutes"),
-                document.querySelector(".eightUnitiesMinutes"),
-            ],
-            [
-                document.querySelector(".oneTensSeconds"),
-                document.querySelector(".twoTensSeconds"),
-                document.querySelector(".fourTensSeconds"),
-                document.querySelector(".oneUnitiesSeconds"),
-                document.querySelector(".twoUnitiesSeconds"),
-                document.querySelector(".fourUnitiesSeconds"),
-                document.querySelector(".eightUnitiesSeconds"),
-            ],
-            [
-                document.querySelector(".tensHours"),
-                document.querySelector(".unitesHours"),
-            ],
-            [
-                document.querySelector(".tensMinutes"),
-                document.querySelector(".unitesMinutes"), 
-            ],
-            [
-                document.querySelector(".tensSeconds"),
-                document.querySelector(".unitesSeconds"),
-            ],
-            [                
-                document.querySelector(".numberOption"),  
-            ],
-        ];
-        const optionsLeds = [
-                document.querySelector(".numberOptionLed"),
-        ];
-        const colors = [
-                'red',
-                'yellow',
-                'green',
-                'mint',
-                'ice',
-                'blue',
-                'purple',
-                'pink',
-        ];
+    const leds = [
+        [
+            document.querySelector(".oneTensHours"),
+            document.querySelector(".twoTensHours"),
+            document.querySelector(".fourTensHours"),
+            document.querySelector(".oneUnitesHours"),
+            document.querySelector(".twoUnitesHours"),
+            document.querySelector(".fourUnitesHours"),
+            document.querySelector(".eightUnitesHours"),
+        ],
+        [
+            document.querySelector(".oneTensMinutes"),
+            document.querySelector(".twoTensMinutes"),
+            document.querySelector(".fourTensMinutes"),
+            document.querySelector(".oneUnitiesMinutes"),
+            document.querySelector(".twoUnitiesMinutes"),
+            document.querySelector(".fourUnitiesMinutes"),
+            document.querySelector(".eightUnitiesMinutes"),
+        ],
+        [
+            document.querySelector(".oneTensSeconds"),
+            document.querySelector(".twoTensSeconds"),
+            document.querySelector(".fourTensSeconds"),
+            document.querySelector(".oneUnitiesSeconds"),
+            document.querySelector(".twoUnitiesSeconds"),
+            document.querySelector(".fourUnitiesSeconds"),
+            document.querySelector(".eightUnitiesSeconds"),
+        ],
+        [
+            document.querySelector(".tensHours"),
+            document.querySelector(".unitesHours"),
+        ],
+        [
+            document.querySelector(".tensMinutes"),
+            document.querySelector(".unitesMinutes"), 
+        ],
+        [
+            document.querySelector(".tensSeconds"),
+            document.querySelector(".unitesSeconds"),
+        ],
+        [                
+            document.querySelector(".numberOption"),  
+        ],
+    ];
+    const optionsLeds = [
+        document.querySelector(".numberOptionLed"),
+    ];
+    const menu = document.getElementById('menu');
+    const colorSet = document.querySelector(".colorSet");
+    const options = document.querySelector(".options");
+    const body = document.querySelector("body");
 
-        const menuLeds = [
-            document.querySelector(".wheel1"),
-            document.querySelector(".wheel2"),
-            document.querySelector(".wheel3"),
-            document.querySelector(".wheel4"),
-            document.querySelector(".wheel5"),
-            document.querySelector(".wheel6"),
-            document.querySelector(".wheel7"),
-            document.querySelector(".wheel8"),
-        ];
-        const ledsOff = [
-            document.getElementById('ledsOff1'),
-            document.getElementById('ledsOff2'),
-            document.getElementById('ledsOff3'),
-            document.getElementById('ledsOff4'),
-            document.getElementById('ledsOff5'),
-            document.getElementById('ledsOff6'),
-            document.getElementById('ledsOff7'),
-            document.getElementById('ledsOff8'),
-            document.getElementById('ledsOff9'),
-            document.getElementById('ledsOff10'),
-            document.getElementById('ledsOff11'),
-            document.getElementById('ledsOff12'),
-            document.getElementById('ledsOff13'),
-            document.getElementById('ledsOff14'),
-            document.getElementById('ledsOff15'),
-            document.getElementById('ledsOff16'),
-            document.getElementById('ledsOff17'),
-            document.getElementById('ledsOff18'),
-            document.getElementById('ledsOff19'),
-            document.getElementById('ledsOff20'),
-            document.getElementById('ledsOff21'),
-            document.getElementById('ledsOff22'),
-            document.getElementById('ledsOff23'),
-            document.getElementById('ledsOff24'),
-        ]
-        let draw;
-        draw = Math.random() * 7;
-        draw = Math.round(draw);
+    const colors = [
+        'red',
+        'yellow',
+        'green',
+        'mint',
+        'ice',
+        'blue',
+        'purple',
+        'pink',
+    ];
 
-        let classOn = colors[draw];
-        let classOff = classOn + 'Off';
-        let classNumber = classOn + 'Number'
+    const menuLeds = [
+        document.querySelector(".wheel1"),
+        document.querySelector(".wheel2"),
+        document.querySelector(".wheel3"),
+        document.querySelector(".wheel4"),
+        document.querySelector(".wheel5"),
+        document.querySelector(".wheel6"),
+        document.querySelector(".wheel7"),
+        document.querySelector(".wheel8"),
+    ];
+    const ledsOff = [
+        document.getElementById('ledsOff1'),
+        document.getElementById('ledsOff2'),
+        document.getElementById('ledsOff3'),
+        document.getElementById('ledsOff4'),
+        document.getElementById('ledsOff5'),
+        document.getElementById('ledsOff6'),
+        document.getElementById('ledsOff7'),
+        document.getElementById('ledsOff8'),
+        document.getElementById('ledsOff9'),
+        document.getElementById('ledsOff10'),
+        document.getElementById('ledsOff11'),
+        document.getElementById('ledsOff12'),
+        document.getElementById('ledsOff13'),
+        document.getElementById('ledsOff14'),
+        document.getElementById('ledsOff15'),
+        document.getElementById('ledsOff16'),
+        document.getElementById('ledsOff17'),
+        document.getElementById('ledsOff18'),
+        document.getElementById('ledsOff19'),
+        document.getElementById('ledsOff20'),
+        document.getElementById('ledsOff21'),
+        document.getElementById('ledsOff22'),
+        document.getElementById('ledsOff23'),
+        document.getElementById('ledsOff24'),
+    ]
+    let draw;
+    draw = Math.random() * 7;
+    draw = Math.round(draw);
 
-        menuLeds[draw].classList.add(classOn);
+    let classOn = colors[draw];
+    let classOff = classOn + 'Off';
+    let classNumber = classOn + 'Number'
 
-        for (let i=0; i<colors.length; i++) {
-            menuLeds[i].addEventListener("click", function(){
-                classOn = colors[i];
-                classOff = colors[i] + 'Off';
-                classNumber = colors[i] + 'Number'
-                for (let o=0; o<menuLeds.length; o++) {
-                    menuLeds[o].classList.remove(colors[o]);
-                    optionsLeds[0].classList.remove(colors[o]);
-                }
-                menuLeds[i].classList.add(colors[i]);
+    menuLeds[draw].classList.add(classOn);
 
-                if(leds[3][0].classList[1] == 'none'){
-                    optionsLeds[0].classList.add(classOff);
-                }else{
-                    optionsLeds[0].classList.add(classOn);
-                }
-            });
-            menuLeds[i].addEventListener("touch", function(){
-                menuLeds[i].addEventListener("click", function(){
-                    classOn = colors[i];
-                    classOff = colors[i] + 'Off';
-                    classNumber = colors[i] + 'Number'
-                    for (let o=0; o<menuLeds.length; o++) {
-                        menuLeds[o].classList.remove(colors[o]);
-                        optionsLeds[0].classList.remove(colors[o]);
-                    }
-                    menuLeds[i].classList.add(colors[i]);
-    
-                    if(leds[3][0].classList[1] == 'none'){
-                        optionsLeds[0].classList.add(classOff);
-                    }else{
-                        optionsLeds[0].classList.add(classOn);
-                    }
-                });
-            });
-        }
+    for (let i=0; i<colors.length; i++) {
+        menuLeds[i].addEventListener("click", function(e){
+            e.stopPropagation(); 
+            classOn = colors[i];
+            classOff = colors[i] + 'Off';
+            classNumber = colors[i] + 'Number'
+            for (let o=0; o<menuLeds.length; o++) {
+                menuLeds[o].classList.remove(colors[o]);
+                optionsLeds[0].classList.remove(colors[o]);
+            }
+            menuLeds[i].classList.add(colors[i]);
+
+            if(leds[3][0].classList[1] == 'none'){
+                optionsLeds[0].classList.add(classOff);
+            }else{
+                optionsLeds[0].classList.add(classOn);
+            }
+        });
+        menuLeds[i].addEventListener("touch", function(e){
+            e.stopPropagation(); 
+            classOn = colors[i];
+            classOff = colors[i] + 'Off';
+            classNumber = colors[i] + 'Number'
+            for (let o=0; o<menuLeds.length; o++) {
+                menuLeds[o].classList.remove(colors[o]);
+                optionsLeds[0].classList.remove(colors[o]);
+            }
+            menuLeds[i].classList.add(colors[i]);
+
+            if(leds[3][0].classList[1] == 'none'){
+                optionsLeds[0].classList.add(classOff);
+            }else{
+                optionsLeds[0].classList.add(classOn);
+            }
+        });
+    }
 
     optionsLeds[0].classList.add(classOff);
-    leds[6][0].addEventListener('click', function(){
+    leds[6][0].addEventListener('click', function(e){
+        e.stopPropagation(); 
+        for (let i=0; i<optionsLeds[i].length; i++) {
+            for (let o=0; o<colors.length; o++) {
+                optionsLeds[i].classList.remove(colors[o]);
+            }
+        }
+        optionsLeds[0].classList.toggle(classOn);
+
+        for (let i=0; i<leds[3].length; i++) {
+            leds[3][i].classList.toggle('none');
+            leds[4][i].classList.toggle('none');
+            leds[5][i].classList.toggle('none');
+        }
+    });
+    leds[6][0].addEventListener('touch', function(e){
+        e.stopPropagation(); 
         for (let i=0; i<optionsLeds[i].length; i++) {
             for (let o=0; o<colors.length; o++) {
                 optionsLeds[i].classList.remove(colors[o]);
@@ -156,7 +177,28 @@
         }
     });
 
+    menu.addEventListener('click', function(e){
+        e.stopPropagation(); 
+        colorSet.classList.toggle('off');
+        options.classList.toggle('off');
+    });
+    menu.addEventListener('touch', function(e){
+        e.stopPropagation(); 
+        colorSet.classList.toggle('off');
+        options.classList.toggle('off');
+    });
+
+    body.addEventListener('click', function(e){
+        colorSet.classList.add('off');
+        options.classList.add('off');
+    });
+    body.addEventListener('touch', function(e){
+        colorSet.classList.add('off');
+        options.classList.add('off');
+    });
+
     function showTime(variable, section, sectionNumber){
+        menu.classList.add(classOn);
         for (let i=0; i<ledsOff.length; i++) {
             ledsOff[i].classList.add(classOff);
         }
@@ -237,6 +279,9 @@
             for (let o=0; o<colors.length; o++) {
                 optionsLeds[i].classList.remove(colors[o] + 'Off');
             }
+        }
+        for (let i=0; i<colors.length; i++) {
+            menu.classList.remove(colors[i]);
         }
     }
 
