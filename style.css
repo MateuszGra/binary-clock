@@ -23,14 +23,14 @@ figure{
 .hours, .minutes, .seconds{
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: flex-start;
     margin: 0 1.2rem 0 1.2rem;
 }
 .tens, .unities{
     display: flex;
     flex-direction: column-reverse;
 }
-.display{
+.colorSet{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -40,9 +40,27 @@ figure{
 p{
     margin: 2rem 1rem 1rem 1rem;
     font-size: 2rem;
+    transition: 0.5s;
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+.numberOption{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0 0 0;
+    cursor: pointer;
+}
+.numberOptionLed{
+    margin: 1.5rem 0 0 0;
 }
 
 /*  COLORS  */
+
 .redOff{
     background: #240000;
 }
@@ -128,4 +146,10 @@ p{
 }
 .pinkNumber{
     color: #ff00d8;
+}
+
+/*  REMOVE  */
+.none{
+    opacity: 0;
+    transition: 0.5s;
 }
