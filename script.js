@@ -179,22 +179,22 @@
 
     menu.addEventListener('click', function(e){
         e.stopPropagation(); 
-        colorSet.classList.toggle('off');
-        options.classList.toggle('off');
+        colorSet.classList.toggle('none');
+        options.classList.toggle('none');
     });
     menu.addEventListener('touch', function(e){
         e.stopPropagation(); 
-        colorSet.classList.toggle('off');
-        options.classList.toggle('off');
+        colorSet.classList.toggle('none');
+        options.classList.toggle('none');
     });
 
     body.addEventListener('click', function(e){
-        colorSet.classList.add('off');
-        options.classList.add('off');
+        colorSet.classList.add('none');
+        options.classList.add('none');
     });
     body.addEventListener('touch', function(e){
-        colorSet.classList.add('off');
-        options.classList.add('off');
+        colorSet.classList.add('none');
+        options.classList.add('none');
     });
 
     function showTime(variable, section, sectionNumber){
