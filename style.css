@@ -67,10 +67,9 @@ p{
 }
 .options{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
     opacity: 1;
     transition: 0.3s
 }
@@ -79,6 +78,7 @@ p{
     flex-direction: row;
     margin: 1rem 0 0 0;
     cursor: pointer;
+    font-size: 2rem;
 }
 .numberOptionLed{
     margin: 1.5rem 0 0 0;

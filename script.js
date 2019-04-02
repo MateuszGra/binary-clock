@@ -47,7 +47,6 @@
         document.querySelector(".numberOptionLed"),
     ];
     const menu = document.getElementById('menu');
-    const colorSet = document.querySelector(".colorSet");
     const options = document.querySelector(".options");
     const body = document.querySelector("body");
 
@@ -179,21 +178,17 @@
 
     menu.addEventListener('click', function(e){
         e.stopPropagation(); 
-        colorSet.classList.toggle('none');
         options.classList.toggle('none');
     });
     menu.addEventListener('touch', function(e){
         e.stopPropagation(); 
-        colorSet.classList.toggle('none');
         options.classList.toggle('none');
     });
 
     body.addEventListener('click', function(e){
-        colorSet.classList.add('none');
         options.classList.add('none');
     });
     body.addEventListener('touch', function(e){
-        colorSet.classList.add('none');
         options.classList.add('none');
     });
 
