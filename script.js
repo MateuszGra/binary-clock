@@ -282,7 +282,7 @@
     }, 100);
 
 
-    const url = "http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/129";
+    const url = "https://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/129";
 
     let xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
