@@ -1,18 +1,25 @@
-@import url(reset.css);
-html{
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
     font-size: 62.5%;
     font-family: 'Play', sans-serif;
 }
-body{
+
+body {
     background: black;
 }
-.clock{
+
+.clock {
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin: 25vh auto 0 auto;
 }
-figure{
+
+figure {
     display: block;
     width: 3rem;
     height: 3rem;
@@ -20,17 +27,23 @@ figure{
     margin: 0.2rem;
     transition: 0.2s;
 }
-.hours, .minutes, .seconds{
+
+.hours,
+.minutes,
+.seconds {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     margin: 0 1.2rem 0 1.2rem;
 }
-.tens, .unities{
+
+.tens,
+.unities {
     display: flex;
     flex-direction: column-reverse;
 }
-.menu{
+
+.menu {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,7 +55,8 @@ figure{
     margin: 5rem auto 0 auto;
     transition: 0.2s;
 }
-.menu::after{
+
+.menu::after {
     content: '';
     display: block;
     background: url(settings.svg);
@@ -51,7 +65,8 @@ figure{
     width: 4.2rem;
     height: 4.2rem;
 }
-.colorSet{
+
+.colorSet {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -60,12 +75,14 @@ figure{
     opacity: 1;
     transition: 0.3s;
 }
-p{
+
+p {
     margin: 2rem 1rem 1rem 1rem;
     font-size: 2rem;
     transition: 0.2s;
 }
-.options{
+
+.options {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,119 +90,159 @@ p{
     opacity: 1;
     transition: 0.3s
 }
-.numberOption{
+
+.numberOption,
+.airQuality {
     display: flex;
     flex-direction: row;
-    margin: 1rem 0 0 0;
+    align-items: center;
+    margin: 0.5rem 0 0 0;
     cursor: pointer;
     font-size: 2rem;
+    width: 17rem;
 }
-.numberOptionLed{
+
+.numberOptionLed,
+.airQualityLed {
     margin: 1.5rem 0 0 0;
 }
 
 /*  COLORS  */
 
-.redOff{
+.redOff {
     background: #240000;
 }
-.yellowOff{
+
+.yellowOff {
     background: #222500;
 }
-.greenOff{
+
+.greenOff {
     background: #002501;
 }
-.mintOff{
+
+.mintOff {
     background: #002413;
 }
-.iceOff{
+
+.iceOff {
     background: #002324;
 }
-.blueOff{
+
+.blueOff {
     background: #00003e;
 }
-.purpleOff{
+
+.purpleOff {
     background: #190024;
 }
-.pinkOff{
+
+.pinkOff {
     background: #24001f;
 }
-.red{
+
+.red {
     background: #ff0000;
     box-shadow: 0 0 2rem 0.2rem #ff0000;
 }
-.yellow{
+
+.yellow {
     background: #f0ff00;
     box-shadow: 0 0 2rem 0.2rem #f0ff00;
 }
-.green{
+
+.green {
     background: #44ff03;
     box-shadow: 0 0 2rem 0.2rem #44ff03;
 }
-.mint{
+
+.mint {
     background: #00ff5a;
     box-shadow: 0 0 2rem 0.2rem #00ff5a;
 }
-.ice{
+
+.ice {
     background: #00ffd8;
     box-shadow: 0 0 2rem 0.2rem #00ffd8;
 }
-.blue{
+
+.blue {
     background: #0042ff;
     box-shadow: 0 0 2rem 0.2rem #0042ff;
 }
-.purple{
+
+.purple {
     background: #ba00ff;
     box-shadow: 0 0 2rem 0.2rem #ba00ff;
 }
-.pink{
+
+.pink {
     background: #ff00d8;
     box-shadow: 0 0 2rem 0.2rem #ff00d8;
 }
-.red, .yellow, .green, .mint, .ice, .blue, .purple, .pink{
+
+.red,
+.yellow,
+.green,
+.mint,
+.ice,
+.blue,
+.purple,
+.pink {
     z-index: 999;
 }
-.wheel1, .wheel2, .wheel3, .wheel4, .wheel5, .wheel6, .wheel7, .wheel8{
+
+.colorSet figure {
     cursor: pointer;
 }
-.redNumber{
+
+.redNumber {
     color: #ff0000;
 }
-.yellowNumber{
+
+.yellowNumber {
     color: #f0ff00;
 }
-.greenNumber{
+
+.greenNumber {
     color: #44ff03;
 }
-.mintNumber{
+
+.mintNumber {
     color: #00ff5a;
 }
-.iceNumber{
+
+.iceNumber {
     color: #00ffd8;
 }
-.blueNumber{
+
+.blueNumber {
     color: #0042ff;
 }
-.purpleNumber{
+
+.purpleNumber {
     color: #ba00ff;
 }
-.pinkNumber{
+
+.pinkNumber {
     color: #ff00d8;
 }
 
 /*  MEDIA  */
 
-@media only screen and (max-height: 600px){
-    .clock{
+@media only screen and (max-height: 600px) {
+    .clock {
         margin: 15vh auto 0 auto;
     }
-    .menu{
+
+    .menu {
         margin: 2rem auto 0 auto;
     }
 }
+
 /*  REMOVE  */
 
-.none{
+.none {
     visibility: hidden;
     opacity: 0;
 }
