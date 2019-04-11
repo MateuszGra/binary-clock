@@ -284,7 +284,7 @@
 
     function makeRequest() {
         let http = new XMLHttpRequest();
-        const url = 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/129';
+        const url = 'https://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/129';
         http.open('GET', url);
         http.send()
         console.log(http.status);
