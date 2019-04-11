@@ -282,15 +282,11 @@
     }, 100);
 
 
-    function makeRequest() {
-        let http = new XMLHttpRequest();
-        const url = 'https://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/129';
-        http.open('GET', url);
-        http.send()
-        console.log(http.status);
-    }
-    makeRequest();
+    const url = "https://danepubliczne.imgw.pl/api/data/synop";
 
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.send();
 
-
+    console.log(xhr.responseText);
 })();

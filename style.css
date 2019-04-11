@@ -246,3 +246,8 @@ p {
     visibility: hidden;
     opacity: 0;
 }
+
+button {
+    width: 10rem;
+    height: 10rem;
+}
