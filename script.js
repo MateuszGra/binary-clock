@@ -44,12 +44,25 @@
             document.querySelector(".weatherOption"),
             document.querySelector(".temp"),
             document.querySelector(".weatherIcon"),
+            document.querySelector(".pressure"),
         ],
     ];
     const optionsLeds = [
         document.querySelector(".numberOptionLed"),
         document.querySelector(".weatherOptionLed"),
     ];
+    const weatherIcons = [
+        'fa-cloud',
+        'fa-sun',
+        'fa-fa-moon',
+        'fa-cloud-moon',
+        'fa-cloud-showers-heavy',
+        'fa-cloud-sun-rain',
+        'fa-cloud-moon-rain',
+        'fa-bolt',
+        'fa-snowflake',
+        'fa-smog',
+    ]
     const menu = document.getElementById('menu');
     const options = document.querySelector(".options");
     const weatherSection = document.querySelector(".weather");
@@ -120,6 +133,7 @@
             for (let o = 0; o < menuLeds.length; o++) {
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
+                optionsLeds[1].classList.remove(colors[o]);
             }
             menuLeds[i].classList.add(colors[i]);
 
@@ -127,6 +141,10 @@
                 optionsLeds[0].classList.add(classOff);
             } else {
                 optionsLeds[0].classList.add(classOn);
+            }
+
+            if (weatherSection.classList[1] != 'none') {
+                optionsLeds[1].classList.add(classOn);
             }
 
         });
@@ -181,10 +199,17 @@
     leds[6][1].addEventListener('click', function (e) {
         optionsLeds[1].classList.toggle(classOn);
         weatherSection.classList.toggle('none');
+        if (weatherSection.classList[1] != 'none') {
+            weatherApi();
+        }
 
     });
     leds[6][1].addEventListener('touch', function (e) {
         optionsLeds[1].classList.toggle(classOn);
+        weatherSection.classList.toggle('none');
+        if (weatherSection.classList[1] != 'none') {
+            weatherApi();
+        }
     });
 
     menu.addEventListener('click', function (e) {
@@ -296,7 +321,7 @@
     }, 100);
 
     function weatherApi() {
-        const url = "https://api.openweathermap.org/data/2.5/weather?q=Wroclaw,pl&APPID=679f4526bf422c38c909c33b7ddba225";
+        const url = "https://api.openweathermap.org/data/2.5/weather?q=Wroclaw,pl&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4";
         let api = new XMLHttpRequest;
         api.open("GET", url, false);
         api.send();
@@ -306,36 +331,46 @@
         temp = Math.round(temp);
 
         leds[6][2].textContent = temp + ' °C';
-        console.log(apiJson)
+        leds[6][4].textContent = apiJson.main.pressure + ' hPa';
+
+        for (i = 0; i < weatherIcons.length; i++) {
+            leds[6][3].classList.remove(weatherIcons[i]);
+        }
 
         if (apiJson.weather[0].description == 'broken clouds' || apiJson.weather[0].description == 'scattered clouds') {
-            leds[6][3].classList.add('fas', 'fa-cloud');
+            leds[6][3].classList.add('fa-cloud');
         }
         if (apiJson.weather[0].description == 'clear sky') {
-            leds[6][3].classList.add('fas', 'fa-sun');
+            leds[6][3].classList.add('fa-sun');
+            //leds[6][3].classList.add('fas', 'fa-fa-moon');
         }
         if (apiJson.weather[0].description == 'few clouds') {
-            leds[6][3].classList.add('fas', 'fa-cloud-sun');
+            leds[6][3].classList.add('fa-cloud-sun');
+            //leds[6][3].classList.add('fas', 'fa-cloud-moon');
         }
         if (apiJson.weather[0].description == 'shower rain') {
-            leds[6][3].classList.add('fas', 'fa-cloud-showers-heavy');
-        }
-        if (apiJson.weather[0].description == 'shower rain') {
-            leds[6][3].classList.add('fas', 'fa-cloud-showers-heavy');
+            leds[6][3].classList.add('fa-cloud-showers-heavy');
         }
         if (apiJson.weather[0].description == 'rain') {
-            leds[6][3].classList.add('fas', 'fa-cloud-sun-rain');
+            leds[6][3].classList.add('fa-cloud-sun-rain');
+            //leds[6][3].classList.add('fas', 'fa-cloud-moon-rain');
         }
         if (apiJson.weather[0].description == 'thunderstorm') {
-            leds[6][3].classList.add('fas', 'fa-bolt');
+            leds[6][3].classList.add('fa-bolt');
         }
         if (apiJson.weather[0].description == 'snow') {
-            leds[6][3].classList.add('fas', 'fa-snowflake');
+            leds[6][3].classList.add('fa-snowflake');
         }
         if (apiJson.weather[0].description == 'mist') {
-            leds[6][3].classList.add('fas', 'fa-smog');
+            leds[6][3].classList.add('fa-smog');
         }
     }
+
     weatherApi();
+    if (weatherSection.classList[1] != 'none') {
+        setInterval(function () {
+            weatherApi();
+        }, 300000);
+    }
 
 })();

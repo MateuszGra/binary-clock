@@ -16,7 +16,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 25vh auto 0 auto;
+    margin: 20vh auto 0 auto;
 }
 
 figure {
@@ -76,7 +76,7 @@ figure {
     transition: 0.3s;
 }
 
-p {
+.clock p {
     margin: 2rem 1rem 1rem 1rem;
     font-size: 2rem;
     transition: 0.2s;
@@ -96,29 +96,36 @@ p {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0.5rem 0 0 0;
+    margin: 2.5rem 0 0 0;
     cursor: pointer;
     font-size: 2rem;
     width: 17rem;
 }
 
-.weatherOption {
-    transition: 0.3s;
-}
-
 .numberOptionLed,
 .weatherOptionLed {
-    margin: 1.5rem 0 0 0;
+    margin: 0 1rem 0 0;
 }
 
 .weather {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0 0 0;
+}
+
+.weather div {
     display: flex;
     justify-content: center;
     align-items: baseline;
 }
 
-.weather p {
+.temp {
     font-size: 4rem;
+}
+
+.pressure {
+    font-size: 2.5rem;
 }
 
 .weather i {
@@ -255,7 +262,7 @@ p {
     }
 
     .menu {
-        margin: 2rem auto 0 auto;
+        margin: 3rem auto 0 auto;
     }
 }
 
