@@ -282,12 +282,13 @@
     }, 100);
 
 
-    const url = "https://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/129";
+    const url = "https://api.openweathermap.org/data/2.5/weather?q=Wroclaw,pl";
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.send('');
+    let api = new XMLHttpRequest;
+    api.open("GET", url);
+    api.setRequestHeader("X-API-Key", "<679f4526bf422c38c909c33b7ddba225>")
+    api.send();
 
-    console.log(xhr.responseText)
+    console.log(api.responseText)
 
 })();
