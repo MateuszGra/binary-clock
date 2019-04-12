@@ -45,6 +45,7 @@
             document.querySelector(".temp"),
             document.querySelector(".weatherIcon"),
             document.querySelector(".pressure"),
+            document.querySelector(".city"),
         ],
     ];
     const optionsLeds = [
@@ -114,14 +115,30 @@
         document.getElementById('ledsOff23'),
         document.getElementById('ledsOff24'),
     ]
-
+    let classOn;
     let draw;
-    draw = Math.random() * 7;
-    draw = Math.round(draw);
 
-    let classOn = colors[draw];
+    if (localStorage.getItem('color') != null) {
+        draw = localStorage.getItem('color')
+    } else {
+        draw = Math.random() * 7;
+        draw = Math.round(draw);
+    }
+
+    classOn = colors[draw];
     let classOff = classOn + 'Off';
     let classNumber = classOn + 'Number'
+
+    let currentDate = new Date();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+    let seconds = currentDate.getSeconds();
+
+    if (localStorage.getItem('city') != null) {
+        leds[6][5].value = localStorage.getItem('city');
+    } else {
+        leds[6][5].value = 'Wrocław';
+    }
 
     menuLeds[draw].classList.add(classOn);
 
@@ -146,7 +163,7 @@
             if (weatherSection.classList[1] != 'none') {
                 optionsLeds[1].classList.add(classOn);
             }
-
+            localStorage.setItem('color', i);
         });
         menuLeds[i].addEventListener("touch", function (e) {
             classOn = colors[i];
@@ -163,31 +180,39 @@
             } else {
                 optionsLeds[0].classList.add(classOn);
             }
+            localStorage.setItem('color', classOn);
         });
     }
-
-    optionsLeds[0].classList.add(classOff);
-    optionsLeds[1].classList.add(classOn);
-    leds[6][0].addEventListener('click', function (e) {
-        for (let i = 0; i < optionsLeds[i].length; i++) {
-            for (let o = 0; o < colors.length; o++) {
-                optionsLeds[i].classList.remove(colors[o]);
-            }
+    if (localStorage.getItem('digitalClock') == 'on') {
+        for (let i = 0; i < leds[3].length; i++) {
+            leds[3][i].classList.remove('none');
+            leds[4][i].classList.remove('none');
+            leds[5][i].classList.remove('none');
+            optionsLeds[0].classList.add(classOn);
         }
+    } else {
+        for (let i = 0; i < leds[3].length; i++) {
+            leds[3][i].classList.add('none');
+            leds[4][i].classList.add('none');
+            leds[5][i].classList.add('none');
+            optionsLeds[0].classList.remove(classOff);
+        }
+    }
+    leds[6][0].addEventListener('click', function (e) {
         optionsLeds[0].classList.toggle(classOn);
 
         for (let i = 0; i < leds[3].length; i++) {
             leds[3][i].classList.toggle('none');
             leds[4][i].classList.toggle('none');
             leds[5][i].classList.toggle('none');
+        }
+        if (leds[3][0].classList[2] == 'none') {
+            localStorage.setItem('digitalClock', 'off');
+        } else {
+            localStorage.setItem('digitalClock', 'on');
         }
     });
     leds[6][0].addEventListener('touch', function (e) {
-        for (let i = 0; i < optionsLeds[i].length; i++) {
-            for (let o = 0; o < colors.length; o++) {
-                optionsLeds[i].classList.remove(colors[o]);
-            }
-        }
         optionsLeds[0].classList.toggle(classOn);
 
         for (let i = 0; i < leds[3].length; i++) {
@@ -195,14 +220,31 @@
             leds[4][i].classList.toggle('none');
             leds[5][i].classList.toggle('none');
         }
+        if (leds[3][0].classList[2] == 'none') {
+            localStorage.setItem('digitalClock', 'off');
+        } else {
+            localStorage.setItem('digitalClock', 'on');
+        }
     });
+
+    if (localStorage.getItem('weather') == 'off') {
+        weatherSection.classList.add('none');
+        optionsLeds[1].classList.add(classOff);
+    } else {
+        weatherSection.classList.remove('none');
+        optionsLeds[1].classList.add(classOn);
+    }
     leds[6][1].addEventListener('click', function (e) {
         optionsLeds[1].classList.toggle(classOn);
         weatherSection.classList.toggle('none');
         if (weatherSection.classList[1] != 'none') {
             weatherApi();
         }
-
+        if (weatherSection.classList[1] == 'none') {
+            localStorage.setItem('weather', 'off');
+        } else {
+            localStorage.setItem('weather', 'on');
+        }
     });
     leds[6][1].addEventListener('touch', function (e) {
         optionsLeds[1].classList.toggle(classOn);
@@ -212,13 +254,20 @@
         }
     });
 
+    leds[6][5].addEventListener('change', function (e) {
+        weatherApi();
+        localStorage.setItem('city', leds[6][5].value);
+    });
+
     menu.addEventListener('click', function (e) {
+        e.stopPropagation;
         options.classList.toggle('none');
         if (options.classList[1] != 'none') {
             options.scrollIntoView()
         }
     });
     menu.addEventListener('touch', function (e) {
+        e.stopPropagation;
         options.classList.toggle('none');
         if (options.classList[1] != 'none') {
             options.scrollIntoView()
@@ -314,10 +363,10 @@
     }
 
     setInterval(function () {
-        let currentDate = new Date();
-        let hours = currentDate.getHours();
-        let minutes = currentDate.getMinutes();
-        let seconds = currentDate.getSeconds();
+        currentDate = new Date();
+        hours = currentDate.getHours();
+        minutes = currentDate.getMinutes();
+        seconds = currentDate.getSeconds();
 
         reset();
         showTime(hours, leds[0], leds[3]);
@@ -327,17 +376,24 @@
     }, 100);
 
     function weatherApi() {
-        const url = "https://api.openweathermap.org/data/2.5/weather?q=Wroclaw,pl&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4";
+        const url = "https://api.openweathermap.org/data/2.5/weather?q=" + leds[6][5].value + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4";
+        console.log(url);
         let api = new XMLHttpRequest;
         api.open("GET", url, false);
         api.send();
 
         let apiJson = JSON.parse(api.responseText);
-        let temp = apiJson.main.temp - 273.15;
-        temp = Math.round(temp);
 
-        leds[6][2].textContent = temp + ' °C';
-        leds[6][4].textContent = apiJson.main.pressure + ' hPa';
+        leds[6][2].textContent = Math.round(apiJson.main.temp - 273.15) + ' °C';
+        leds[6][4].textContent = Math.round(apiJson.main.pressure) + ' hPa';
+
+        let sunet = apiJson.sys.sunset;
+        let dateSunset = new Date(sunet * 1000);
+        let hoursSunset = dateSunset.getHours();
+
+        let sunrise = apiJson.sys.sunrise;
+        let dateSunrise = new Date(sunrise * 1000);
+        let hoursSunrise = dateSunrise.getHours();
 
         for (i = 0; i < weatherIcons.length; i++) {
             leds[6][3].classList.remove(weatherIcons[i]);
@@ -347,19 +403,28 @@
             leds[6][3].classList.add('fa-cloud');
         }
         if (apiJson.weather[0].description == 'clear sky') {
-            leds[6][3].classList.add('fa-sun');
-            //leds[6][3].classList.add('fas', 'fa-fa-moon');
+            if (hours <= hoursSunset && hours >= hoursSunrise) {
+                leds[6][3].classList.add('fa-sun');
+            } else {
+                leds[6][3].classList.add('fas', 'fa-moon');
+            }
         }
         if (apiJson.weather[0].description == 'few clouds') {
-            leds[6][3].classList.add('fa-cloud-sun');
-            //leds[6][3].classList.add('fas', 'fa-cloud-moon');
+            if (hours <= hoursSunset && hours >= hoursSunrise) {
+                leds[6][3].classList.add('fa-cloud-sun');
+            } else {
+                leds[6][3].classList.add('fas', 'fa-cloud-moon');
+            }
         }
         if (apiJson.weather[0].description == 'shower rain') {
             leds[6][3].classList.add('fa-cloud-showers-heavy');
         }
         if (apiJson.weather[0].description == 'rain') {
-            leds[6][3].classList.add('fa-cloud-sun-rain');
-            //leds[6][3].classList.add('fas', 'fa-cloud-moon-rain');
+            if (hours <= hoursSunset && hours >= hoursSunrise) {
+                leds[6][3].classList.add('fa-cloud-sun-rain');
+            } else {
+                leds[6][3].classList.add('fas', 'fa-cloud-moon-rain');
+            }
         }
         if (apiJson.weather[0].description == 'thunderstorm') {
             leds[6][3].classList.add('fa-bolt');
@@ -378,5 +443,4 @@
             weatherApi();
         }, 300000);
     }
-
 })();
