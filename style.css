@@ -92,7 +92,7 @@ p {
 }
 
 .numberOption,
-.airQuality {
+.weatherOption {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -102,9 +102,28 @@ p {
     width: 17rem;
 }
 
+.weatherOption {
+    transition: 0.3s;
+}
+
 .numberOptionLed,
-.airQualityLed {
+.weatherOptionLed {
     margin: 1.5rem 0 0 0;
+}
+
+.weather {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.weather p {
+    font-size: 4rem;
+}
+
+.weather i {
+    font-size: 4rem;
+    margin: 0 0 0 2rem;
 }
 
 /*  COLORS  */

@@ -41,15 +41,18 @@
         ],
         [
             document.querySelector(".numberOption"),
-            document.querySelector(".airQuality"),
+            document.querySelector(".weatherOption"),
+            document.querySelector(".temp"),
+            document.querySelector(".weatherIcon"),
         ],
     ];
     const optionsLeds = [
         document.querySelector(".numberOptionLed"),
-        document.querySelector(".airQualityLed"),
+        document.querySelector(".weatherOptionLed"),
     ];
     const menu = document.getElementById('menu');
     const options = document.querySelector(".options");
+    const weatherSection = document.querySelector(".weather");
 
     const colors = [
         'red',
@@ -125,6 +128,7 @@
             } else {
                 optionsLeds[0].classList.add(classOn);
             }
+
         });
         menuLeds[i].addEventListener("touch", function (e) {
             classOn = colors[i];
@@ -145,6 +149,7 @@
     }
 
     optionsLeds[0].classList.add(classOff);
+    optionsLeds[1].classList.add(classOn);
     leds[6][0].addEventListener('click', function (e) {
         for (let i = 0; i < optionsLeds[i].length; i++) {
             for (let o = 0; o < colors.length; o++) {
@@ -172,6 +177,14 @@
             leds[4][i].classList.toggle('none');
             leds[5][i].classList.toggle('none');
         }
+    });
+    leds[6][1].addEventListener('click', function (e) {
+        optionsLeds[1].classList.toggle(classOn);
+        weatherSection.classList.toggle('none');
+
+    });
+    leds[6][1].addEventListener('touch', function (e) {
+        optionsLeds[1].classList.toggle(classOn);
     });
 
     menu.addEventListener('click', function (e) {
@@ -279,16 +292,50 @@
         showTime(hours, leds[0], leds[3]);
         showTime(minutes, leds[1], leds[4]);
         showTime(seconds, leds[2], leds[5]);
+
     }, 100);
 
+    function weatherApi() {
+        const url = "https://api.openweathermap.org/data/2.5/weather?q=Wroclaw,pl&APPID=679f4526bf422c38c909c33b7ddba225";
+        let api = new XMLHttpRequest;
+        api.open("GET", url, false);
+        api.send();
 
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=Wroclaw,pl";
+        let apiJson = JSON.parse(api.responseText);
+        let temp = apiJson.main.temp - 273.15;
+        temp = Math.round(temp);
 
-    let api = new XMLHttpRequest;
-    api.open("GET", url);
-    api.setRequestHeader("X-API-Key", "<679f4526bf422c38c909c33b7ddba225>")
-    api.send();
+        leds[6][2].textContent = temp + ' °C';
+        console.log(apiJson)
 
-    console.log(api.responseText)
+        if (apiJson.weather[0].description == 'broken clouds' || apiJson.weather[0].description == 'scattered clouds') {
+            leds[6][3].classList.add('fas', 'fa-cloud');
+        }
+        if (apiJson.weather[0].description == 'clear sky') {
+            leds[6][3].classList.add('fas', 'fa-sun');
+        }
+        if (apiJson.weather[0].description == 'few clouds') {
+            leds[6][3].classList.add('fas', 'fa-cloud-sun');
+        }
+        if (apiJson.weather[0].description == 'shower rain') {
+            leds[6][3].classList.add('fas', 'fa-cloud-showers-heavy');
+        }
+        if (apiJson.weather[0].description == 'shower rain') {
+            leds[6][3].classList.add('fas', 'fa-cloud-showers-heavy');
+        }
+        if (apiJson.weather[0].description == 'rain') {
+            leds[6][3].classList.add('fas', 'fa-cloud-sun-rain');
+        }
+        if (apiJson.weather[0].description == 'thunderstorm') {
+            leds[6][3].classList.add('fas', 'fa-bolt');
+        }
+        if (apiJson.weather[0].description == 'snow') {
+            leds[6][3].classList.add('fas', 'fa-snowflake');
+        }
+        if (apiJson.weather[0].description == 'mist') {
+            leds[6][3].classList.add('fas', 'fa-smog');
+        }
+    }
+    weatherApi();
 
 })();
