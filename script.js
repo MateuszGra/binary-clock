@@ -214,9 +214,15 @@
 
     menu.addEventListener('click', function (e) {
         options.classList.toggle('none');
+        if (options.classList[1] != 'none') {
+            options.scrollIntoView()
+        }
     });
     menu.addEventListener('touch', function (e) {
         options.classList.toggle('none');
+        if (options.classList[1] != 'none') {
+            options.scrollIntoView()
+        }
     });
 
     function showTime(variable, section, sectionNumber) {
