@@ -47,7 +47,6 @@
             document.querySelector(".pressure"),
             document.querySelector(".city"),
             document.querySelector(".name"),
-            document.querySelector(".fa-kiwi-bird"),
         ],
     ];
     const optionsLeds = [
@@ -70,6 +69,7 @@
     const menu = document.getElementById('menu');
     const options = document.querySelector(".options");
     const weatherSection = document.querySelector(".weather");
+    const kiwi = document.querySelector(".fa-kiwi-bird");
 
     const colors = [
         'red',
@@ -118,6 +118,8 @@
         document.getElementById('ledsOff23'),
         document.getElementById('ledsOff24'),
     ]
+    let dictoBirdInterval;
+    let tempoColor = 'off';
     let classOn;
     let draw;
 
@@ -155,8 +157,13 @@
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
                 optionsLeds[1].classList.remove(colors[o]);
+                kiwi.classList.remove(colors[o] + 'Number');
             }
             menuLeds[i].classList.add(colors[i]);
+
+            if (tempoColor == 'on') {
+                kiwi.classList.add(colors[i] + 'Number');
+            }
 
             if (leds[3][0].classList[1] != 'none') {
                 optionsLeds[0].classList.add(classOn);
@@ -176,8 +183,13 @@
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
                 optionsLeds[1].classList.remove(colors[o]);
+                kiwi.classList.remove(colors[o] + 'Number');
             }
             menuLeds[i].classList.add(colors[i]);
+
+            if (tempoColor == 'on') {
+                kiwi.classList.add(colors[i] + 'Number');
+            }
 
             if (leds[3][0].classList[1] != 'none') {
                 optionsLeds[0].classList.add(classOn);
@@ -300,6 +312,7 @@
         for (let i = 0; i < optionsLeds.length; i++) {
             optionsLeds[i].classList.add(classOff);
         }
+        kiwi.classList.add(classOff + 'Number');
 
         let tens = variable / 10
         tens = Math.floor(tens);
@@ -369,6 +382,7 @@
         }
         for (let i = 0; i < colors.length; i++) {
             menu.classList.remove(colors[i]);
+            kiwi.classList.remove(colors[i] + 'OffNumber');
         }
     }
 
@@ -460,8 +474,13 @@
             menuLeds[o].classList.remove(colors[o]);
             optionsLeds[0].classList.remove(colors[o]);
             optionsLeds[1].classList.remove(colors[o]);
+            kiwi.classList.remove(colors[o] + 'Number');
         }
         menuLeds[draw].classList.add(colors[draw]);
+
+        if (tempoColor == 'on') {
+            kiwi.classList.add(classOn + 'Number');
+        }
 
         if (leds[3][0].classList[1] != 'none') {
             optionsLeds[0].classList.add(classOn);
@@ -471,15 +490,15 @@
         }
     }
 
-    let dictoBirdInterval;
-    let tempoColor = 'off';
-    leds[6][7].addEventListener('click', function (e) {
-
-        leds[6][7].classList.toggle('bigBird');
+    kiwi.addEventListener('click', function (e) {
+        for (let i = 0; i < colors.length; i++) {
+            kiwi.classList.remove(colors[i] + 'Number');
+        }
 
         if (tempoColor == 'off') {
             tempoColor = 'on'
             dictoBirdInterval = setInterval(discoBird, 500);
+            kiwi.classList.add(classOn + 'Number');
         } else {
             tempoColor = 'off';
             clearInterval(dictoBirdInterval);

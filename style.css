@@ -149,14 +149,10 @@ figure {
 }
 
 .fa-kiwi-bird {
-    font-size: 5rem;
+    font-size: 3.2rem;
     cursor: pointer;
     transition: 0.2s linear;
-    margin: 0 0 2rem 0;
-}
-
-.bigBird {
-    font-size: 8rem;
+    margin: 0.2rem;
 }
 
 /*  COLORS  */
@@ -246,6 +242,38 @@ figure {
 
 .colorSet figure {
     cursor: pointer;
+}
+
+.redOffNumber {
+    color: #240000;
+}
+
+.yellowOffNumber {
+    color: #222500;
+}
+
+.greenOffNumber {
+    color: #002501;
+}
+
+.mintOffNumber {
+    color: #002413;
+}
+
+.iceOffNumber {
+    color: #002324;
+}
+
+.blueOffNumber {
+    color: #00003e;
+}
+
+.purpleOffNumber {
+    color: #190024;
+}
+
+.pinkOffNumber {
+    color: #24001f;
 }
 
 .redNumber {
