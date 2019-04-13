@@ -47,6 +47,7 @@
             document.querySelector(".pressure"),
             document.querySelector(".city"),
             document.querySelector(".name"),
+            document.querySelector(".fa-kiwi-bird"),
         ],
     ];
     const optionsLeds = [
@@ -157,9 +158,7 @@
             }
             menuLeds[i].classList.add(colors[i]);
 
-            if (leds[3][0].classList[1] == 'none') {
-                optionsLeds[0].classList.add(classOff);
-            } else {
+            if (leds[3][0].classList[1] != 'none') {
                 optionsLeds[0].classList.add(classOn);
             }
 
@@ -167,6 +166,7 @@
                 optionsLeds[1].classList.add(classOn);
             }
             localStorage.setItem('color', i);
+            draw = i;
         });
         menuLeds[i].addEventListener("touch", function (e) {
             classOn = colors[i];
@@ -179,9 +179,7 @@
             }
             menuLeds[i].classList.add(colors[i]);
 
-            if (leds[3][0].classList[1] == 'none') {
-                optionsLeds[0].classList.add(classOff);
-            } else {
+            if (leds[3][0].classList[1] != 'none') {
                 optionsLeds[0].classList.add(classOn);
             }
 
@@ -189,6 +187,7 @@
                 optionsLeds[1].classList.add(classOn);
             }
             localStorage.setItem('color', i);
+            draw = i;
         });
     }
     if (localStorage.getItem('digitalClock') == 'on') {
@@ -444,9 +443,46 @@
     }
 
     weatherApi();
-    if (weatherSection.classList[1] != 'none') {
-        setInterval(function () {
-            weatherApi();
-        }, 300000);
+    setInterval(function () {
+        weatherApi();
+    }, 300000);
+
+    function discoBird() {
+        draw = draw + 1;
+        if (draw >= colors.length) {
+            draw = 0;
+        }
+
+        classOn = colors[draw];
+        classOff = colors[draw] + 'Off';
+        classNumber = colors[draw] + 'Number'
+        for (let o = 0; o < menuLeds.length; o++) {
+            menuLeds[o].classList.remove(colors[o]);
+            optionsLeds[0].classList.remove(colors[o]);
+            optionsLeds[1].classList.remove(colors[o]);
+        }
+        menuLeds[draw].classList.add(colors[draw]);
+
+        if (leds[3][0].classList[1] != 'none') {
+            optionsLeds[0].classList.add(classOn);
+        }
+        if (weatherSection.classList[1] != 'none') {
+            optionsLeds[1].classList.add(classOn);
+        }
     }
+
+    let dictoBirdInterval;
+    let tempoColor = 'off';
+    leds[6][7].addEventListener('click', function (e) {
+
+        leds[6][7].classList.toggle('bigBird');
+
+        if (tempoColor == 'off') {
+            tempoColor = 'on'
+            dictoBirdInterval = setInterval(discoBird, 500);
+        } else {
+            tempoColor = 'off';
+            clearInterval(dictoBirdInterval);
+        }
+    });
 })();

@@ -122,7 +122,7 @@ figure {
     flex-direction: column;
     align-items: center;
     margin: 2rem 0 0 0;
-    transition: 0.2s linear;
+    transition: 0.5s linear;
 }
 
 .weather div {
@@ -146,6 +146,17 @@ figure {
 .weather i {
     font-size: 4rem;
     margin: 0 0 0 2rem;
+}
+
+.fa-kiwi-bird {
+    font-size: 5rem;
+    cursor: pointer;
+    transition: 0.5s linear;
+    margin: 0 0 2rem 0;
+}
+
+.bigBird {
+    font-size: 8rem;
 }
 
 /*  COLORS  */
