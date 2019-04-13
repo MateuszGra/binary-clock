@@ -124,6 +124,7 @@
     } else {
         draw = Math.random() * 7;
         draw = Math.round(draw);
+        localStorage.setItem('color', draw);
     }
 
     classOn = colors[draw];
@@ -173,6 +174,7 @@
             for (let o = 0; o < menuLeds.length; o++) {
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
+                optionsLeds[1].classList.remove(colors[o]);
             }
             menuLeds[i].classList.add(colors[i]);
 
@@ -181,7 +183,11 @@
             } else {
                 optionsLeds[0].classList.add(classOn);
             }
-            localStorage.setItem('color', classOn);
+
+            if (weatherSection.classList[1] != 'none') {
+                optionsLeds[1].classList.add(classOn);
+            }
+            localStorage.setItem('color', i);
         });
     }
     if (localStorage.getItem('digitalClock') == 'on') {
@@ -207,7 +213,7 @@
             leds[4][i].classList.toggle('none');
             leds[5][i].classList.toggle('none');
         }
-        if (leds[3][0].classList[2] == 'none') {
+        if (leds[3][0].classList[2] != 'none') {
             localStorage.setItem('digitalClock', 'off');
         } else {
             localStorage.setItem('digitalClock', 'on');
