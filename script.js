@@ -395,44 +395,46 @@
         let dateSunrise = new Date(sunrise * 1000);
         let hoursSunrise = dateSunrise.getHours();
 
+        console.log();
+
         for (i = 0; i < weatherIcons.length; i++) {
             leds[6][3].classList.remove(weatherIcons[i]);
         }
 
-        if (apiJson.weather[0].description == 'broken clouds' || apiJson.weather[0].description == 'scattered clouds') {
+        if (apiJson.weather[0].id >= 802 && apiJson.weather[0].id < 900) {
             leds[6][3].classList.add('fa-cloud');
         }
-        if (apiJson.weather[0].description == 'clear sky') {
+        if (apiJson.weather[0].id == 800) {
             if (hours <= hoursSunset && hours >= hoursSunrise) {
                 leds[6][3].classList.add('fa-sun');
             } else {
                 leds[6][3].classList.add('fas', 'fa-moon');
             }
         }
-        if (apiJson.weather[0].description == 'few clouds') {
+        if (apiJson.weather[0].id == 801) {
             if (hours <= hoursSunset && hours >= hoursSunrise) {
                 leds[6][3].classList.add('fa-cloud-sun');
             } else {
                 leds[6][3].classList.add('fas', 'fa-cloud-moon');
             }
         }
-        if (apiJson.weather[0].description == 'shower rain') {
+        if (apiJson.weather[0].id >= 502 && apiJson.weather[0].id < 600 || apiJson.weather[0].id >= 300 && apiJson.weather[0].id < 400) {
             leds[6][3].classList.add('fa-cloud-showers-heavy');
         }
-        if (apiJson.weather[0].description == 'rain') {
+        if (apiJson.weather[0].id >= 500 && apiJson.weather[0].id < 502) {
             if (hours <= hoursSunset && hours >= hoursSunrise) {
                 leds[6][3].classList.add('fa-cloud-sun-rain');
             } else {
-                leds[6][3].classList.add('fas', 'fa-cloud-moon-rain');
+                leds[6][3].classList.add('fa-cloud-moon-rain');
             }
         }
-        if (apiJson.weather[0].description == 'thunderstorm') {
+        if (apiJson.weather[0].id >= 200 && apiJson.weather[0].id < 300) {
             leds[6][3].classList.add('fa-bolt');
         }
-        if (apiJson.weather[0].description == 'snow') {
+        if (apiJson.weather[0].id >= 600 && apiJson.weather[0].id < 700) {
             leds[6][3].classList.add('fa-snowflake');
         }
-        if (apiJson.weather[0].description == 'mist') {
+        if (apiJson.weather[0].id >= 700 && apiJson.weather[0].id < 800) {
             leds[6][3].classList.add('fa-smog');
         }
     }
