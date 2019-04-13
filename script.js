@@ -214,9 +214,9 @@
             leds[5][i].classList.toggle('none');
         }
         if (leds[3][0].classList[2] != 'none') {
-            localStorage.setItem('digitalClock', 'off');
-        } else {
             localStorage.setItem('digitalClock', 'on');
+        } else {
+            localStorage.setItem('digitalClock', 'off');
         }
     });
     leds[6][0].addEventListener('touch', function (e) {
@@ -228,9 +228,9 @@
             leds[5][i].classList.toggle('none');
         }
         if (leds[3][0].classList[2] != 'none') {
-            localStorage.setItem('digitalClock', 'off');
-        } else {
             localStorage.setItem('digitalClock', 'on');
+        } else {
+            localStorage.setItem('digitalClock', 'off');
         }
     });
 
