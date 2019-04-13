@@ -25,7 +25,7 @@ figure {
     height: 3rem;
     border-radius: 50%;
     margin: 0.2rem;
-    transition: 0.2s;
+    transition: 0.2s linear;
 }
 
 .hours,
@@ -53,7 +53,7 @@ figure {
     border-radius: 50%;
     cursor: pointer;
     margin: 5rem auto 1.5rem auto;
-    transition: 0.2s;
+    transition: 0.2s linear;
 }
 
 .menu::after {
@@ -73,13 +73,13 @@ figure {
     align-items: center;
     margin: 1.5rem auto 0 auto;
     opacity: 1;
-    transition: 0.3s;
+    transition: 0.2s linear;
 }
 
 .clock p {
     margin: 2rem 1rem 1rem 1rem;
     font-size: 2rem;
-    transition: 0.2s;
+    transition: 0.2s linear;
 }
 
 .options {
@@ -87,7 +87,7 @@ figure {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: 0.3s;
+    transition: 0.3s linear;
     background: black;
 }
 
@@ -122,7 +122,7 @@ figure {
     flex-direction: column;
     align-items: center;
     margin: 2rem 0 0 0;
-    transition: 0.3s;
+    transition: 0.2s linear;
 }
 
 .weather div {
