@@ -64,6 +64,7 @@
         'fa-bolt',
         'fa-snowflake',
         'fa-smog',
+        'fa-exclamation-triangle',
     ]
     const menu = document.getElementById('menu');
     const options = document.querySelector(".options");
@@ -396,7 +397,7 @@
 
         leds[6][2].textContent = Math.round(apiJson.main.temp - 273.15) + ' °C';
         leds[6][4].textContent = Math.round(apiJson.main.pressure) + ' hPa';
-        leds[6][6].textContent = apiJson.name;
+        leds[6][6].textContent = apiJson.name + ', ' + apiJson.sys.country;
 
         let sunet = apiJson.sys.sunset;
         let dateSunset = new Date(sunet * 1000);
@@ -409,42 +410,36 @@
         for (i = 0; i < weatherIcons.length; i++) {
             leds[6][3].classList.remove(weatherIcons[i]);
         }
-
         if (apiJson.weather[0].id >= 802 && apiJson.weather[0].id < 900) {
             leds[6][3].classList.add('fa-cloud');
-        }
-        if (apiJson.weather[0].id == 800) {
+        } else if (apiJson.weather[0].id == 800) {
             if (hours <= hoursSunset && hours >= hoursSunrise) {
                 leds[6][3].classList.add('fa-sun');
             } else {
                 leds[6][3].classList.add('fas', 'fa-moon');
             }
-        }
-        if (apiJson.weather[0].id == 801) {
+        } else if (apiJson.weather[0].id == 801) {
             if (hours <= hoursSunset && hours >= hoursSunrise) {
                 leds[6][3].classList.add('fa-cloud-sun');
             } else {
                 leds[6][3].classList.add('fas', 'fa-cloud-moon');
             }
-        }
-        if (apiJson.weather[0].id >= 502 && apiJson.weather[0].id < 600 || apiJson.weather[0].id >= 300 && apiJson.weather[0].id < 400) {
+        } else if (apiJson.weather[0].id >= 502 && apiJson.weather[0].id < 600 || apiJson.weather[0].id >= 300 && apiJson.weather[0].id < 400) {
             leds[6][3].classList.add('fa-cloud-showers-heavy');
-        }
-        if (apiJson.weather[0].id >= 500 && apiJson.weather[0].id < 502) {
+        } else if (apiJson.weather[0].id >= 500 && apiJson.weather[0].id < 502) {
             if (hours <= hoursSunset && hours >= hoursSunrise) {
                 leds[6][3].classList.add('fa-cloud-sun-rain');
             } else {
                 leds[6][3].classList.add('fa-cloud-moon-rain');
             }
-        }
-        if (apiJson.weather[0].id >= 200 && apiJson.weather[0].id < 300) {
+        } else if (apiJson.weather[0].id >= 200 && apiJson.weather[0].id < 300) {
             leds[6][3].classList.add('fa-bolt');
-        }
-        if (apiJson.weather[0].id >= 600 && apiJson.weather[0].id < 700) {
+        } else if (apiJson.weather[0].id >= 600 && apiJson.weather[0].id < 700) {
             leds[6][3].classList.add('fa-snowflake');
-        }
-        if (apiJson.weather[0].id >= 700 && apiJson.weather[0].id < 800) {
+        } else if (apiJson.weather[0].id >= 700 && apiJson.weather[0].id < 800) {
             leds[6][3].classList.add('fa-smog');
+        } else {
+            leds[6][3].classList.add('fa-exclamation-triangle');
         }
     }
 
