@@ -227,7 +227,7 @@
             leds[4][i].classList.toggle('none');
             leds[5][i].classList.toggle('none');
         }
-        if (leds[3][0].classList[2] == 'none') {
+        if (leds[3][0].classList[2] != 'none') {
             localStorage.setItem('digitalClock', 'off');
         } else {
             localStorage.setItem('digitalClock', 'on');
@@ -259,6 +259,11 @@
         if (weatherSection.classList[1] != 'none') {
             weatherApi();
         }
+        if (weatherSection.classList[1] == 'none') {
+            localStorage.setItem('weather', 'off');
+        } else {
+            localStorage.setItem('weather', 'on');
+        }
     });
 
     leds[6][5].addEventListener('change', function (e) {
@@ -267,14 +272,12 @@
     });
 
     menu.addEventListener('click', function (e) {
-        e.stopPropagation;
         options.classList.toggle('none');
         if (options.classList[1] != 'none') {
             options.scrollIntoView()
         }
     });
     menu.addEventListener('touch', function (e) {
-        e.stopPropagation;
         options.classList.toggle('none');
         if (options.classList[1] != 'none') {
             options.scrollIntoView()
