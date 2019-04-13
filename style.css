@@ -165,8 +165,8 @@ figure {
     background: #222500;
 }
 
-.greenOff {
-    background: #002501;
+.orangeOff {
+    background: #281c00;
 }
 
 .mintOff {
@@ -199,9 +199,9 @@ figure {
     box-shadow: 0 0 2rem 0.2rem #f0ff00;
 }
 
-.green {
-    background: #44ff03;
-    box-shadow: 0 0 2rem 0.2rem #44ff03;
+.orange {
+    background: #ffb400;
+    box-shadow: 0 0 2rem 0.2rem #ffb400;
 }
 
 .mint {
@@ -231,7 +231,7 @@ figure {
 
 .red,
 .yellow,
-.green,
+.orange,
 .mint,
 .ice,
 .blue,
@@ -252,8 +252,8 @@ figure {
     color: #222500;
 }
 
-.greenOffNumber {
-    color: #002501;
+.orangeOffNumber {
+    color: #281c00;
 }
 
 .mintOffNumber {
@@ -284,8 +284,8 @@ figure {
     color: #f0ff00;
 }
 
-.greenNumber {
-    color: #44ff03;
+.orangeNumber {
+    color: #ffb400;
 }
 
 .mintNumber {

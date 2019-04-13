@@ -74,7 +74,7 @@
     const colors = [
         'red',
         'yellow',
-        'green',
+        'orange',
         'mint',
         'ice',
         'blue',
