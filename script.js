@@ -46,6 +46,7 @@
             document.querySelector(".weatherIcon"),
             document.querySelector(".pressure"),
             document.querySelector(".city"),
+            document.querySelector(".name"),
         ],
     ];
     const optionsLeds = [
@@ -376,7 +377,7 @@
     }, 100);
 
     function weatherApi() {
-        const url = "https://api.openweathermap.org/data/2.5/weather?q=" + leds[6][5].value + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4";
+        const url = "https://api.openweathermap.org/data/2.5/weather?q=" + encodeURI(leds[6][5].value) + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4";
         console.log(url);
         let api = new XMLHttpRequest;
         api.open("GET", url, false);
@@ -386,6 +387,7 @@
 
         leds[6][2].textContent = Math.round(apiJson.main.temp - 273.15) + ' °C';
         leds[6][4].textContent = Math.round(apiJson.main.pressure) + ' hPa';
+        leds[6][6].textContent = apiJson.name;
 
         let sunet = apiJson.sys.sunset;
         let dateSunset = new Date(sunet * 1000);
@@ -394,8 +396,6 @@
         let sunrise = apiJson.sys.sunrise;
         let dateSunrise = new Date(sunrise * 1000);
         let hoursSunrise = dateSunrise.getHours();
-
-        console.log();
 
         for (i = 0; i < weatherIcons.length; i++) {
             leds[6][3].classList.remove(weatherIcons[i]);
