@@ -16,11 +16,10 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 15vh auto 0 auto;
+    margin: 18vh auto 0 auto;
 }
 
 figure {
-    display: block;
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
@@ -122,7 +121,6 @@ figure {
     flex-direction: column;
     align-items: center;
     margin: 2rem 0 0 0;
-    transition: 0.3s linear;
 }
 
 .weather div {
@@ -133,23 +131,27 @@ figure {
 
 .temp {
     font-size: 4rem;
+    transition: 0.2s linear;
 }
 
 .pressure {
     font-size: 2.5rem;
+    transition: 0.2s linear;
 }
 
 .name {
     font-size: 1.5rem;
+    transition: 0.2s linear;
 }
 
 .weather i {
     font-size: 4rem;
     margin: 0 0 0 2rem;
+    transition: 0.2s linear;
 }
 
 .fa-kiwi-bird {
-    font-size: 3.2rem;
+    font-size: 3.5rem;
     cursor: pointer;
     transition: 0.2s linear;
     margin: 0.2rem;
@@ -229,17 +231,6 @@ figure {
     box-shadow: 0 0 2rem 0.2rem #ff00d8;
 }
 
-.red,
-.yellow,
-.orange,
-.mint,
-.ice,
-.blue,
-.purple,
-.pink {
-    z-index: 999;
-}
-
 .colorSet figure {
     cursor: pointer;
 }
@@ -308,11 +299,22 @@ figure {
     color: #ff00d8;
 }
 
+.red,
+.yellow,
+.orange,
+.mint,
+.ice,
+.blue,
+.purple,
+.pink {
+    z-index: 999;
+}
+
 /*  MEDIA  */
 
 @media only screen and (max-height: 700px) {
     .clock {
-        margin: 10vh auto 0 auto;
+        margin: 12vh auto 0 auto;
     }
 
     .menu {
@@ -320,13 +322,9 @@ figure {
     }
 }
 
-@media only screen and (max-height: 580px) {
+@media only screen and (max-height: 500px) {
     .clock {
         margin: 5vh auto 0 auto;
-    }
-
-    .weather {
-        margin: 0 0 0 0;
     }
 }
 

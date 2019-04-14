@@ -118,9 +118,9 @@
         document.getElementById('ledsOff23'),
         document.getElementById('ledsOff24'),
     ]
-    let dictoBirdInterval;
+    let weatherApiUpdate;
+    let discoBirdInterval;
     let tempoColor = 'off';
-    let classOn;
     let draw;
 
     if (localStorage.getItem('color') != null) {
@@ -130,10 +130,6 @@
         draw = Math.round(draw);
         localStorage.setItem('color', draw);
     }
-
-    classOn = colors[draw];
-    let classOff = classOn + 'Off';
-    let classNumber = classOn + 'Number'
 
     let currentDate = new Date();
     let hours = currentDate.getHours();
@@ -146,13 +142,10 @@
         leds[6][5].value = 'Wrocław';
     }
 
-    menuLeds[draw].classList.add(classOn);
+    menuLeds[draw].classList.add(colors[draw]);
 
     for (let i = 0; i < colors.length; i++) {
         menuLeds[i].addEventListener("click", function (e) {
-            classOn = colors[i];
-            classOff = colors[i] + 'Off';
-            classNumber = colors[i] + 'Number'
             for (let o = 0; o < menuLeds.length; o++) {
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
@@ -166,19 +159,16 @@
             }
 
             if (leds[3][0].classList[1] != 'none') {
-                optionsLeds[0].classList.add(classOn);
+                optionsLeds[0].classList.add(colors[i]);
             }
 
             if (weatherSection.classList[1] != 'none') {
-                optionsLeds[1].classList.add(classOn);
+                optionsLeds[1].classList.add(colors[i]);
             }
             localStorage.setItem('color', i);
             draw = i;
         });
         menuLeds[i].addEventListener("touch", function (e) {
-            classOn = colors[i];
-            classOff = colors[i] + 'Off';
-            classNumber = colors[i] + 'Number'
             for (let o = 0; o < menuLeds.length; o++) {
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
@@ -192,11 +182,11 @@
             }
 
             if (leds[3][0].classList[1] != 'none') {
-                optionsLeds[0].classList.add(classOn);
+                optionsLeds[0].classList.add(colors[i]);
             }
 
             if (weatherSection.classList[1] != 'none') {
-                optionsLeds[1].classList.add(classOn);
+                optionsLeds[1].classList.add(colors[i]);
             }
             localStorage.setItem('color', i);
             draw = i;
@@ -207,18 +197,18 @@
             leds[3][i].classList.remove('none');
             leds[4][i].classList.remove('none');
             leds[5][i].classList.remove('none');
-            optionsLeds[0].classList.add(classOn);
+            optionsLeds[0].classList.add(colors[draw]);
         }
     } else {
         for (let i = 0; i < leds[3].length; i++) {
             leds[3][i].classList.add('none');
             leds[4][i].classList.add('none');
             leds[5][i].classList.add('none');
-            optionsLeds[0].classList.remove(classOff);
+            optionsLeds[0].classList.remove(colors[draw] + 'Off');
         }
     }
     leds[6][0].addEventListener('click', function (e) {
-        optionsLeds[0].classList.toggle(classOn);
+        optionsLeds[0].classList.toggle(colors[draw]);
 
         for (let i = 0; i < leds[3].length; i++) {
             leds[3][i].classList.toggle('none');
@@ -232,7 +222,7 @@
         }
     });
     leds[6][0].addEventListener('touch', function (e) {
-        optionsLeds[0].classList.toggle(classOn);
+        optionsLeds[0].classList.toggle(colors[draw]);
 
         for (let i = 0; i < leds[3].length; i++) {
             leds[3][i].classList.toggle('none');
@@ -248,39 +238,46 @@
 
     if (localStorage.getItem('weather') == 'off') {
         weatherSection.classList.add('none');
-        optionsLeds[1].classList.add(classOff);
+        optionsLeds[1].classList.add(colors[draw] + 'Off');
     } else {
         weatherSection.classList.remove('none');
-        optionsLeds[1].classList.add(classOn);
+        optionsLeds[1].classList.add(colors[draw]);
     }
+
     leds[6][1].addEventListener('click', function (e) {
-        optionsLeds[1].classList.toggle(classOn);
+        optionsLeds[1].classList.toggle(colors[draw]);
         weatherSection.classList.toggle('none');
-        if (weatherSection.classList[1] != 'none') {
-            weatherApi();
-        }
         if (weatherSection.classList[1] == 'none') {
             localStorage.setItem('weather', 'off');
+            clearInterval(weatherApiUpdate);
         } else {
             localStorage.setItem('weather', 'on');
+            weatherApi();
+            weatherApiUpdate = setInterval(weatherApi, 3000000);
         }
     });
     leds[6][1].addEventListener('touch', function (e) {
-        optionsLeds[1].classList.toggle(classOn);
+        optionsLeds[1].classList.toggle(colors[draw]);
         weatherSection.classList.toggle('none');
-        if (weatherSection.classList[1] != 'none') {
-            weatherApi();
-        }
         if (weatherSection.classList[1] == 'none') {
             localStorage.setItem('weather', 'off');
+            clearInterval(weatherApiUpdate);
         } else {
             localStorage.setItem('weather', 'on');
+            weatherApi();
+            weatherApiUpdate = setInterval(weatherApi, 3000000);
         }
     });
 
     leds[6][5].addEventListener('change', function (e) {
         weatherApi();
         localStorage.setItem('city', leds[6][5].value);
+    });
+    leds[6][5].addEventListener("keyup", function (e) {
+        if (event.keyCode === 13) {
+            weatherApi();
+            localStorage.setItem('city', leds[6][5].value);
+        }
     });
 
     menu.addEventListener('click', function (e) {
@@ -297,22 +294,22 @@
     });
 
     function showTime(variable, section, sectionNumber) {
-        menu.classList.add(classOn);
+        menu.classList.add(colors[draw]);
         for (let i = 0; i < ledsOff.length; i++) {
-            ledsOff[i].classList.add(classOff);
+            ledsOff[i].classList.add(colors[draw] + 'Off');
         }
         for (let i = 0; i < leds[3].length; i++) {
-            leds[3][i].classList.add(classNumber);
-            leds[4][i].classList.add(classNumber);
-            leds[5][i].classList.add(classNumber);
+            leds[3][i].classList.add(colors[draw] + 'Number');
+            leds[4][i].classList.add(colors[draw] + 'Number');
+            leds[5][i].classList.add(colors[draw] + 'Number');
         }
         for (let i = 0; i < leds[6].length; i++) {
-            leds[6][i].classList.add(classNumber);
+            leds[6][i].classList.add(colors[draw] + 'Number');
         }
         for (let i = 0; i < optionsLeds.length; i++) {
-            optionsLeds[i].classList.add(classOff);
+            optionsLeds[i].classList.add(colors[draw] + 'Off');
         }
-        kiwi.classList.add(classOff + 'Number');
+        kiwi.classList.add(colors[draw] + 'OffNumber');
 
         let tens = variable / 10
         tens = Math.floor(tens);
@@ -322,31 +319,31 @@
         sectionNumber[1].textContent = unities;
 
         if (unities >= 8) {
-            section[6].classList.add(classOn);
+            section[6].classList.add(colors[draw]);
             unities = unities - 8
         }
         if (unities >= 4) {
-            section[5].classList.add(classOn);
+            section[5].classList.add(colors[draw]);
             unities = unities - 4
         }
         if (unities >= 2) {
-            section[4].classList.add(classOn);
+            section[4].classList.add(colors[draw]);
             unities = unities - 2
         }
         if (unities >= 1) {
-            section[3].classList.add(classOn);
+            section[3].classList.add(colors[draw]);
         }
 
         if (tens >= 4) {
-            section[2].classList.add(classOn);
+            section[2].classList.add(colors[draw]);
             tens = tens - 4
         }
         if (tens >= 2) {
-            section[1].classList.add(classOn);
+            section[1].classList.add(colors[draw]);
             tens = tens - 2
         }
         if (tens >= 1) {
-            section[0].classList.add(classOn);
+            section[0].classList.add(colors[draw]);
         }
     }
 
@@ -455,11 +452,10 @@
             leds[6][3].classList.add('fa-exclamation-triangle');
         }
     }
-
     weatherApi();
-    setInterval(function () {
-        weatherApi();
-    }, 300000);
+    if (weatherSection.classList[1] != 'none') {
+        weatherApiUpdate = setInterval(weatherApi, 3000000);
+    }
 
     function discoBird() {
         draw = draw + 1;
@@ -467,9 +463,6 @@
             draw = 0;
         }
 
-        classOn = colors[draw];
-        classOff = colors[draw] + 'Off';
-        classNumber = colors[draw] + 'Number'
         for (let o = 0; o < menuLeds.length; o++) {
             menuLeds[o].classList.remove(colors[o]);
             optionsLeds[0].classList.remove(colors[o]);
@@ -479,14 +472,14 @@
         menuLeds[draw].classList.add(colors[draw]);
 
         if (tempoColor == 'on') {
-            kiwi.classList.add(classOn + 'Number');
+            kiwi.classList.add(colors[draw] + 'Number');
         }
 
         if (leds[3][0].classList[1] != 'none') {
-            optionsLeds[0].classList.add(classOn);
+            optionsLeds[0].classList.add(colors[draw]);
         }
         if (weatherSection.classList[1] != 'none') {
-            optionsLeds[1].classList.add(classOn);
+            optionsLeds[1].classList.add(colors[draw]);
         }
     }
 
@@ -497,11 +490,25 @@
 
         if (tempoColor == 'off') {
             tempoColor = 'on'
-            dictoBirdInterval = setInterval(discoBird, 500);
-            kiwi.classList.add(classOn + 'Number');
+            discoBirdInterval = setInterval(discoBird, 500);
+            kiwi.classList.add(colors[draw] + 'Number');
         } else {
             tempoColor = 'off';
-            clearInterval(dictoBirdInterval);
+            clearInterval(discoBirdInterval);
+        }
+    });
+    kiwi.addEventListener('touch', function (e) {
+        for (let i = 0; i < colors.length; i++) {
+            kiwi.classList.remove(colors[i] + 'Number');
+        }
+
+        if (tempoColor == 'off') {
+            tempoColor = 'on'
+            discoBirdInterval = setInterval(discoBird, 500);
+            kiwi.classList.add(colors[draw] + 'Number');
+        } else {
+            tempoColor = 'off';
+            clearInterval(discoBirdInterval);
         }
     });
 })();
