@@ -253,7 +253,7 @@
         } else {
             localStorage.setItem('weather', 'on');
             weatherApi();
-            weatherApiUpdate = setInterval(weatherApi, 3000000);
+            weatherApiUpdate = setInterval(weatherApi, 300000);
         }
     });
     leds[6][1].addEventListener('touch', function (e) {
@@ -265,7 +265,7 @@
         } else {
             localStorage.setItem('weather', 'on');
             weatherApi();
-            weatherApiUpdate = setInterval(weatherApi, 3000000);
+            weatherApiUpdate = setInterval(weatherApi, 300000);
         }
     });
 
@@ -454,7 +454,7 @@
     }
     weatherApi();
     if (weatherSection.classList[1] != 'none') {
-        weatherApiUpdate = setInterval(weatherApi, 3000000);
+        weatherApiUpdate = setInterval(weatherApi, 30000);
     }
 
     function discoBird() {
