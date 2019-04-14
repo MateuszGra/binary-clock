@@ -454,7 +454,7 @@
     }
     weatherApi();
     if (weatherSection.classList[1] != 'none') {
-        weatherApiUpdate = setInterval(weatherApi, 30000);
+        weatherApiUpdate = setInterval(weatherApi, 300000);
     }
 
     function discoBird() {
