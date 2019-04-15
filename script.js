@@ -259,13 +259,11 @@
     }, 100);
 
     function weatherApi() {
-        const url = "https://api.openweathermap.org/data/2.5/weather?q=" + encodeURI(subtitlesLeds[5].value) + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4";
         let api = new XMLHttpRequest;
-        api.open("GET", url, false);
+        api.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=" + encodeURI(subtitlesLeds[5].value) + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4", false);
         api.send();
 
         let apiJson = JSON.parse(api.responseText);
-        console.log(url);
         console.log(apiJson);
 
         subtitlesLeds[2].textContent = Math.round(apiJson.main.temp - 273.15) + ' °C';
