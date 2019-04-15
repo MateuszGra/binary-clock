@@ -49,9 +49,20 @@
         document.querySelector(".weatherOption"),
         document.querySelector(".temp"),
         document.querySelector(".weatherIcon"),
-        document.querySelector(".pressure"),
         document.querySelector(".city"),
         document.querySelector(".name"),
+        document.querySelector(".fa-info-circle"),
+        document.querySelector(".fullInfo"),
+        document.querySelector(".tempFullInfo"),
+        document.querySelector(".weatherFullInfo"),
+        document.querySelector(".cityFullInfo"),
+        document.querySelector(".pressureFullInfo"),
+        document.querySelector(".humidityFullInfo"),
+        document.querySelector(".windFullInfo"),
+        document.querySelector(".sunriseFullInfo"),
+        document.querySelector(".SunsetFullInfo"),
+        document.querySelector(".cordFullInfo"),
+        document.querySelector(".updateFullInfo"),
     ];
 
     const optionsLeds = [
@@ -77,6 +88,8 @@
     const options = document.querySelector(".options");
     const weatherSection = document.querySelector(".weather");
     const kiwi = document.querySelector(".fa-kiwi-bird");
+    const weatherInfo = document.querySelector(".weather");
+    const body = document.querySelector("body");
 
     const colors = [
         'red',
@@ -118,9 +131,9 @@
         localStorage.setItem('color', draw);
     }
     if (localStorage.getItem('city') != null) {
-        subtitlesLeds[5].value = localStorage.getItem('city');
+        subtitlesLeds[4].value = localStorage.getItem('city');
     } else {
-        subtitlesLeds[5].value = 'Wrocław';
+        subtitlesLeds[4].value = 'Wrocław';
     }
 
     if (localStorage.getItem('digitalClock') == 'on') {
@@ -260,57 +273,84 @@
 
     function weatherApi() {
         let api = new XMLHttpRequest;
-        api.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=" + encodeURI(subtitlesLeds[5].value) + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4", false);
+        api.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=" + encodeURI(subtitlesLeds[4].value) + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4", false);
         api.send();
 
         let apiJson = JSON.parse(api.responseText);
-        console.log(apiJson);
-
-        subtitlesLeds[2].textContent = Math.round(apiJson.main.temp - 273.15) + ' °C';
-        subtitlesLeds[4].textContent = Math.round(apiJson.main.pressure) + ' hPa';
-        subtitlesLeds[6].textContent = apiJson.name + ', ' + apiJson.sys.country;
 
         let sunet = apiJson.sys.sunset;
         let dateSunset = new Date(sunet * 1000);
         let hoursSunset = dateSunset.getHours();
+        let minutesSunset = dateSunset.getMinutes();
 
-        let sunrise = apiJson.sys.sunrise;
-        let dateSunrise = new Date(sunrise * 1000);
+        let dateSunrise = new Date(apiJson.sys.sunrise * 1000);
         let hoursSunrise = dateSunrise.getHours();
+        let minutesSunrise = dateSunrise.getMinutes();
 
-        for (i = 0; i < weatherIcons.length; i++) {
-            subtitlesLeds[3].classList.remove(weatherIcons[i]);
-        }
-        if (apiJson.weather[0].id >= 802 && apiJson.weather[0].id < 900) {
-            subtitlesLeds[3].classList.add('fa-cloud');
-        } else if (apiJson.weather[0].id == 800) {
-            if (hours <= hoursSunset && hours >= hoursSunrise) {
-                subtitlesLeds[3].classList.add('fa-sun');
-            } else {
-                subtitlesLeds[3].classList.add('fa-moon');
+        if (api.status == 200) {
+            subtitlesLeds[2].textContent = Math.round(apiJson.main.temp - 273.15) + ' °C';
+            subtitlesLeds[5].textContent = apiJson.name + ', ' + apiJson.sys.country;
+
+            subtitlesLeds[8].textContent = 'temp: ' + Math.round(apiJson.main.temp - 273.15) + ' °C , ' + (Math.round(apiJson.main.temp - 273.15) * 9 / 5 + 32) + ' °F';
+            subtitlesLeds[9].textContent = 'weather: ' + apiJson.weather[0].description;
+            subtitlesLeds[10].textContent = apiJson.name + ', ' + apiJson.sys.country;
+            subtitlesLeds[11].textContent = 'pressure: ' + apiJson.main.pressure + ' hPa';
+            subtitlesLeds[12].textContent = 'humidity: ' + apiJson.main.humidity + ' %';
+            subtitlesLeds[13].textContent = 'wind: ' + apiJson.wind.speed + ' m/s, ' + apiJson.wind.deg + ' deg.';
+
+            function addZero(n) {
+                if (n < 10) {
+                    n = "0" + n;
+                }
+                return n;
             }
-        } else if (apiJson.weather[0].id == 801) {
-            if (hours <= hoursSunset && hours >= hoursSunrise) {
-                subtitlesLeds[3].classList.add('fa-cloud-sun');
-            } else {
-                subtitlesLeds[3].classList.add('fa-cloud-moon');
+
+            subtitlesLeds[14].textContent = 'sunrise: ' + addZero(hoursSunrise) + ':' + addZero(minutesSunrise);
+            subtitlesLeds[15].textContent = 'sunset: ' + addZero(hoursSunset) + ':' + addZero(minutesSunset);
+            subtitlesLeds[16].textContent = 'geo coords: [ ' + apiJson.coord.lon + ' , ' + apiJson.coord.lat + ' ]';
+
+            let dateUpdate = new Date();
+            let hoursUpdate = dateUpdate.getHours();
+            let minutesUpdate = dateUpdate.getMinutes();
+            let secondsUpdate = dateUpdate.getSeconds();
+
+            subtitlesLeds[17].textContent = 'last update: ' + addZero(hoursUpdate) + ':' + addZero(minutesUpdate) + ':' + addZero(secondsUpdate);
+
+
+            for (i = 0; i < weatherIcons.length; i++) {
+                subtitlesLeds[3].classList.remove(weatherIcons[i]);
             }
-        } else if (apiJson.weather[0].id >= 502 && apiJson.weather[0].id < 600 || apiJson.weather[0].id >= 300 && apiJson.weather[0].id < 400) {
-            subtitlesLeds[3].classList.add('fa-cloud-showers-heavy');
-        } else if (apiJson.weather[0].id >= 500 && apiJson.weather[0].id < 502) {
-            if (hours <= hoursSunset && hours >= hoursSunrise) {
-                subtitlesLeds[3].classList.add('fa-cloud-sun-rain');
+            if (apiJson.weather[0].id >= 802 && apiJson.weather[0].id < 900) {
+                subtitlesLeds[3].classList.add('fa-cloud');
+            } else if (apiJson.weather[0].id == 800) {
+                if (hours <= hoursSunset && hours >= hoursSunrise) {
+                    subtitlesLeds[3].classList.add('fa-sun');
+                } else {
+                    subtitlesLeds[3].classList.add('fa-moon');
+                }
+            } else if (apiJson.weather[0].id == 801) {
+                if (hours <= hoursSunset && hours >= hoursSunrise) {
+                    subtitlesLeds[3].classList.add('fa-cloud-sun');
+                } else {
+                    subtitlesLeds[3].classList.add('fa-cloud-moon');
+                }
+            } else if (apiJson.weather[0].id >= 502 && apiJson.weather[0].id < 600 || apiJson.weather[0].id >= 300 && apiJson.weather[0].id < 400) {
+                subtitlesLeds[3].classList.add('fa-cloud-showers-heavy');
+            } else if (apiJson.weather[0].id >= 500 && apiJson.weather[0].id < 502) {
+                if (hours <= hoursSunset && hours >= hoursSunrise) {
+                    subtitlesLeds[3].classList.add('fa-cloud-sun-rain');
+                } else {
+                    subtitlesLeds[3].classList.add('fa-cloud-moon-rain');
+                }
+            } else if (apiJson.weather[0].id >= 200 && apiJson.weather[0].id < 300) {
+                subtitlesLeds[3].classList.add('fa-bolt');
+            } else if (apiJson.weather[0].id >= 600 && apiJson.weather[0].id < 700) {
+                subtitlesLeds[3].classList.add('fa-snowflake');
+            } else if (apiJson.weather[0].id >= 700 && apiJson.weather[0].id < 800) {
+                subtitlesLeds[3].classList.add('fa-smog');
             } else {
-                subtitlesLeds[3].classList.add('fa-cloud-moon-rain');
+                subtitlesLeds[3].classList.add('fa-exclamation-triangle');
             }
-        } else if (apiJson.weather[0].id >= 200 && apiJson.weather[0].id < 300) {
-            subtitlesLeds[3].classList.add('fa-bolt');
-        } else if (apiJson.weather[0].id >= 600 && apiJson.weather[0].id < 700) {
-            subtitlesLeds[3].classList.add('fa-snowflake');
-        } else if (apiJson.weather[0].id >= 700 && apiJson.weather[0].id < 800) {
-            subtitlesLeds[3].classList.add('fa-smog');
-        } else {
-            subtitlesLeds[3].classList.add('fa-exclamation-triangle');
         }
     }
     weatherApi();
@@ -345,6 +385,7 @@
 
     for (let i = 0; i < colors.length; i++) {
         menuLeds[i].addEventListener("click", function (e) {
+            e.stopPropagation();
             for (let o = 0; o < menuLeds.length; o++) {
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
@@ -368,6 +409,7 @@
             draw = i;
         });
         menuLeds[i].addEventListener("touch", function (e) {
+            e.stopPropagation();
             for (let o = 0; o < menuLeds.length; o++) {
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
@@ -393,6 +435,7 @@
     }
 
     subtitlesLeds[1].addEventListener('click', function (e) {
+        e.stopPropagation();
         optionsLeds[1].classList.toggle(colors[draw]);
         weatherSection.classList.toggle('none');
         if (weatherSection.classList[1] == 'none') {
@@ -406,6 +449,7 @@
     });
 
     subtitlesLeds[1].addEventListener('touch', function (e) {
+        e.stopPropagation();
         optionsLeds[1].classList.toggle(colors[draw]);
         weatherSection.classList.toggle('none');
         if (weatherSection.classList[1] == 'none') {
@@ -418,18 +462,20 @@
         }
     });
 
-    subtitlesLeds[5].addEventListener('change', function (e) {
+    subtitlesLeds[4].addEventListener('change', function (e) {
         weatherApi();
-        localStorage.setItem('city', subtitlesLeds[5].value);
+        localStorage.setItem('city', subtitlesLeds[4].value);
     });
 
     menu.addEventListener('click', function (e) {
+        e.stopPropagation();
         options.classList.toggle('none');
         if (options.classList[1] != 'none') {
             options.scrollIntoView()
         }
     });
     menu.addEventListener('touch', function (e) {
+        e.stopPropagation();
         options.classList.toggle('none');
         if (options.classList[1] != 'none') {
             options.scrollIntoView()
@@ -437,6 +483,7 @@
     });
 
     kiwi.addEventListener('click', function (e) {
+        e.stopPropagation();
         for (let i = 0; i < colors.length; i++) {
             kiwi.classList.remove(colors[i] + 'Number');
         }
@@ -451,6 +498,7 @@
         }
     });
     kiwi.addEventListener('touch', function (e) {
+        e.stopPropagation();
         for (let i = 0; i < colors.length; i++) {
             kiwi.classList.remove(colors[i] + 'Number');
         }
@@ -466,6 +514,7 @@
     });
 
     subtitlesLeds[0].addEventListener('click', function (e) {
+        e.stopPropagation();
         optionsLeds[0].classList.toggle(colors[draw]);
 
         for (let i = 0; i < leds[3].length; i++) {
@@ -480,6 +529,7 @@
         }
     });
     subtitlesLeds[0].addEventListener('touch', function (e) {
+        e.stopPropagation();
         optionsLeds[0].classList.toggle(colors[draw]);
 
         for (let i = 0; i < leds[3].length; i++) {
@@ -492,5 +542,21 @@
         } else {
             localStorage.setItem('digitalClock', 'off');
         }
+    });
+
+    weatherInfo.addEventListener('click', function (e) {
+        e.stopPropagation();
+        subtitlesLeds[7].classList.toggle('none');
+    });
+    weatherInfo.addEventListener('touch', function (e) {
+        e.stopPropagation();
+        subtitlesLeds[7].classList.toggle('none');
+    });
+
+    body.addEventListener('click', function (e) {
+        subtitlesLeds[7].classList.add('none');
+    });
+    body.addEventListener('touch', function (e) {
+        subtitlesLeds[7].classList.add('none');
     });
 })();
