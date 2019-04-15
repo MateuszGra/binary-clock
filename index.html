@@ -12,86 +12,88 @@
 </head>
 
 <body>
-    <section class="clock">
-        <div class="hours">
-            <div class="tens">
-                <p class="tensHours none">X</p>
-                <figure id="ledsOff1" class="oneTensHours"></figure>
-                <figure id="ledsOff2" class="twoTensHours"></figure>
-                <figure id="ledsOff3" class="fourTensHours"></figure>
-                <figure id="ledsOff4"></figure>
+    <div>
+        <section class="clock">
+            <div class="hours">
+                <div class="tens">
+                    <p id="tensHours" class="none">X</p>
+                    <figure id="oneTensHours"></figure>
+                    <figure id="twoTensHours"></figure>
+                    <figure id="fourTensHours"></figure>
+                    <figure id="ledsOff4"></figure>
+                </div>
+                <div class="unities">
+                    <p id="unitesHours" class="none">X</p>
+                    <figure id="oneUnitesHours"></figure>
+                    <figure id="twoUnitesHours"></figure>
+                    <figure id="fourUnitesHours"></figure>
+                    <figure id="eightUnitesHours"></figure>
+                </div>
             </div>
-            <div class="unities">
-                <p class="unitesHours none">X</p>
-                <figure id="ledsOff5" class="oneUnitesHours"></figure>
-                <figure id="ledsOff6" class="twoUnitesHours"></figure>
-                <figure id="ledsOff7" class="fourUnitesHours"></figure>
-                <figure id="ledsOff8" class="eightUnitesHours"></figure>
+            <div class="minutes">
+                <div class="tens">
+                    <p id="tensMinutes" class="none">X</p>
+                    <figure id="oneTensMinutes"></figure>
+                    <figure id="twoTensMinutes"></figure>
+                    <figure id="fourTensMinutes"></figure>
+                    <figure id="ledsOff12"></figure>
+                </div>
+                <div class="unities">
+                    <p id="unitesMinutes" class="none">X</p>
+                    <figure id="oneUnitiesMinutes"></figure>
+                    <figure id="twoUnitiesMinutes"></figure>
+                    <figure id="fourUnitiesMinutes"></figure>
+                    <figure id="eightUnitiesMinutes"></figure>
+                </div>
             </div>
-        </div>
-        <div class="minutes">
-            <div class="tens">
-                <p class="tensMinutes none">X</p>
-                <figure id="ledsOff9" class="oneTensMinutes"></figure>
-                <figure id="ledsOff10" class="twoTensMinutes"></figure>
-                <figure id="ledsOff11" class="fourTensMinutes"></figure>
-                <figure id="ledsOff12"></figure>
+            <div class="seconds">
+                <div class="tens">
+                    <p id="tensSeconds" class="none">X</p>
+                    <figure id="oneTensSeconds"></figure>
+                    <figure id="twoTensSeconds"></figure>
+                    <figure id="fourTensSeconds"></figure>
+                    <figure id="ledsOff20"></figure>
+                </div>
+                <div class="unities">
+                    <p id="unitesSeconds" class="none">X</p>
+                    <figure id="oneUnitiesSeconds"></figure>
+                    <figure id="twoUnitiesSeconds"></figure>
+                    <figure id="fourUnitiesSeconds"></figure>
+                    <figure id="eightUnitiesSeconds"></figure>
+                </div>
             </div>
-            <div class="unities">
-                <p class="unitesMinutes none">X</p>
-                <figure id="ledsOff13" class="oneUnitiesMinutes"></figure>
-                <figure id="ledsOff14" class="twoUnitiesMinutes"></figure>
-                <figure id="ledsOff15" class="fourUnitiesMinutes"></figure>
-                <figure id="ledsOff16" class="eightUnitiesMinutes"></figure>
+        </section>
+        <section class="weather">
+            <div>
+                <p class="temp">Error</p>
+                <i class="weatherIcon fas"></i>
             </div>
-        </div>
-        <div class="seconds">
-            <div class="tens">
-                <p class="tensSeconds none">X</p>
-                <figure id="ledsOff17" class="oneTensSeconds"></figure>
-                <figure id="ledsOff18" class="twoTensSeconds"></figure>
-                <figure id="ledsOff19" class="fourTensSeconds"></figure>
-                <figure id="ledsOff20"></figure>
+            <p class="pressure">Error</p>
+            <p class="name">Error</p>
+        </section>
+        <div id="menu" class="menu"></div>
+        <div class="options none">
+            <div class="colorSet">
+                <figure id="wheel1" class="redOff"></figure>
+                <figure id="wheel2" class="yellowOff"></figure>
+                <figure id="wheel3" class="orangeOff"></figure>
+                <figure id="wheel4" class="mintOff"></figure>
+                <figure id="wheel5" class="iceOff"></figure>
+                <figure id="wheel6" class="blueOff"></figure>
+                <figure id="wheel7" class="purpleOff"></figure>
+                <figure id="wheel8" class="pinkOff"></figure>
+                <i class="fas fa-kiwi-bird"></i>
             </div>
-            <div class="unities">
-                <p class="unitesSeconds none">X</p>
-                <figure id="ledsOff21" class="oneUnitiesSeconds"></figure>
-                <figure id="ledsOff22" class="twoUnitiesSeconds"></figure>
-                <figure id="ledsOff23" class="fourUnitiesSeconds"></figure>
-                <figure id="ledsOff24" class="eightUnitiesSeconds"></figure>
+            <div class="numberOption">
+                <figure class="numberOptionLed"></figure>
+                <p>Digital Clock</p>
             </div>
+            <div class="weatherOption">
+                <figure class="weatherOptionLed"></figure>
+                <p>Weather</p>
+            </div>
+            <input class="city">
         </div>
-    </section>
-    <section class="weather">
-        <div>
-            <p class="temp">Error</p>
-            <i class="weatherIcon fas"></i>
-        </div>
-        <p class="pressure">Error</p>
-        <p class="name">Error</p>
-    </section>
-    <div id="menu" class="menu"></div>
-    <div class="options none">
-        <div class="colorSet">
-            <figure class="redOff wheel1"></figure>
-            <figure class="yellowOff wheel2"></figure>
-            <figure class="orangeOff wheel3"></figure>
-            <figure class="mintOff wheel4"></figure>
-            <figure class="iceOff wheel5"></figure>
-            <figure class="blueOff wheel6"></figure>
-            <figure class="purpleOff wheel7"></figure>
-            <figure class="pinkOff wheel8"></figure>
-            <i class="fas fa-kiwi-bird"></i>
-        </div>
-        <div class="numberOption">
-            <figure class="numberOptionLed"></figure>
-            <p>Digital Clock</p>
-        </div>
-        <div class="weatherOption">
-            <figure class="weatherOptionLed"></figure>
-            <p>Weather</p>
-        </div>
-        <input class="city">
     </div>
     <script src="script.js"></script>
 </body>
