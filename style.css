@@ -119,9 +119,10 @@ figure {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2rem 0 0 0;
+    margin: 2rem auto 0 auto;
     transition: 0.2s linear;
     cursor: pointer;
+    width: fit-content;
 }
 
 .weather div {
@@ -155,7 +156,7 @@ figure {
 
 .fa-info-circle {
     font-size: 2rem;
-    margin: 1rem 0 0 0.5rem;
+    margin: 1rem 0 0 0;
     transition: 0.2s linear;
 }
 
