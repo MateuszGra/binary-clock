@@ -111,12 +111,12 @@
 
     if (localStorage.getItem('color') != null) {
         draw = localStorage.getItem('color')
+        draw = parseInt(draw);
     } else {
         draw = Math.random() * 7;
         draw = Math.round(draw);
         localStorage.setItem('color', draw);
     }
-
     if (localStorage.getItem('city') != null) {
         subtitlesLeds[5].value = localStorage.getItem('city');
     } else {
@@ -324,7 +324,6 @@
         if (draw >= colors.length) {
             draw = 0;
         }
-
         for (let o = 0; o < menuLeds.length; o++) {
             menuLeds[o].classList.remove(colors[o]);
             optionsLeds[0].classList.remove(colors[o]);
