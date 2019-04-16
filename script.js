@@ -277,6 +277,8 @@
         api.send();
 
         if (api.status == 200) {
+            localStorage.setItem('city', subtitlesLeds[4].value);
+
             let apiJson = JSON.parse(api.responseText);
             let dateSunset = new Date(apiJson.sys.sunset * 1000);
             let hoursSunset = dateSunset.getHours();
@@ -499,7 +501,6 @@
 
     subtitlesLeds[4].addEventListener('change', function (e) {
         weatherApi();
-        localStorage.setItem('city', subtitlesLeds[4].value);
     });
 
     menu.addEventListener('click', function (e) {
