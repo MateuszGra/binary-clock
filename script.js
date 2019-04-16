@@ -292,6 +292,7 @@
 
         if (api.status == 200) {
             subtitlesLeds[2].textContent = round(apiJson.main.temp - 273.15, 0) + '°C';
+
             subtitlesLeds[5].textContent = apiJson.name + ', ' + apiJson.sys.country;
 
             subtitlesLeds[8].textContent = 'temp: ' + round(apiJson.main.temp - 273.15, 1) + '°C , ' + round((apiJson.main.temp - 273.15) * 9 / 5 + 32, 1) + '°F';
