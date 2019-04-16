@@ -125,15 +125,18 @@ figure {
     width: fit-content;
 }
 
-.weather div {
+.center {
     display: flex;
-    justify-content: center;
-    align-items: baseline;
+    flex-direction: row;
 }
 
 .temp {
     font-size: 4rem;
     transition: 0.2s linear;
+}
+
+.pressure {
+    font-size: 2.5rem;
 }
 
 .name {
@@ -161,21 +164,17 @@ figure {
 }
 
 .fullInfo {
+    display: flex;
     flex-direction: column;
     position: absolute;
     border: 0.2rem solid;
     border-radius: 1rem;
     cursor: pointer;
-    opacity: 1;
     background: rgba(0, 0, 0, 0.85);
-    transition: 0.2s linear;
     font-size: 2rem;
-    top: 50%;
     transform: translateY(-50%);
     z-index: 2;
-}
-
-.fullInfo p {
+    opacity: 1;
     transition: 0.2s linear;
 }
 
@@ -346,7 +345,7 @@ figure {
 
 @media only screen and (max-height: 700px) {
     .clock {
-        margin: 12vh auto 0 auto;
+        margin: 11vh auto 0 auto;
     }
 
     .menu {

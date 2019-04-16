@@ -277,9 +277,7 @@
         api.send();
 
         let apiJson = JSON.parse(api.responseText);
-
-        let sunet = apiJson.sys.sunset;
-        let dateSunset = new Date(sunet * 1000);
+        let dateSunset = new Date(apiJson.sys.sunset * 1000);
         let hoursSunset = dateSunset.getHours();
         let minutesSunset = dateSunset.getMinutes();
 
@@ -288,15 +286,52 @@
         let minutesSunrise = dateSunrise.getMinutes();
 
         if (api.status == 200) {
-            subtitlesLeds[2].textContent = Math.round(apiJson.main.temp - 273.15) + ' °C';
+            subtitlesLeds[2].textContent = Math.round(apiJson.main.temp - 273.15, 1) + '°C';
             subtitlesLeds[5].textContent = apiJson.name + ', ' + apiJson.sys.country;
 
-            subtitlesLeds[8].textContent = 'temp: ' + Math.round(apiJson.main.temp - 273.15) + ' °C , ' + (Math.round(apiJson.main.temp - 273.15) * 9 / 5 + 32) + ' °F';
+            subtitlesLeds[8].textContent = 'temp: ' + Math.round(apiJson.main.temp - 273.15) + '°C , ' + (Math.round(apiJson.main.temp - 273.15) * 9 / 5 + 32) + '°F';
             subtitlesLeds[9].textContent = 'weather: ' + apiJson.weather[0].description;
             subtitlesLeds[10].textContent = apiJson.name + ', ' + apiJson.sys.country;
-            subtitlesLeds[11].textContent = 'pressure: ' + apiJson.main.pressure + ' hPa';
-            subtitlesLeds[12].textContent = 'humidity: ' + apiJson.main.humidity + ' %';
-            subtitlesLeds[13].textContent = 'wind: ' + apiJson.wind.speed + ' m/s, ' + apiJson.wind.deg + ' deg.';
+            subtitlesLeds[11].textContent = 'pressure: ' + apiJson.main.pressure + 'hPa';
+            subtitlesLeds[12].textContent = 'humidity: ' + apiJson.main.humidity + '%';
+
+            function windDirection(n) {
+                if (apiJson.wind.deg > 348.75 && apiJson.wind.deg <= 11.25) {
+                    return 'N';
+                } else if (apiJson.wind.deg > 11.25 && apiJson.wind.deg <= 33.75) {
+                    return 'NNE';
+                } else if (apiJson.wind.deg > 33.75 && apiJson.wind.deg <= 56.25) {
+                    return 'NE';
+                } else if (apiJson.wind.deg > 56.25 && apiJson.wind.deg <= 78.75) {
+                    return 'ENE';
+                } else if (apiJson.wind.deg > 78.75 && apiJson.wind.deg <= 101.25) {
+                    return 'E';
+                } else if (apiJson.wind.deg > 101.25 && apiJson.wind.deg <= 123.75) {
+                    return 'ESE';
+                } else if (apiJson.wind.deg > 123.75 && apiJson.wind.deg <= 146.25) {
+                    return 'SE';
+                } else if (apiJson.wind.deg > 146.25 && apiJson.wind.deg <= 168.75) {
+                    return 'SSE';
+                } else if (apiJson.wind.deg > 168.75 && apiJson.wind.deg <= 191.25) {
+                    return 'S';
+                } else if (apiJson.wind.deg > 191.25 && apiJson.wind.deg <= 213.75) {
+                    return 'SSW';
+                } else if (apiJson.wind.deg > 213.75 && apiJson.wind.deg <= 236.25) {
+                    return 'SW';
+                } else if (apiJson.wind.deg > 236.25 && apiJson.wind.deg <= 258.75) {
+                    return 'WSW';
+                } else if (apiJson.wind.deg > 258.75 && apiJson.wind.deg <= 281.25) {
+                    return 'W';
+                } else if (apiJson.wind.deg > 281.25 && apiJson.wind.deg <= 303.75) {
+                    return 'WNW';
+                } else if (apiJson.wind.deg > 303.75 && apiJson.wind.deg <= 326.25) {
+                    return 'NW';
+                } else if (apiJson.wind.deg > 326.25 && apiJson.wind.deg <= 348.75) {
+                    return 'NNW';
+                }
+            }
+
+            subtitlesLeds[13].textContent = 'wind: ' + apiJson.wind.speed + 'm/s, ' + windDirection(apiJson.wind.deg) + ' (' + apiJson.wind.deg + 'deg.)';
 
             function addZero(n) {
                 if (n < 10) {
@@ -316,37 +351,31 @@
 
             subtitlesLeds[17].textContent = 'last update: ' + addZero(hoursUpdate) + ':' + addZero(minutesUpdate) + ':' + addZero(secondsUpdate);
 
-
             for (i = 0; i < weatherIcons.length; i++) {
                 subtitlesLeds[3].classList.remove(weatherIcons[i]);
             }
-            if (apiJson.weather[0].id >= 802 && apiJson.weather[0].id < 900) {
+
+            if (apiJson.weather[0].icon == '03d' || apiJson.weather[0].icon == '03n' || apiJson.weather[0].icon == '04d' || apiJson.weather[0].icon == '04n') {
                 subtitlesLeds[3].classList.add('fa-cloud');
-            } else if (apiJson.weather[0].id == 800) {
-                if (hours <= hoursSunset && hours >= hoursSunrise) {
-                    subtitlesLeds[3].classList.add('fa-sun');
-                } else {
-                    subtitlesLeds[3].classList.add('fa-moon');
-                }
-            } else if (apiJson.weather[0].id == 801) {
-                if (hours <= hoursSunset && hours >= hoursSunrise) {
-                    subtitlesLeds[3].classList.add('fa-cloud-sun');
-                } else {
-                    subtitlesLeds[3].classList.add('fa-cloud-moon');
-                }
-            } else if (apiJson.weather[0].id >= 502 && apiJson.weather[0].id < 600 || apiJson.weather[0].id >= 300 && apiJson.weather[0].id < 400) {
+            } else if (apiJson.weather[0].icon == '01d') {
+                subtitlesLeds[3].classList.add('fa-sun');
+            } else if (apiJson.weather[0].icon == '01n') {
+                subtitlesLeds[3].classList.add('fa-moon');
+            } else if (apiJson.weather[0].icon == '02d') {
+                subtitlesLeds[3].classList.add('fa-cloud-sun');
+            } else if (apiJson.weather[0].icon == '02n') {
+                subtitlesLeds[3].classList.add('fa-cloud-moon');
+            } else if (apiJson.weather[0].icon == '09d' || apiJson.weather[0].icon == '09n') {
                 subtitlesLeds[3].classList.add('fa-cloud-showers-heavy');
-            } else if (apiJson.weather[0].id >= 500 && apiJson.weather[0].id < 502) {
-                if (hours <= hoursSunset && hours >= hoursSunrise) {
-                    subtitlesLeds[3].classList.add('fa-cloud-sun-rain');
-                } else {
-                    subtitlesLeds[3].classList.add('fa-cloud-moon-rain');
-                }
-            } else if (apiJson.weather[0].id >= 200 && apiJson.weather[0].id < 300) {
+            } else if (apiJson.weather[0].icon == '10d') {
+                subtitlesLeds[3].classList.add('fa-cloud-sun-rain');
+            } else if (apiJson.weather[0].icon == '10n') {
+                subtitlesLeds[3].classList.add('fa-cloud-moon-rain');
+            } else if (apiJson.weather[0].icon == '11d' || apiJson.weather[0].icon == '11n') {
                 subtitlesLeds[3].classList.add('fa-bolt');
-            } else if (apiJson.weather[0].id >= 600 && apiJson.weather[0].id < 700) {
+            } else if (apiJson.weather[0].icon == '13d' || apiJson.weather[0].icon == '13n') {
                 subtitlesLeds[3].classList.add('fa-snowflake');
-            } else if (apiJson.weather[0].id >= 700 && apiJson.weather[0].id < 800) {
+            } else if (apiJson.weather[0].icon == '50d' || apiJson.weather[0].icon == '50n') {
                 subtitlesLeds[3].classList.add('fa-smog');
             } else {
                 subtitlesLeds[3].classList.add('fa-exclamation-triangle');
@@ -355,7 +384,7 @@
     }
     weatherApi();
     if (weatherSection.classList[1] != 'none') {
-        weatherApiUpdate = setInterval(weatherApi, 300000);
+        weatherApiUpdate = setInterval(weatherApi, 60000);
     }
 
     function discoBird() {
@@ -444,7 +473,7 @@
         } else {
             localStorage.setItem('weather', 'on');
             weatherApi();
-            weatherApiUpdate = setInterval(weatherApi, 300000);
+            weatherApiUpdate = setInterval(weatherApi, 60000);
         }
     });
 
@@ -458,7 +487,7 @@
         } else {
             localStorage.setItem('weather', 'on');
             weatherApi();
-            weatherApiUpdate = setInterval(weatherApi, 300000);
+            weatherApiUpdate = setInterval(weatherApi, 60000);
         }
     });
 
