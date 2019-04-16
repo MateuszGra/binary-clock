@@ -289,11 +289,12 @@
             let factor = Math.pow(10, k);
             return Math.round(n * factor) / factor;
         }
+
         if (api.status == 200) {
             subtitlesLeds[2].textContent = round(apiJson.main.temp - 273.15, 0) + '°C';
             subtitlesLeds[5].textContent = apiJson.name + ', ' + apiJson.sys.country;
 
-            subtitlesLeds[8].textContent = 'temp: ' + round(apiJson.main.temp - 273.15, 0) + '°C , ' + round((apiJson.main.temp - 273.15) * 9 / 5 + 32, 1) + '°F';
+            subtitlesLeds[8].textContent = 'temp: ' + round(apiJson.main.temp - 273.15, 1) + '°C , ' + round((apiJson.main.temp - 273.15) * 9 / 5 + 32, 1) + '°F';
             subtitlesLeds[9].textContent = 'weather: ' + apiJson.weather[0].description;
             subtitlesLeds[10].textContent = apiJson.name + ', ' + apiJson.sys.country;
             subtitlesLeds[11].textContent = 'pressure: ' + apiJson.main.pressure + 'hPa';
