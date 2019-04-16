@@ -276,21 +276,21 @@
         api.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=" + encodeURI(subtitlesLeds[4].value) + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4", false);
         api.send();
 
-        let apiJson = JSON.parse(api.responseText);
-        let dateSunset = new Date(apiJson.sys.sunset * 1000);
-        let hoursSunset = dateSunset.getHours();
-        let minutesSunset = dateSunset.getMinutes();
-
-        let dateSunrise = new Date(apiJson.sys.sunrise * 1000);
-        let hoursSunrise = dateSunrise.getHours();
-        let minutesSunrise = dateSunrise.getMinutes();
-
-        function round(n, k) {
-            let factor = Math.pow(10, k);
-            return Math.round(n * factor) / factor;
-        }
-
         if (api.status == 200) {
+            let apiJson = JSON.parse(api.responseText);
+            let dateSunset = new Date(apiJson.sys.sunset * 1000);
+            let hoursSunset = dateSunset.getHours();
+            let minutesSunset = dateSunset.getMinutes();
+
+            let dateSunrise = new Date(apiJson.sys.sunrise * 1000);
+            let hoursSunrise = dateSunrise.getHours();
+            let minutesSunrise = dateSunrise.getMinutes();
+
+            function round(n, k) {
+                let factor = Math.pow(10, k);
+                return Math.round(n * factor) / factor;
+            }
+
             subtitlesLeds[2].textContent = round(apiJson.main.temp - 273.15, 0) + '°C';
 
             subtitlesLeds[5].textContent = apiJson.name + ', ' + apiJson.sys.country;
