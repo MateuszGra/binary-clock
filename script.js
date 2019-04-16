@@ -347,7 +347,7 @@
 
             subtitlesLeds[14].textContent = 'sunrise: ' + addZero(hoursSunrise) + ':' + addZero(minutesSunrise);
             subtitlesLeds[15].textContent = 'sunset: ' + addZero(hoursSunset) + ':' + addZero(minutesSunset);
-            subtitlesLeds[16].textContent = 'geo coords: [ ' + apiJson.coord.lon + ' , ' + apiJson.coord.lat + ' ]';
+            subtitlesLeds[16].textContent = 'geo coords: [' + apiJson.coord.lon + ' , ' + apiJson.coord.lat + ']';
 
             let dateUpdate = new Date();
             let hoursUpdate = dateUpdate.getHours();

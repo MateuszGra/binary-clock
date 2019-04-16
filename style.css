@@ -71,7 +71,6 @@ figure {
     justify-content: center;
     align-items: center;
     margin: 1.5rem auto 0 auto;
-    opacity: 1;
     transition: 0.2s linear;
 }
 
@@ -79,6 +78,7 @@ figure {
     margin: 2rem 1rem 1rem 1rem;
     font-size: 2rem;
     transition: 0.2s linear;
+    animation: show 0.5s linear;
 }
 
 .options {
@@ -86,7 +86,7 @@ figure {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: 0.3s linear;
+    animation: show 0.5s linear;
 }
 
 .numberOption,
@@ -123,6 +123,7 @@ figure {
     transition: 0.2s linear;
     cursor: pointer;
     width: fit-content;
+    animation: show 0.5s linear alternate;
 }
 
 .center {
@@ -174,18 +175,17 @@ figure {
     font-size: 2rem;
     transform: translateY(-50%);
     z-index: 2;
-    opacity: 1;
     transition: 0.2s linear;
+    width: fit-content;
+    animation: show 1s;
 }
 
 .fullInfo div {
-    display: flex;
-    flex-direction: column;
     margin: 1.5rem;
 }
 
-.fullInfo:first-child {
-    align-items: center;
+.fullInfo p {
+    transition: 0.2s linear;
 }
 
 /*  COLORS  */
@@ -341,6 +341,16 @@ figure {
     z-index: 1;
 }
 
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 /*  MEDIA  */
 
 @media only screen and (max-height: 700px) {
@@ -362,7 +372,7 @@ figure {
 /*  REMOVE  */
 
 .none {
-    visibility: hidden;
+    display: none;
     opacity: 0;
 }
 
