@@ -163,7 +163,6 @@ figure {
     margin: 1rem 0 0 0;
     transition: 0.2s linear;
     opacity: 0;
-    animation: show 8s reverse;
 }
 
 .fullInfo {
