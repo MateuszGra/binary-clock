@@ -297,7 +297,7 @@
 
             subtitlesLeds[5].textContent = apiJson.name + ', ' + apiJson.sys.country;
 
-            subtitlesLeds[8].textContent = 'temp: ' + round(apiJson.main.temp - 273.15, 1) + '°C , ' + round((apiJson.main.temp - 273.15) * 9 / 5 + 32, 1) + '°F';
+            subtitlesLeds[8].textContent = 'temp: ' + round(apiJson.main.temp - 273.15, 1) + '°C , ' + round(round(apiJson.main.temp - 273.15, 1) * 9 / 5 + 32, 1) + '°F';
             subtitlesLeds[9].textContent = 'weather: ' + apiJson.weather[0].description;
             subtitlesLeds[10].textContent = apiJson.name + ', ' + apiJson.sys.country;
             subtitlesLeds[11].textContent = 'pressure: ' + apiJson.main.pressure + 'hPa';
@@ -339,7 +339,14 @@
                 }
             }
 
-            subtitlesLeds[13].textContent = 'wind: ' + apiJson.wind.speed + 'm/s, ' + windDirection(apiJson.wind.deg) + ' (' + apiJson.wind.deg + 'deg.)';
+            function delUndefined(n, y) {
+                if (n == undefined) {
+                    y = '';
+                }
+                return y;
+            }
+
+            subtitlesLeds[13].textContent = 'wind: ' + apiJson.wind.speed + 'm/s' + delUndefined(apiJson.wind.deg, ', ' + windDirection(apiJson.wind.deg) + ' (' + apiJson.wind.deg + 'deg.)');
 
             function addZero(n) {
                 if (n < 10) {
@@ -400,6 +407,7 @@
         if (draw >= colors.length) {
             draw = 0;
         }
+        localStorage.setItem('color', draw);
         for (let o = 0; o < menuLeds.length; o++) {
             menuLeds[o].classList.remove(colors[o]);
             optionsLeds[0].classList.remove(colors[o]);
