@@ -298,9 +298,7 @@
             subtitlesLeds[12].textContent = 'humidity: ' + apiJson.main.humidity + '%';
 
             function windDirection(n) {
-                if (n > 348.75 && n <= 11.25) {
-                    return 'N';
-                } else if (n > 11.25 && n <= 33.75) {
+                if (n > 11.25 && n <= 33.75) {
                     return 'NNE';
                 } else if (n > 33.75 && n <= 56.25) {
                     return 'NE';
@@ -330,6 +328,8 @@
                     return 'NW';
                 } else if (n > 326.25 && n <= 348.75) {
                     return 'NNW';
+                } else if (n > 348.75 || n <= 11.25) {
+                    return 'N';
                 }
             }
 
