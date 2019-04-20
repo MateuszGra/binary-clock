@@ -79,7 +79,6 @@
     const weatherSection = document.querySelector(".weather");
     const kiwi = document.querySelector(".fa-kiwi-bird");
     const weatherInfo = document.querySelector(".weather");
-    const body = document.querySelector("body");
 
     const colors = [
         'red', 'yellow', 'orange', 'mint', 'ice', 'blue', 'purple', 'pink',
@@ -347,7 +346,7 @@
                 subtitlesLeds[13].textContent = 'wind: ' + resp.wind.speed + 'm/s' + delUndefined(resp.wind.deg, ', ' + windDirection(resp.wind.deg) + ' (' + resp.wind.deg + 'deg.)');
                 subtitlesLeds[14].textContent = 'sunrise: ' + addZero(hoursSunrise) + ':' + addZero(minutesSunrise);
                 subtitlesLeds[15].textContent = 'sunset: ' + addZero(hoursSunset) + ':' + addZero(minutesSunset);
-                subtitlesLeds[16].textContent = 'geo coords: [' + resp.coord.lon + ' , ' + resp.coord.lat + ']';
+                subtitlesLeds[16].textContent = 'geo coords: [' + resp.coord.lat + ' , ' + resp.coord.lon + ']';
                 subtitlesLeds[17].textContent = 'last update: ' + addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
 
                 for (i = 0; i < weatherIcons.length; i++) {
@@ -581,10 +580,10 @@
         subtitlesLeds[7].classList.toggle('none');
     });
 
-    body.addEventListener('click', function (e) {
+    document.addEventListener('click', function (e) {
         subtitlesLeds[7].classList.add('none');
     });
-    body.addEventListener('touch', function (e) {
+    document.addEventListener('touch', function (e) {
         subtitlesLeds[7].classList.add('none');
     });
 })();
