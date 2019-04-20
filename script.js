@@ -255,11 +255,6 @@
     }, 100);
 
     function weatherApi() {
-        let dateUpdate = new Date();
-        let hoursUpdate = dateUpdate.getHours();
-        let minutesUpdate = dateUpdate.getMinutes();
-        let secondsUpdate = dateUpdate.getSeconds();
-
         function round(n, k) {
             let factor = Math.pow(10, k);
             return Math.round(n * factor) / factor;
@@ -353,7 +348,7 @@
                 subtitlesLeds[14].textContent = 'sunrise: ' + addZero(hoursSunrise) + ':' + addZero(minutesSunrise);
                 subtitlesLeds[15].textContent = 'sunset: ' + addZero(hoursSunset) + ':' + addZero(minutesSunset);
                 subtitlesLeds[16].textContent = 'geo coords: [' + resp.coord.lon + ' , ' + resp.coord.lat + ']';
-                subtitlesLeds[17].textContent = 'last update: ' + addZero(hoursUpdate) + ':' + addZero(minutesUpdate) + ':' + addZero(secondsUpdate);
+                subtitlesLeds[17].textContent = 'last update: ' + addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
 
                 for (i = 0; i < weatherIcons.length; i++) {
                     subtitlesLeds[3].classList.remove(weatherIcons[i]);
