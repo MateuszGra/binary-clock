@@ -166,8 +166,7 @@
     }
 
     function showTime(variable, section, sectionNumber) {
-        let tens = variable / 10
-        tens = Math.floor(tens);
+        let tens = Math.floor(variable / 10);
         let unities = variable - tens * 10;
 
         sectionNumber[0].textContent = tens;
