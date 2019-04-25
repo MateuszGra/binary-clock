@@ -255,7 +255,7 @@
 
     function weatherApi() {
         function round(n, k) {
-            let factor = Math.pow(10, k);
+            const factor = Math.pow(10, k);
             return Math.round(n * factor) / factor;
         }
 
@@ -328,13 +328,13 @@
                     localStorage.setItem('city', subtitlesLeds[4].value);
                 }
 
-                let dateSunset = new Date(resp.sys.sunset * 1000);
-                let hoursSunset = dateSunset.getHours();
-                let minutesSunset = dateSunset.getMinutes();
+                const dateSunset = new Date(resp.sys.sunset * 1000);
+                const hoursSunset = dateSunset.getHours();
+                const minutesSunset = dateSunset.getMinutes();
 
-                let dateSunrise = new Date(resp.sys.sunrise * 1000);
-                let hoursSunrise = dateSunrise.getHours();
-                let minutesSunrise = dateSunrise.getMinutes();
+                const dateSunrise = new Date(resp.sys.sunrise * 1000);
+                const hoursSunrise = dateSunrise.getHours();
+                const minutesSunrise = dateSunrise.getMinutes();
 
                 subtitlesLeds[2].textContent = round(resp.main.temp - 273.15, 0) + '°C';
                 subtitlesLeds[5].textContent = resp.name + ', ' + resp.sys.country;
