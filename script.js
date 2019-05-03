@@ -410,9 +410,10 @@
         }
     }
 
+    //events
+
     for (let i = 0; i < colors.length; i++) {
-        menuLeds[i].addEventListener("click", function (e) {
-            e.stopPropagation();
+        function colorClick() {
             for (let o = 0; o < menuLeds.length; o++) {
                 menuLeds[o].classList.remove(colors[o]);
                 optionsLeds[0].classList.remove(colors[o]);
@@ -434,82 +435,61 @@
             }
             localStorage.setItem('color', i);
             draw = i;
+        }
+        menuLeds[i].addEventListener("click", function (e) {
+            e.stopPropagation();
+            colorClick();
         });
         menuLeds[i].addEventListener("touch", function (e) {
             e.stopPropagation();
-            for (let o = 0; o < menuLeds.length; o++) {
-                menuLeds[o].classList.remove(colors[o]);
-                optionsLeds[0].classList.remove(colors[o]);
-                optionsLeds[1].classList.remove(colors[o]);
-                kiwi.classList.remove(colors[o] + 'Number');
-            }
-            menuLeds[i].classList.add(colors[i]);
-
-            if (tempoColor == 'on') {
-                kiwi.classList.add(colors[i] + 'Number');
-            }
-
-            if (leds[3][0].classList[0] != 'none') {
-                optionsLeds[0].classList.add(colors[i]);
-            }
-
-            if (weatherSection.classList[1] != 'none') {
-                optionsLeds[1].classList.add(colors[i]);
-            }
-            localStorage.setItem('color', i);
-            draw = i;
+            colorClick();
         });
+    }
+
+    function weatherOptionClick() {
+        optionsLeds[1].classList.toggle(colors[draw]);
+        weatherSection.classList.toggle('none');
+        if (weatherSection.classList[1] == 'none') {
+            localStorage.setItem('weather', 'off');
+            clearInterval(weatherApiUpdate);
+        } else {
+            localStorage.setItem('weather', 'on');
+            weatherApi();
+            weatherApiUpdate = setInterval(weatherApi, 60000);
+        }
     }
 
     subtitlesLeds[1].addEventListener('click', function (e) {
         e.stopPropagation();
-        optionsLeds[1].classList.toggle(colors[draw]);
-        weatherSection.classList.toggle('none');
-        if (weatherSection.classList[1] == 'none') {
-            localStorage.setItem('weather', 'off');
-            clearInterval(weatherApiUpdate);
-        } else {
-            localStorage.setItem('weather', 'on');
-            weatherApi();
-            weatherApiUpdate = setInterval(weatherApi, 60000);
-        }
+        weatherOptionClick();
     });
 
     subtitlesLeds[1].addEventListener('touch', function (e) {
         e.stopPropagation();
-        optionsLeds[1].classList.toggle(colors[draw]);
-        weatherSection.classList.toggle('none');
-        if (weatherSection.classList[1] == 'none') {
-            localStorage.setItem('weather', 'off');
-            clearInterval(weatherApiUpdate);
-        } else {
-            localStorage.setItem('weather', 'on');
-            weatherApi();
-            weatherApiUpdate = setInterval(weatherApi, 60000);
-        }
+        weatherOptionClick()
     });
 
     subtitlesLeds[4].addEventListener('change', function (e) {
         weatherApi();
     });
 
-    menu.addEventListener('click', function (e) {
-        e.stopPropagation();
+    function menuClick() {
         options.classList.toggle('none');
         if (options.classList[1] != 'none') {
             options.scrollIntoView()
         }
+    }
+
+    menu.addEventListener('click', function (e) {
+        e.stopPropagation();
+        menuClick();
     });
     menu.addEventListener('touch', function (e) {
         e.stopPropagation();
-        options.classList.toggle('none');
-        if (options.classList[1] != 'none') {
-            options.scrollIntoView()
-        }
+        menuClick();
     });
 
-    kiwi.addEventListener('click', function (e) {
-        e.stopPropagation();
+    function kiwiClick() {
         for (let i = 0; i < colors.length; i++) {
             kiwi.classList.remove(colors[i] + 'Number');
         }
@@ -522,25 +502,17 @@
             tempoColor = 'off';
             clearInterval(discoBirdInterval);
         }
+    }
+    kiwi.addEventListener('click', function (e) {
+        e.stopPropagation();
+        kiwiClick();
     });
     kiwi.addEventListener('touch', function (e) {
         e.stopPropagation();
-        for (let i = 0; i < colors.length; i++) {
-            kiwi.classList.remove(colors[i] + 'Number');
-        }
-
-        if (tempoColor == 'off') {
-            tempoColor = 'on'
-            discoBirdInterval = setInterval(discoBird, 500);
-            kiwi.classList.add(colors[draw] + 'Number');
-        } else {
-            tempoColor = 'off';
-            clearInterval(discoBirdInterval);
-        }
+        kiwiClick();
     });
 
-    subtitlesLeds[0].addEventListener('click', function (e) {
-        e.stopPropagation();
+    function numberOptionClick() {
         optionsLeds[0].classList.toggle(colors[draw]);
 
         for (let i = 0; i < leds[3].length; i++) {
@@ -553,21 +525,14 @@
         } else {
             localStorage.setItem('digitalClock', 'off');
         }
+    }
+    subtitlesLeds[0].addEventListener('click', function (e) {
+        e.stopPropagation();
+        numberOptionClick();
     });
     subtitlesLeds[0].addEventListener('touch', function (e) {
         e.stopPropagation();
-        optionsLeds[0].classList.toggle(colors[draw]);
-
-        for (let i = 0; i < leds[3].length; i++) {
-            leds[3][i].classList.toggle('none');
-            leds[4][i].classList.toggle('none');
-            leds[5][i].classList.toggle('none');
-        }
-        if (leds[3][0].classList[1] != 'none') {
-            localStorage.setItem('digitalClock', 'on');
-        } else {
-            localStorage.setItem('digitalClock', 'off');
-        }
+        numberOptionClick();
     });
 
     weatherInfo.addEventListener('click', function (e) {
