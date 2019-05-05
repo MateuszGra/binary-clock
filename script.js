@@ -1,4 +1,4 @@
-(function () {
+(() => {
     const leds = [
         [
             document.getElementById("oneTensHours"),
@@ -142,7 +142,7 @@
         optionsLeds[1].classList.add(colors[draw]);
     }
 
-    function addColors() {
+    addColors = () => {
         menu.classList.add(colors[draw]);
         menuLeds[draw].classList.add(colors[draw]);
 
@@ -165,7 +165,7 @@
         kiwi.classList.add(colors[draw] + 'OffNumber');
     }
 
-    function showTime(variable, section, sectionNumber) {
+    showTime = (variable, section, sectionNumber) => {
         let tens = Math.floor(variable / 10);
         let unities = variable - tens * 10;
 
@@ -201,7 +201,7 @@
         }
     }
 
-    function reset() {
+    reset = () => {
         for (let i = 0; i < leds.length; i++) {
             for (let o = 0; o < leds[i].length; o++) {
                 for (let z = 0; z < colors.length; z++) {
@@ -239,7 +239,7 @@
         }
     }
 
-    setInterval(function () {
+    setInterval(() => {
         currentDate = new Date();
         hours = currentDate.getHours();
         minutes = currentDate.getMinutes();
@@ -252,13 +252,13 @@
         showTime(seconds, leds[2], leds[5]);
     }, 100);
 
-    function weatherApi() {
-        function round(n, k) {
+    weatherApi = () => {
+        round = (n, k) => {
             const factor = Math.pow(10, k);
             return Math.round(n * factor) / factor;
         }
 
-        function decodeCountry(n) {
+        decodeCountry = n => {
             const countryCode = ['AF', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BY', 'BE', 'BZ', 'BJ', 'BM', 'BT', 'BO', 'BQ', 'BA', 'BW', 'BV', 'BR', 'IO', 'BN', 'BG', 'BF', 'BI', 'KH', 'CM', 'CA', 'CV', 'KY', 'CF', 'TD', 'CL', 'CN', 'CX', 'CC', 'CO', 'KM', 'CG', 'CD', 'CK', 'CR', 'HR', 'CU', 'CW', 'CY', 'CZ', 'CI', 'DK', 'DJ', 'DM', 'DO', 'EC', 'EG', 'SV', 'GQ', 'ER', 'EE', 'SZ', 'ET', 'FK', 'FO', 'FJ', 'FI', 'FR', 'GF', 'PF', 'TF', 'GA', 'GM', 'GE', 'DE', 'GH', 'GI', 'GR', 'GL', 'GD', 'GP', 'GU', 'GT', 'GG', 'GN', 'GW', 'GY', 'HT', 'HM', 'VA', 'HN', 'HK', 'HU', 'IS', 'IN', 'ID', 'IR', 'IQ', 'IE', 'IM', 'IL', 'IT', 'JM', 'JP', 'JE', 'JO', 'KZ', 'KE', 'KI', 'KP', 'KR', 'KW', 'KG', 'LA', 'LV', 'LB', 'LS', 'LR', 'LY', 'LI', 'LT', 'LU', 'MO', 'MK', 'MG', 'MW', 'MY', 'MV', 'ML', 'MT', 'MH', 'MQ', 'MR', 'MU', 'YT', 'MX', 'FM', 'MD', 'MC', 'MN', 'ME', 'MS', 'MA', 'MZ', 'MM', 'NA', 'NR', 'NP', 'NL', 'NC', 'NZ', 'NI', 'NE', 'NG', 'NU', 'NF', 'MP', 'NO', 'OM', 'PK', 'PW', 'PS', 'PA', 'PG', 'PY', 'PE', 'PH', 'PN', 'PL', 'PT', 'PR', 'QA', 'RO', 'RU', 'RW', 'RE', 'BL', 'SH', 'KN', 'LC', 'MF', 'PM', 'VC', 'WS', 'SM', 'ST', 'SA', 'SN', 'RS', 'SC', 'SL', 'SG', 'SX', 'SK', 'SI', 'SB', 'SO', 'ZA', 'GS', 'SS', 'ES', 'LK', 'SD', 'SR', 'SJ', 'SE', 'CH', 'SY', 'TW', 'TJ', 'TZ', 'TH', 'TL', 'TG', 'TK', 'TO', 'TT', 'TN', 'TR', 'TM', 'TC', 'TV', 'UG', 'UA', 'AE', 'GB', 'US', 'UM', 'UY', 'UZ', 'VU', 'VE', 'VN', 'VG', 'VI', 'WF', 'EH', 'YE', 'ZM', 'ZW', 'AX'];
             const country = ['Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla', 'Antarctica', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia, Plurinational State of', 'Bonaire, Sint Eustatius and Saba', 'Bosnia and Herzegovina', 'Botswana', 'Bouvet Island', 'Brazil', 'British Indian Ocean Territory', 'Brunei Darussalam', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Central African Republic', 'Chad', 'Chile', 'China', 'Christmas Island', 'Cocos (Keeling) Islands', 'Colombia', 'Comoros', 'Congo', 'Congo, the Democratic Republic of the', 'Cook Islands', 'Costa Rica', 'Croatia', 'Cuba', 'Curaçao', 'Cyprus', 'Czechia', 'Côte d’Ivoire', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Falkland Islands (Malvinas)', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Guiana', 'French Polynesia', 'French Southern Territories', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guadeloupe', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Heard Island and McDonald Islands', 'Holy See (Vatican City State)', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran, Islamic Republic of', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, Democratic People’s Republic of', 'Korea, Republic of', 'Kuwait', 'Kyrgyzstan', 'Lao People’s Democratic Republic', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libyan Arab Jamahiriya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macao', 'Macedonia, the former Yugoslav Republic of', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Martinique', 'Mauritania', 'Mauritius', 'Mayotte', 'Mexico', 'Micronesia, Federated States of', 'Moldova, Republic of', 'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Niue', 'Norfolk Island', 'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestinian Territory, Occupied', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Pitcairn', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Romania', 'Russian Federation', 'Rwanda', 'Réunion', 'Saint Barthélemy', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin (French part)', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Sint Maarten (Dutch part)', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia and the South Sandwich Islands', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard and Jan Mayen', 'Sweden', 'Switzerland', 'Syrian Arab Republic', 'Taiwan, Province of China', 'Tajikistan', 'Tanzania, United Republic of', 'Thailand', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'United States Minor Outlying Islands', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela, Bolivarian Republic of', 'Viet Nam', 'Virgin Islands, British', 'Virgin Islands, U.S.', 'Wallis and Futuna', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe', 'Åland Islands'];
 
@@ -270,7 +270,7 @@
             return n;
         }
 
-        function windDirection(n) {
+        windDirection = n => {
             if (n > 11.25 && n <= 33.75) {
                 return 'NNE';
             } else if (n > 33.75 && n <= 56.25) {
@@ -306,14 +306,14 @@
             }
         }
 
-        function delUndefined(n, y) {
+        delUndefined = (n, y) => {
             if (n == undefined) {
                 y = '';
             }
             return y;
         }
 
-        function addZero(n) {
+        addZero = n => {
             if (n < 10) {
                 n = "0" + n;
             }
@@ -384,7 +384,7 @@
         weatherApiUpdate = setInterval(weatherApi, 60000);
     }
 
-    function discoBird() {
+    discoBird = () => {
         draw++;
         if (draw >= colors.length) {
             draw = 0;
@@ -412,41 +412,42 @@
 
     //events
 
-    for (let i = 0; i < colors.length; i++) {
-        function colorClick() {
-            for (let o = 0; o < menuLeds.length; o++) {
-                menuLeds[o].classList.remove(colors[o]);
-                optionsLeds[0].classList.remove(colors[o]);
-                optionsLeds[1].classList.remove(colors[o]);
-                kiwi.classList.remove(colors[o] + 'Number');
-            }
-            menuLeds[i].classList.add(colors[i]);
-
-            if (tempoColor == 'on') {
-                kiwi.classList.add(colors[i] + 'Number');
-            }
-
-            if (leds[3][0].classList[0] != 'none') {
-                optionsLeds[0].classList.add(colors[i]);
-            }
-
-            if (weatherSection.classList[1] != 'none') {
-                optionsLeds[1].classList.add(colors[i]);
-            }
-            localStorage.setItem('color', i);
-            draw = i;
+    colorClick = n => {
+        for (let o = 0; o < menuLeds.length; o++) {
+            menuLeds[o].classList.remove(colors[o]);
+            optionsLeds[0].classList.remove(colors[o]);
+            optionsLeds[1].classList.remove(colors[o]);
+            kiwi.classList.remove(colors[o] + 'Number');
         }
-        menuLeds[i].addEventListener("click", function (e) {
+        menuLeds[n].classList.add(colors[n]);
+
+        if (tempoColor == 'on') {
+            kiwi.classList.add(colors[n] + 'Number');
+        }
+
+        if (leds[3][0].classList[0] != 'none') {
+            optionsLeds[0].classList.add(colors[n]);
+        }
+
+        if (weatherSection.classList[1] != 'none') {
+            optionsLeds[1].classList.add(colors[n]);
+        }
+        localStorage.setItem('color', n);
+        draw = n;
+    }
+
+    for (let i = 0; i < colors.length; i++) {
+        menuLeds[i].addEventListener("click", (e) => {
             e.stopPropagation();
-            colorClick();
+            colorClick(i);
         });
-        menuLeds[i].addEventListener("touch", function (e) {
+        menuLeds[i].addEventListener("touch", (e) => {
             e.stopPropagation();
-            colorClick();
+            colorClick(i);
         });
     }
 
-    function weatherOptionClick() {
+    weatherOptionClick = () => {
         optionsLeds[1].classList.toggle(colors[draw]);
         weatherSection.classList.toggle('none');
         if (weatherSection.classList[1] == 'none') {
@@ -459,37 +460,36 @@
         }
     }
 
-    subtitlesLeds[1].addEventListener('click', function (e) {
+    subtitlesLeds[1].addEventListener('click', (e) => {
         e.stopPropagation();
         weatherOptionClick();
     });
-
-    subtitlesLeds[1].addEventListener('touch', function (e) {
+    subtitlesLeds[1].addEventListener('touch', (e) => {
         e.stopPropagation();
         weatherOptionClick()
     });
 
-    subtitlesLeds[4].addEventListener('change', function (e) {
+    subtitlesLeds[4].addEventListener('change', (e) => {
         weatherApi();
     });
 
-    function menuClick() {
+    menuClick = () => {
         options.classList.toggle('none');
         if (options.classList[1] != 'none') {
             options.scrollIntoView()
         }
     }
 
-    menu.addEventListener('click', function (e) {
+    menu.addEventListener('click', (e) => {
         e.stopPropagation();
         menuClick();
     });
-    menu.addEventListener('touch', function (e) {
+    menu.addEventListener('touch', (e) => {
         e.stopPropagation();
         menuClick();
     });
 
-    function kiwiClick() {
+    kiwiClick = () => {
         for (let i = 0; i < colors.length; i++) {
             kiwi.classList.remove(colors[i] + 'Number');
         }
@@ -503,16 +503,16 @@
             clearInterval(discoBirdInterval);
         }
     }
-    kiwi.addEventListener('click', function (e) {
+    kiwi.addEventListener('click', (e) => {
         e.stopPropagation();
         kiwiClick();
     });
-    kiwi.addEventListener('touch', function (e) {
+    kiwi.addEventListener('touch', (e) => {
         e.stopPropagation();
         kiwiClick();
     });
 
-    function numberOptionClick() {
+    numberOptionClick = () => {
         optionsLeds[0].classList.toggle(colors[draw]);
 
         for (let i = 0; i < leds[3].length; i++) {
@@ -526,28 +526,28 @@
             localStorage.setItem('digitalClock', 'off');
         }
     }
-    subtitlesLeds[0].addEventListener('click', function (e) {
+    subtitlesLeds[0].addEventListener('click', (e) => {
         e.stopPropagation();
         numberOptionClick();
     });
-    subtitlesLeds[0].addEventListener('touch', function (e) {
+    subtitlesLeds[0].addEventListener('touch', (e) => {
         e.stopPropagation();
         numberOptionClick();
     });
 
-    weatherInfo.addEventListener('click', function (e) {
+    weatherInfo.addEventListener('click', (e) => {
         e.stopPropagation();
         subtitlesLeds[7].classList.toggle('none');
     });
-    weatherInfo.addEventListener('touch', function (e) {
+    weatherInfo.addEventListener('touch', (e) => {
         e.stopPropagation();
         subtitlesLeds[7].classList.toggle('none');
     });
 
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', (e) => {
         subtitlesLeds[7].classList.add('none');
     });
-    document.addEventListener('touch', function (e) {
+    document.addEventListener('touch', (e) => {
         subtitlesLeds[7].classList.add('none');
     });
 })();
