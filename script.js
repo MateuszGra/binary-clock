@@ -174,15 +174,15 @@
 
         if (unities >= 8) {
             section[6].classList.add(colors[draw]);
-            unities = unities - 8
+            unities -= 8
         }
         if (unities >= 4) {
             section[5].classList.add(colors[draw]);
-            unities = unities - 4
+            unities -= 4
         }
         if (unities >= 2) {
             section[4].classList.add(colors[draw]);
-            unities = unities - 2
+            unities -= 2
         }
         if (unities >= 1) {
             section[3].classList.add(colors[draw]);
@@ -190,11 +190,11 @@
 
         if (tens >= 4) {
             section[2].classList.add(colors[draw]);
-            tens = tens - 4
+            tens -= 4
         }
         if (tens >= 2) {
             section[1].classList.add(colors[draw]);
-            tens = tens - 2
+            tens -= 2
         }
         if (tens >= 1) {
             section[0].classList.add(colors[draw]);
@@ -315,7 +315,7 @@
 
         addZero = n => {
             if (n < 10) {
-                n = "0" + n;
+                n = '0' + n;
             }
             return n;
         }
@@ -335,18 +335,18 @@
                 const hoursSunrise = dateSunrise.getHours();
                 const minutesSunrise = dateSunrise.getMinutes();
 
-                subtitlesLeds[2].textContent = round(resp.main.temp - 273.15, 0) + '°C';
-                subtitlesLeds[5].textContent = resp.name + ', ' + resp.sys.country;
-                subtitlesLeds[8].textContent = 'temp: ' + round(resp.main.temp - 273.15, 1) + '°C , ' + round(round(resp.main.temp - 273.15, 1) * 9 / 5 + 32, 1) + '°F';
-                subtitlesLeds[9].textContent = 'weather: ' + resp.weather[0].description;
-                subtitlesLeds[10].textContent = resp.name + ', ' + decodeCountry(resp.sys.country);
-                subtitlesLeds[11].textContent = 'pressure: ' + resp.main.pressure + 'hPa';
-                subtitlesLeds[12].textContent = 'humidity: ' + resp.main.humidity + '%';
-                subtitlesLeds[13].textContent = 'wind: ' + resp.wind.speed + 'm/s' + delUndefined(resp.wind.deg, ', ' + windDirection(resp.wind.deg) + ' (' + resp.wind.deg + 'deg.)');
-                subtitlesLeds[14].textContent = 'sunrise: ' + addZero(hoursSunrise) + ':' + addZero(minutesSunrise);
-                subtitlesLeds[15].textContent = 'sunset: ' + addZero(hoursSunset) + ':' + addZero(minutesSunset);
-                subtitlesLeds[16].textContent = 'geo coords: [' + resp.coord.lat + ' , ' + resp.coord.lon + ']';
-                subtitlesLeds[17].textContent = 'last update: ' + addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
+                subtitlesLeds[2].textContent = `${round(resp.main.temp - 273.15, 0)}°C`;
+                subtitlesLeds[5].textContent = `${resp.name} , ${resp.sys.country}`;
+                subtitlesLeds[8].textContent = `temp: ${round(resp.main.temp - 273.15, 1)}°C , ${round(round(resp.main.temp - 273.15, 1) * 9 / 5 + 32, 1)}°F`;
+                subtitlesLeds[9].textContent = `weather: ${resp.weather[0].description}`;
+                subtitlesLeds[10].textContent = `${resp.name}, ${decodeCountry(resp.sys.country)}`;
+                subtitlesLeds[11].textContent = `pressure: ${resp.main.pressure}hPa`;
+                subtitlesLeds[12].textContent = `humidity: ${resp.main.humidity}%`;
+                subtitlesLeds[13].textContent = `wind: ${resp.wind.speed}m/s${delUndefined(resp.wind.deg, `, ${windDirection(resp.wind.deg)} (${resp.wind.deg}deg.)`)}`;
+                subtitlesLeds[14].textContent = `sunrise: ${addZero(hoursSunrise)}:${addZero(minutesSunrise)}`;
+                subtitlesLeds[15].textContent = `sunset: ${addZero(hoursSunset)}:${addZero(minutesSunset)}`;
+                subtitlesLeds[16].textContent = `geo coords: [${resp.coord.lat} , ${resp.coord.lon}]`;
+                subtitlesLeds[17].textContent = `last update: ${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}`;
 
                 for (i = 0; i < weatherIcons.length; i++) {
                     subtitlesLeds[3].classList.remove(weatherIcons[i]);
