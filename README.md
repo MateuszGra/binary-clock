@@ -1,5 +1,5 @@
 # binary-clock
-binary clock
+binary clock with weather api.
 ________________________________________
 link:
 https://mateuszgra.github.io/binary-clock/
