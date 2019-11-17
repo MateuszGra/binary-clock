@@ -1,0 +1,150 @@
+.redOff {
+    background: #240000;
+}
+
+.yellowOff {
+    background: #222500;
+}
+
+.orangeOff {
+    background: #281c00;
+}
+
+.mintOff {
+    background: #002413;
+}
+
+.iceOff {
+    background: #002324;
+}
+
+.blueOff {
+    background: #00003e;
+}
+
+.purpleOff {
+    background: #190024;
+}
+
+.pinkOff {
+    background: #24001f;
+}
+
+.red {
+    background: #ff0000;
+    box-shadow: 0 0 2rem 0.2rem #ff0000;
+}
+
+.yellow {
+    background: #f0ff00;
+    box-shadow: 0 0 2rem 0.2rem #f0ff00;
+}
+
+.orange {
+    background: #ffb400;
+    box-shadow: 0 0 2rem 0.2rem #ffb400;
+}
+
+.mint {
+    background: #00ff5a;
+    box-shadow: 0 0 2rem 0.2rem #00ff5a;
+}
+
+.ice {
+    background: #00ffd8;
+    box-shadow: 0 0 2rem 0.2rem #00ffd8;
+}
+
+.blue {
+    background: #0042ff;
+    box-shadow: 0 0 2rem 0.2rem #0042ff;
+}
+
+.purple {
+    background: #ba00ff;
+    box-shadow: 0 0 2rem 0.2rem #ba00ff;
+}
+
+.pink {
+    background: #ff00d8;
+    box-shadow: 0 0 2rem 0.2rem #ff00d8;
+}
+
+.colorSet .diode {
+    cursor: pointer;
+}
+
+.redOffNumber {
+    color: #240000;
+}
+
+.yellowOffNumber {
+    color: #222500;
+}
+
+.orangeOffNumber {
+    color: #281c00;
+}
+
+.mintOffNumber {
+    color: #002413;
+}
+
+.iceOffNumber {
+    color: #002324;
+}
+
+.blueOffNumber {
+    color: #00003e;
+}
+
+.purpleOffNumber {
+    color: #190024;
+}
+
+.pinkOffNumber {
+    color: #24001f;
+}
+
+.redNumber {
+    color: #ff0000;
+}
+
+.yellowNumber {
+    color: #f0ff00;
+}
+
+.orangeNumber {
+    color: #ffb400;
+}
+
+.mintNumber {
+    color: #00ff5a;
+}
+
+.iceNumber {
+    color: #00ffd8;
+}
+
+.blueNumber {
+    color: #0042ff;
+}
+
+.purpleNumber {
+    color: #ba00ff;
+}
+
+.pinkNumber {
+    color: #ff00d8;
+}
+
+.red,
+.yellow,
+.orange,
+.mint,
+.ice,
+.blue,
+.purple,
+.pink {
+    z-index: 1;
+}

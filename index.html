@@ -1,116 +1,130 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl-PL">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Binary Clock</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <title>Gulp Starter</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge ,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="Content-Language" content="pl-PL" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/vendor.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/custom.min.css">
 </head>
 
 <body>
-
-    <section class="clock">
-        <div class="hours">
-            <div class="tens">
-                <p id="tensHours" class="none">X</p>
-                <figure id="oneTensHours"></figure>
-                <figure id="twoTensHours"></figure>
-                <figure id="fourTensHours"></figure>
-                <figure id="ledsOff4"></figure>
-            </div>
-            <div class="unities">
-                <p id="unitesHours" class="none">X</p>
-                <figure id="oneUnitesHours"></figure>
-                <figure id="twoUnitesHours"></figure>
-                <figure id="fourUnitesHours"></figure>
-                <figure id="eightUnitesHours"></figure>
-            </div>
-        </div>
-        <div class="minutes">
-            <div class="tens">
-                <p id="tensMinutes" class="none">X</p>
-                <figure id="oneTensMinutes"></figure>
-                <figure id="twoTensMinutes"></figure>
-                <figure id="fourTensMinutes"></figure>
-                <figure id="ledsOff12"></figure>
-            </div>
-            <div class="unities">
-                <p id="unitesMinutes" class="none">X</p>
-                <figure id="oneUnitiesMinutes"></figure>
-                <figure id="twoUnitiesMinutes"></figure>
-                <figure id="fourUnitiesMinutes"></figure>
-                <figure id="eightUnitiesMinutes"></figure>
-            </div>
-        </div>
-        <div class="seconds">
-            <div class="tens">
-                <p id="tensSeconds" class="none">X</p>
-                <figure id="oneTensSeconds"></figure>
-                <figure id="twoTensSeconds"></figure>
-                <figure id="fourTensSeconds"></figure>
-                <figure id="ledsOff20"></figure>
-            </div>
-            <div class="unities">
-                <p id="unitesSeconds" class="none">X</p>
-                <figure id="oneUnitiesSeconds"></figure>
-                <figure id="twoUnitiesSeconds"></figure>
-                <figure id="fourUnitiesSeconds"></figure>
-                <figure id="eightUnitiesSeconds"></figure>
-            </div>
-        </div>
-    </section>
-    <section class="weather">
-        <div class="center">
-            <p class="temp"></p>
-            <i class="weatherIcon fas"></i>
-        </div>
-        <p class="name"></p>
-        <i class="fas fa-info-circle"></i>
-        <div class="fullInfo none">
-            <div>
-                <p class="tempFullInfo"></p>
-                <p class="weatherFullInfo"></p>
-                <p class="pressureFullInfo"></p>
-                <p class="humidityFullInfo"></p>
-                <p class="windFullInfo"></p>
-            </div>
-            <div>
-                <p class="cityFullInfo"></p>
-                <p class="cordFullInfo"></p>
-                <p class="sunriseFullInfo"></p>
-                <p class="SunsetFullInfo"></p>
-                <p class="updateFullInfo"></p>
-            </div>
-        </div>
-    </section>
-    <div id="menu" class="menu"></div>
-    <div class="options none">
-        <div class="colorSet">
-            <figure id="wheel" class="redOff"></figure>
-            <figure id="wheel" class="yellowOff"></figure>
-            <figure id="wheel" class="orangeOff"></figure>
-            <figure id="wheel" class="mintOff"></figure>
-            <figure id="wheel" class="iceOff"></figure>
-            <figure id="wheel" class="blueOff"></figure>
-            <figure id="wheel" class="purpleOff"></figure>
-            <figure id="wheel" class="pinkOff"></figure>
-            <i class="fas fa-kiwi-bird"></i>
-        </div>
-        <div class="numberOption">
-            <figure class="numberOptionLed"></figure>
-            <p>Digital Clock</p>
-        </div>
-        <div class="weatherOption">
-            <figure class="weatherOptionLed"></figure>
-            <p>Weather</p>
-        </div>
-        <input class="city">
+  <section class="clock">
+    <div class="clock-column">
+      <div class="clock-row">
+        <div class="clock-diode diode" id="oneTensHours"></div>
+        <div class="clock-diode diode" id="twoTensHours"></div>
+        <div class="clock-diode diode" id="fourTensHours"></div>
+        <div class="clock-diode diode"></div>
+      </div>
+      <div class="clock-row">
+        <div class="clock-diode diode" id="oneUnitesHours"></div>
+        <div class="clock-diode diode" id="twoUnitesHours"></div>
+        <div class="clock-diode diode" id="fourUnitesHours"></div>
+        <div class="clock-diode diode" id="eightUnitesHours"></div>
+      </div>
     </div>
-    <script src="script.js"></script>
+    <div class="clock-column">
+      <div class="clock-row">
+        <div class="clock-diode diode" id="oneTensMinutes"></div>
+        <div class="clock-diode diode" id="twoTensMinutes"></div>
+        <div class="clock-diode diode" id="fourTensMinutes"></div>
+        <div class="clock-diode diode"></div>
+      </div>
+      <div class="clock-row">
+        <div class="clock-diode diode" id="oneUnitiesMinutes"></div>
+        <div class="clock-diode diode" id="twoUnitiesMinutes"></div>
+        <div class="clock-diode diode" id="fourUnitiesMinutes"></div>
+        <div class="clock-diode diode" id="eightUnitiesMinutes"></div>
+      </div>
+    </div>
+    <div class="clock-column">
+      <div class="clock-row">
+        <div class="clock-diode diode" id="oneTensSeconds"></div>
+        <div class="clock-diode diode" id="twoTensSeconds"></div>
+        <div class="clock-diode diode" id="fourTensSeconds"></div>
+        <div class="clock-diode diode"></div>
+      </div>
+      <div class="clock-row">
+        <div class="clock-diode diode" id="oneUnitiesSeconds"></div>
+        <div class="clock-diode diode" id="twoUnitiesSeconds"></div>
+        <div class="clock-diode diode" id="fourUnitiesSeconds"></div>
+        <div class="clock-diode diode" id="eightUnitiesSeconds"></div>
+      </div>
+    </div>
+  </section>
+  <section class="digital-clock none">
+    <p class="clock-number text" id="tensHours">X</p>
+    <p class="clock-number text" id="unitesHours">X</p>
+    <p class="clock-number text">:</p>
+    <p class="clock-number text" id="tensMinutes">X</p>
+    <p class="clock-number text" id="unitesMinutes">X</p>
+    <p class="clock-number text">:</p>
+    <p class="clock-number text" id="tensSeconds">X</p>
+    <p class="clock-number text" id="unitesSeconds">X</p>
+  </section>
+  <section class="weather">
+    <div class="weather-row">
+      <p class="text info-temp"></p>
+      <i class="text weather-icon fas"></i>
+    </div>
+    <p class="info-city text"></p>
+    <i class="text fas fa-info-circle"></i>
+    <div class="text full-info none">
+      <div class="full-info-column">
+        <p class="text full-info-text  full-info-temp"></p>
+        <p class="text full-info-text full-info-weather"></p>
+        <p class="text full-info-text full-info-pressure"></p>
+        <p class="text full-info-text full-info-humidity"></p>
+        <p class="text full-info-text full-info-wind"></p>
+      </div>
+      <div class="full-info-column">
+        <p class="text full-info-text full-info-city"></p>
+        <p class="text full-info-text full-info-cord"></p>
+        <p class="text full-info-text full-info-sunrise"></p>
+        <p class="text full-info-text full-info-sunset"></p>
+        <p class="text full-info-text full-info-update"></p>
+      </div>
+    </div>
+  </section>
+  <button class="menu-button"></button>
+  <div class="menu-wrapper none">
+    <div class="colorSet">
+      <button class="color-set-diode diode redOff"></button>
+      <button class="color-set-diode diode yellowOff"></button>
+      <button class="color-set-diode diode orangeOff"></button>
+      <button class="color-set-diode diode mintOff"></button>
+      <button class="color-set-diode diode iceOff"></button>
+      <button class="color-set-diode diode blueOff"></button>
+      <button class="color-set-diode diode purpleOff"></button>
+      <button class="color-set-diode diode pinkOff"></button>
+      <i class="fas fa-kiwi-bird"></i>
+    </div>
+    <button class="option option-digital">
+      <div class="option-diode diode option-digital-diode"></div>
+      <span class="text">Digital Clock</span>
+    </button>
+    <button class="option option-weather">
+      <div class="option-diode diode option-weather-diode"></div>
+      <span class="text">Weather</span>
+    </button>
+    <input class="text city-input">
+  </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Play']
+    }
+  });
+</script>
+<script src="assets/js/vendor.min.js"></script>
+<script src="assets/js/custom.min.js"></script>
 
 </html>

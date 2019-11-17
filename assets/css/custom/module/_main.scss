@@ -1,17 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    font-size: 62.5%;
-    font-family: 'Play', sans-serif;
-}
-
-body {
-    background: black;
-}
-
 .clock {
     display: flex;
     flex-direction: row;
@@ -19,7 +5,7 @@ body {
     margin: 18vh auto 0 auto;
 }
 
-figure {
+.diode {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
@@ -27,22 +13,32 @@ figure {
     transition: 0.2s linear;
 }
 
-.hours,
-.minutes,
-.seconds {
+.digital-clock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock-number {
+    font-size: 2.6rem;
+    margin: 2rem 0.5rem 1rem 0.5rem;
+    transition: 0.2s linear;
+    animation: show 0.3s;
+}
+
+.clock-column {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     margin: 0 1.2rem 0 1.2rem;
 }
 
-.tens,
-.unities {
+.clock-row {
     display: flex;
     flex-direction: column-reverse;
 }
 
-.menu {
+.menu-button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -53,16 +49,16 @@ figure {
     cursor: pointer;
     margin: 5rem auto 1.5rem auto;
     transition: 0.2s linear;
-}
 
-.menu::after {
-    content: '';
-    display: block;
-    background: url(settings.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 4.2rem;
-    height: 4.2rem;
+    &::after {
+        content: '';
+        display: block;
+        background: url(../images/settings.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 4.2rem;
+        height: 4.2rem;
+    }
 }
 
 .colorSet {
@@ -74,14 +70,7 @@ figure {
     transition: 0.2s linear;
 }
 
-.clock p {
-    margin: 2rem 1rem 1rem 1rem;
-    font-size: 2rem;
-    transition: 0.2s linear;
-    animation: show 0.3s;
-}
-
-.options {
+.menu-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -89,22 +78,21 @@ figure {
     animation: show 0.3s;
 }
 
-.numberOption,
-.weatherOption {
+.option {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 1.5rem 0 0 0;
     cursor: pointer;
     font-size: 2rem;
+    background: transparent;
 }
 
-.numberOptionLed,
-.weatherOptionLed {
+.option-diode {
     margin: 0 1rem 0 0;
 }
 
-.city {
+.city-input {
     width: 12rem;
     height: 3rem;
     font-size: 2rem;
@@ -126,26 +114,21 @@ figure {
     animation: show 0.3s;
 }
 
-.center {
+.weather-row {
     display: flex;
-    flex-direction: row;
 }
 
-.temp {
+.info-temp {
     font-size: 4rem;
     transition: 0.2s linear;
 }
 
-.pressure {
-    font-size: 2.5rem;
-}
-
-.name {
+.info-city {
     font-size: 1.5rem;
     transition: 0.2s linear;
 }
 
-.weatherIcon {
+.weather-icon {
     font-size: 4rem;
     margin: 0 0 0 1rem;
     transition: 0.2s linear;
@@ -164,14 +147,14 @@ figure {
     transition: 0.2s linear;
 }
 
-.fullInfo {
+.full-info {
     display: flex;
     flex-direction: column;
     position: absolute;
     border: 0.2rem solid;
     border-radius: 1rem;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.7);
     font-size: 2rem;
     transform: translateY(-50%);
     z-index: 2;
@@ -181,166 +164,14 @@ figure {
     animation: show 0.3s;
 }
 
-.fullInfo div {
+.full-info-column {
     margin: 1.5rem;
 }
 
-.fullInfo p {
+.full-info-text {
     transition: 0.2s linear;
 }
 
-/*  COLORS  */
-
-.redOff {
-    background: #240000;
-}
-
-.yellowOff {
-    background: #222500;
-}
-
-.orangeOff {
-    background: #281c00;
-}
-
-.mintOff {
-    background: #002413;
-}
-
-.iceOff {
-    background: #002324;
-}
-
-.blueOff {
-    background: #00003e;
-}
-
-.purpleOff {
-    background: #190024;
-}
-
-.pinkOff {
-    background: #24001f;
-}
-
-.red {
-    background: #ff0000;
-    box-shadow: 0 0 2rem 0.2rem #ff0000;
-}
-
-.yellow {
-    background: #f0ff00;
-    box-shadow: 0 0 2rem 0.2rem #f0ff00;
-}
-
-.orange {
-    background: #ffb400;
-    box-shadow: 0 0 2rem 0.2rem #ffb400;
-}
-
-.mint {
-    background: #00ff5a;
-    box-shadow: 0 0 2rem 0.2rem #00ff5a;
-}
-
-.ice {
-    background: #00ffd8;
-    box-shadow: 0 0 2rem 0.2rem #00ffd8;
-}
-
-.blue {
-    background: #0042ff;
-    box-shadow: 0 0 2rem 0.2rem #0042ff;
-}
-
-.purple {
-    background: #ba00ff;
-    box-shadow: 0 0 2rem 0.2rem #ba00ff;
-}
-
-.pink {
-    background: #ff00d8;
-    box-shadow: 0 0 2rem 0.2rem #ff00d8;
-}
-
-.colorSet figure {
-    cursor: pointer;
-}
-
-.redOffNumber {
-    color: #240000;
-}
-
-.yellowOffNumber {
-    color: #222500;
-}
-
-.orangeOffNumber {
-    color: #281c00;
-}
-
-.mintOffNumber {
-    color: #002413;
-}
-
-.iceOffNumber {
-    color: #002324;
-}
-
-.blueOffNumber {
-    color: #00003e;
-}
-
-.purpleOffNumber {
-    color: #190024;
-}
-
-.pinkOffNumber {
-    color: #24001f;
-}
-
-.redNumber {
-    color: #ff0000;
-}
-
-.yellowNumber {
-    color: #f0ff00;
-}
-
-.orangeNumber {
-    color: #ffb400;
-}
-
-.mintNumber {
-    color: #00ff5a;
-}
-
-.iceNumber {
-    color: #00ffd8;
-}
-
-.blueNumber {
-    color: #0042ff;
-}
-
-.purpleNumber {
-    color: #ba00ff;
-}
-
-.pinkNumber {
-    color: #ff00d8;
-}
-
-.red,
-.yellow,
-.orange,
-.mint,
-.ice,
-.blue,
-.purple,
-.pink {
-    z-index: 1;
-}
 
 @keyframes show {
     0% {
@@ -359,7 +190,7 @@ figure {
         margin: 11vh auto 0 auto;
     }
 
-    .menu {
+    .menu-button {
         margin: 3rem auto 1.5rem auto;
     }
 }
@@ -370,7 +201,6 @@ figure {
     }
 }
 
-/*  REMOVE  */
 
 .none {
     display: none;
