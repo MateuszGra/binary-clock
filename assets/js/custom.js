@@ -72,407 +72,386 @@ var addZero = function addZero(n) {
 
   return n;
 };
+
+var changeIcon = function changeIcon(n) {
+  var weatherIcon = document.querySelector('.weather-icon');
+  var weatherCode = [{
+    code: '03d',
+    icon: 'fa-cloud'
+  }, {
+    code: '03n',
+    icon: 'fa-cloud'
+  }, {
+    code: '04d',
+    icon: 'fa-cloud'
+  }, {
+    code: '04n',
+    icon: 'fa-cloud'
+  }, {
+    code: '01d',
+    icon: 'fa-sun'
+  }, {
+    code: '01n',
+    icon: 'fa-moon'
+  }, {
+    code: '02d',
+    icon: 'fa-cloud-sun'
+  }, {
+    code: '02n',
+    icon: 'fa-cloud-moon'
+  }, {
+    code: '09d',
+    icon: 'fa-cloud-showers-heavy'
+  }, {
+    code: '09n',
+    icon: 'fa-cloud-showers-heavy'
+  }, {
+    code: '10d',
+    icon: 'fa-cloud-sun-rain'
+  }, {
+    code: '10n',
+    icon: 'fa-cloud-moon-rain'
+  }, {
+    code: '11d',
+    icon: 'fa-bolt'
+  }, {
+    code: '11n',
+    icon: 'fa-bolt'
+  }, {
+    code: '13d',
+    icon: 'fa-snowflake'
+  }, {
+    code: '13n',
+    icon: 'fa-snowflake'
+  }, {
+    code: '50d',
+    icon: 'fa-smog'
+  }, {
+    code: '50n',
+    icon: 'fa-smog'
+  }, {
+    code: 'error',
+    icon: 'fa-exclamation-triangle'
+  }];
+  weatherCode.forEach(function (code) {
+    weatherIcon.classList.remove(code.icon);
+  });
+
+  for (var i = 0; i < weatherCode.length; i++) {
+    if (n == weatherCode[i].code) {
+      weatherIcon.classList.add(weatherCode[i].icon);
+      break;
+    }
+  }
+};
 "use strict";
 
-(function () {
-  var clockDiodes = [[document.getElementById("oneTensHours"), document.getElementById("twoTensHours"), document.getElementById("fourTensHours"), document.getElementById("oneUnitesHours"), document.getElementById("twoUnitesHours"), document.getElementById("fourUnitesHours"), document.getElementById("eightUnitesHours")], [document.getElementById("oneTensMinutes"), document.getElementById("twoTensMinutes"), document.getElementById("fourTensMinutes"), document.getElementById("oneUnitiesMinutes"), document.getElementById("twoUnitiesMinutes"), document.getElementById("fourUnitiesMinutes"), document.getElementById("eightUnitiesMinutes")], [document.getElementById("oneTensSeconds"), document.getElementById("twoTensSeconds"), document.getElementById("fourTensSeconds"), document.getElementById("oneUnitiesSeconds"), document.getElementById("twoUnitiesSeconds"), document.getElementById("fourUnitiesSeconds"), document.getElementById("eightUnitiesSeconds")]];
-  var clockNumbers = [[document.getElementById("tensHours"), document.getElementById("unitesHours")], [document.getElementById("tensMinutes"), document.getElementById("unitesMinutes")], [document.getElementById("tensSeconds"), document.getElementById("unitesSeconds")]];
-  var cityInput = document.querySelector(".city-input");
-  var optionsLeds = [document.querySelector(".option-digital-diode"), document.querySelector(".option-weather-diode")];
-  var digitalClock = document.querySelector('.digital-clock');
-  var menu = document.querySelector('.menu-button');
-  var kiwi = document.querySelector(".fa-kiwi-bird");
-  var colorSet = document.querySelectorAll(".color-set-diode");
-  var weatherSection = document.querySelector(".weather");
-  var weatherIcons = ['fa-cloud', 'fa-sun', 'fa-moon', 'fa-cloud-moon', 'fa-cloud-showers-heavy', 'fa-cloud-sun-rain', 'fa-cloud-moon-rain', 'fa-bolt', 'fa-snowflake', 'fa-smog', 'fa-exclamation-triangle'];
-  var colors = ['red', 'yellow', 'orange', 'mint', 'ice', 'blue', 'purple', 'pink'];
-  var weatherApiUpdate; //weather API (set interval)
+var hoursDiodes = document.querySelectorAll('#hours-diode');
+var minutesDiodes = document.querySelectorAll('#minutes-diode');
+var secondsDiodes = document.querySelectorAll('#seconds-diode');
+var hoursNumbers = document.querySelectorAll('#hours');
+var minutesNumbers = document.querySelectorAll('#minutes');
+var secondsNumbers = document.querySelectorAll('#seconds');
+var cityInput = document.querySelector('.city-input');
+var options = document.querySelectorAll('.option');
+var sections = document.querySelectorAll('.section');
+var optionDiods = document.querySelectorAll('.option-diode');
+var digitalClock = document.querySelector('.digital-clock');
+var menu = document.querySelector('.menu-button');
+var kiwi = document.querySelector('.fa-kiwi-bird');
+var colorSet = document.querySelectorAll(".color-set-diode");
+var weatherSection = document.querySelector(".weather");
+var colors = ['red', 'yellow', 'orange', 'mint', 'ice', 'blue', 'purple', 'pink'];
+var weatherApiUpdate; //weather API (set interval)
 
-  var discoBirdInterval; //color change interval
+var discoBirdInterval; //color change interval
 
-  var tempoColor = 'off'; // color change status (on/off)
+var tempoColor = 'off'; // color change status (on/off)
 
-  var draw; //current color 
-  //current date and time
+var draw; //current color 
+//current date and time
 
-  var currentDate = new Date();
-  var hours = currentDate.getHours();
-  var minutes = currentDate.getMinutes();
-  var seconds = currentDate.getSeconds(); //load and set local storage options
+var currentDate = new Date();
+var hours = currentDate.getHours();
+var minutes = currentDate.getMinutes();
+var seconds = currentDate.getSeconds(); //load and set local storage options
 
-  var loadOptions = function loadOptions() {
-    if (localStorage.getItem('color') != null) {
-      draw = localStorage.getItem('color');
-      draw = parseInt(draw);
-    } else {
-      draw = Math.random() * 7;
-      draw = Math.round(draw);
-      localStorage.setItem('color', draw);
-    }
-
-    if (localStorage.getItem('city') != null) {
-      cityInput.value = localStorage.getItem('city');
-    } else {
-      cityInput.value = 'Wrocław';
-    }
-
-    if (localStorage.getItem('digitalClock') == 'on') {
-      digitalClock.classList.remove('none');
-      optionsLeds[0].classList.add(colors[draw]);
-    } else {
-      digitalClock.classList.add('none');
-      optionsLeds[0].classList.remove(colors[draw] + 'Off');
-    }
-
-    if (localStorage.getItem('weather') == 'off') {
-      weatherSection.classList.add('none');
-      optionsLeds[1].classList.add(colors[draw] + 'Off');
-    } else {
-      weatherSection.classList.remove('none');
-      optionsLeds[1].classList.add(colors[draw]);
-    }
-  };
-
-  loadOptions(); //reset all colors before set new one
-
-  var clockDiods = document.querySelectorAll('.clock-diode');
-  var texts = document.querySelectorAll('.text');
-  var optionsDiods = document.querySelectorAll('.option-diode');
-
-  var reset = function reset() {
-    colors.forEach(function (color) {
-      clockDiods.forEach(function (clockDiode) {
-        clockDiode.classList.remove("".concat(color, "Off"));
-        clockDiode.classList.remove("".concat(color));
-      });
-      texts.forEach(function (text) {
-        text.classList.remove("".concat(color, "Number"));
-      });
-      optionsDiods.forEach(function (optionsDiod) {
-        optionsDiod.classList.remove("".concat(color, "Off"));
-      });
-      menu.classList.remove(color);
-      kiwi.classList.remove("".concat(color, "OffNumber"));
-    });
-  }; //add colors to all (options, clock, weather...)
-
-
-  var addColors = function addColors() {
-    menu.classList.add(colors[draw]);
-    colorSet[draw].classList.add(colors[draw]);
-    kiwi.classList.add("".concat(colors[draw], "OffNumber"));
-    clockDiods.forEach(function (clockDiode) {
-      clockDiode.classList.add("".concat(colors[draw], "Off"));
-    });
-    texts.forEach(function (text) {
-      text.classList.add("".concat(colors[draw], "Number"));
-    });
-    optionsDiods.forEach(function (optionsDiod) {
-      optionsDiod.classList.add("".concat(colors[draw], "Off"));
-    });
-  }; //show time at binary and digital clock
-
-
-  var showTime = function showTime(variable, section, digitalNumber) {
-    var tens = Math.floor(variable / 10);
-    var unities = variable - tens * 10;
-    digitalNumber[0].textContent = tens;
-    digitalNumber[1].textContent = unities;
-
-    if (unities >= 8) {
-      section[6].classList.add(colors[draw]);
-      unities -= 8;
-    }
-
-    if (unities >= 4) {
-      section[5].classList.add(colors[draw]);
-      unities -= 4;
-    }
-
-    if (unities >= 2) {
-      section[4].classList.add(colors[draw]);
-      unities -= 2;
-    }
-
-    if (unities >= 1) {
-      section[3].classList.add(colors[draw]);
-    }
-
-    if (tens >= 4) {
-      section[2].classList.add(colors[draw]);
-      tens -= 4;
-    }
-
-    if (tens >= 2) {
-      section[1].classList.add(colors[draw]);
-      tens -= 2;
-    }
-
-    if (tens >= 1) {
-      section[0].classList.add(colors[draw]);
-    }
-  }; //time set interwal 
-
-
-  setInterval(function () {
-    currentDate = new Date();
-    hours = currentDate.getHours();
-    minutes = currentDate.getMinutes();
-    seconds = currentDate.getSeconds();
-    reset();
-    addColors();
-    showTime(hours, clockDiodes[0], clockNumbers[0]);
-    showTime(minutes, clockDiodes[1], clockNumbers[1]);
-    showTime(seconds, clockDiodes[2], clockNumbers[2]);
-  }, 100); //get info from weather API
-
-  var weatherApi = function weatherApi() {
-    //get info from API and set information in HTML
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + encodeURI(cityInput.value) + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4").then(function (resp) {
-      return resp.json();
-    }).then(function (resp) {
-      if (resp.cod == 200) {
-        localStorage.setItem('city', cityInput.value);
-      }
-
-      var dateSunset = new Date(resp.sys.sunset * 1000);
-      var hoursSunset = dateSunset.getHours();
-      var minutesSunset = dateSunset.getMinutes();
-      var dateSunrise = new Date(resp.sys.sunrise * 1000);
-      var hoursSunrise = dateSunrise.getHours();
-      var minutesSunrise = dateSunrise.getMinutes();
-      var weatherIcon = document.querySelector('.weather-icon');
-      var infoTemp = document.querySelector('.info-temp');
-      var infoCity = document.querySelector('.info-city');
-      var fullInfoTemp = document.querySelector('.full-info-temp');
-      var fullInfoWeather = document.querySelector('.full-info-weather');
-      var fullInfoPressure = document.querySelector('.full-info-pressure');
-      var fullInfoHumidity = document.querySelector('.full-info-humidity');
-      var fullInfoCity = document.querySelector('.full-info-city');
-      var fullInfoWind = document.querySelector('.full-info-wind');
-      var fullInfoSunrise = document.querySelector('.full-info-sunrise');
-      var fullInfoSanset = document.querySelector('.full-info-sunset');
-      var fullInfoCord = document.querySelector('.full-info-cord');
-      var fullInfoUpdate = document.querySelector('.full-info-update');
-      infoTemp.textContent = "".concat(round(resp.main.temp - 273.15, 0), "\xB0C");
-      infoCity.textContent = "".concat(resp.name, " , ").concat(resp.sys.country);
-      fullInfoTemp.textContent = "temp: ".concat(round(resp.main.temp - 273.15, 1), "\xB0C , ").concat(round(round(resp.main.temp - 273.15, 1) * 9 / 5 + 32, 1), "\xB0F");
-      fullInfoWeather.textContent = "weather: ".concat(resp.weather[0].description);
-      fullInfoCity.textContent = "".concat(resp.name, ", ").concat(decodeCountry(resp.sys.country));
-      fullInfoPressure.textContent = "pressure: ".concat(resp.main.pressure, "hPa");
-      fullInfoHumidity.textContent = "humidity: ".concat(resp.main.humidity, "%");
-      fullInfoWind.textContent = "wind: ".concat(resp.wind.speed, "m/s").concat(delUndefined(resp.wind.deg, ", ".concat(windDirection(resp.wind.deg), " (").concat(resp.wind.deg, "deg.)")));
-      fullInfoSunrise.textContent = "sunrise: ".concat(addZero(hoursSunrise), ":").concat(addZero(minutesSunrise));
-      fullInfoSanset.textContent = "sunset: ".concat(addZero(hoursSunset), ":").concat(addZero(minutesSunset));
-      fullInfoCord.textContent = "geo coords: [".concat(resp.coord.lat, " , ").concat(resp.coord.lon, "]");
-      fullInfoUpdate.textContent = "last update: ".concat(addZero(hours), ":").concat(addZero(minutes), ":").concat(addZero(seconds));
-
-      for (var i = 0; i < weatherIcons.length; i++) {
-        weatherIcon.classList.remove(weatherIcons[i]);
-      }
-
-      if (resp.weather[0].icon == '03d' || resp.weather[0].icon == '03n' || resp.weather[0].icon == '04d' || resp.weather[0].icon == '04n') {
-        weatherIcon.classList.add('fa-cloud');
-      } else if (resp.weather[0].icon == '01d') {
-        weatherIcon.classList.add('fa-sun');
-      } else if (resp.weather[0].icon == '01n') {
-        weatherIcon.classList.add('fa-moon');
-      } else if (resp.weather[0].icon == '02d') {
-        weatherIcon.classList.add('fa-cloud-sun');
-      } else if (resp.weather[0].icon == '02n') {
-        weatherIcon.classList.add('fa-cloud-moon');
-      } else if (resp.weather[0].icon == '09d' || resp.weather[0].icon == '09n') {
-        weatherIcon.classList.add('fa-cloud-showers-heavy');
-      } else if (resp.weather[0].icon == '10d') {
-        weatherIcon.classList.add('fa-cloud-sun-rain');
-      } else if (resp.weather[0].icon == '10n') {
-        weatherIcon.classList.add('fa-cloud-moon-rain');
-      } else if (resp.weather[0].icon == '11d' || resp.weather[0].icon == '11n') {
-        weatherIcon.classList.add('fa-bolt');
-      } else if (resp.weather[0].icon == '13d' || resp.weather[0].icon == '13n') {
-        weatherIcon.classList.add('fa-snowflake');
-      } else if (resp.weather[0].icon == '50d' || resp.weather[0].icon == '50n') {
-        weatherIcon.classList.add('fa-smog');
-      } else {
-        weatherIcon.classList.add('fa-exclamation-triangle');
-      }
-    });
-  };
-
-  weatherApi();
-
-  if (!weatherSection.classList.contains('none')) {
-    weatherApiUpdate = setInterval(weatherApi, 60000);
-  } //automatic change of colors
-
-
-  var discoBird = function discoBird() {
-    draw++;
-
-    if (draw >= colors.length) {
-      draw = 0;
-    }
-
+var loadOptions = function loadOptions() {
+  if (localStorage.getItem('color') != null) {
+    draw = localStorage.getItem('color');
+    draw = parseInt(draw);
+  } else {
+    draw = Math.random() * 7;
+    draw = Math.round(draw);
     localStorage.setItem('color', draw);
-
-    for (var o = 0; o < colorSet.length; o++) {
-      colorSet[o].classList.remove(colors[o]);
-      optionsLeds[0].classList.remove(colors[o]);
-      optionsLeds[1].classList.remove(colors[o]);
-      kiwi.classList.remove(colors[o] + 'Number');
-    }
-
-    colorSet[draw].classList.add(colors[draw]);
-
-    if (tempoColor == 'on') {
-      kiwi.classList.add(colors[draw] + 'Number');
-    }
-
-    if (!digitalClock.classList.contains('none')) {
-      optionsLeds[0].classList.add(colors[draw]);
-    }
-
-    if (!weatherSection.classList.contains('none')) {
-      optionsLeds[1].classList.add(colors[draw]);
-    }
-  }; //////////////////////////////////////// event listeners ////////////////////////////////////////
-
-
-  var colorClick = function colorClick(n) {
-    for (var o = 0; o < colorSet.length; o++) {
-      colorSet[o].classList.remove(colors[o]);
-      optionsLeds[0].classList.remove(colors[o]);
-      optionsLeds[1].classList.remove(colors[o]);
-      kiwi.classList.remove(colors[o] + 'Number');
-    }
-
-    colorSet[n].classList.add(colors[n]);
-
-    if (tempoColor == 'on') {
-      kiwi.classList.add(colors[n] + 'Number');
-    }
-
-    if (!digitalClock.classList.contains('none')) {
-      optionsLeds[0].classList.add(colors[n]);
-    }
-
-    if (!weatherSection.classList.contains('none')) {
-      optionsLeds[1].classList.add(colors[n]);
-    }
-
-    localStorage.setItem('color', n);
-    draw = n;
-  };
-
-  var _loop = function _loop(i) {
-    colorSet[i].addEventListener("click", function (e) {
-      e.stopPropagation();
-      colorClick(i);
-    });
-    colorSet[i].addEventListener("touch", function (e) {
-      e.stopPropagation();
-      colorClick(i);
-    });
-  };
-
-  for (var i = 0; i < colors.length; i++) {
-    _loop(i);
   }
 
-  var weatherOptionClick = function weatherOptionClick() {
-    optionsLeds[1].classList.toggle(colors[draw]);
-    weatherSection.classList.toggle('none');
+  if (localStorage.getItem('city') != null) {
+    cityInput.value = localStorage.getItem('city');
+  } else {
+    cityInput.value = 'Wrocław';
+  }
 
-    if (weatherSection.classList[1] == 'none') {
-      localStorage.setItem('weather', 'off');
-      clearInterval(weatherApiUpdate);
+  sections.forEach(function (section, index) {
+    if (localStorage.getItem("section".concat(index)) == 'on') {
+      section.classList.remove('none');
+      optionDiods[index].classList.add(colors[draw]);
     } else {
-      localStorage.setItem('weather', 'on');
-      weatherApi();
-      weatherApiUpdate = setInterval(weatherApi, 60000);
+      section.classList.add('none');
+      optionDiods[index].classList.remove(colors[draw] + 'Off');
     }
-  };
+  });
+};
 
-  var optionWeather = document.querySelector('.option-weather');
-  optionWeather.addEventListener('click', function (e) {
-    e.stopPropagation();
-    weatherOptionClick();
-  });
-  optionWeather.addEventListener('touch', function (e) {
-    e.stopPropagation();
-    weatherOptionClick();
-  });
-  cityInput.addEventListener('change', function (e) {
-    weatherApi();
-  });
+loadOptions(); //reset all colors before set new one
 
-  var menuClick = function menuClick() {
-    var menuWrapper = document.querySelector(".menu-wrapper");
-    menuWrapper.classList.toggle('none');
-    if (!menuWrapper.classList.contains('none')) menuWrapper.scrollIntoView();
-  };
+var clockDiods = document.querySelectorAll('.clock-diode');
+var texts = document.querySelectorAll('.text');
 
-  menu.addEventListener('click', function (e) {
-    e.stopPropagation();
-    menuClick();
+var resetColors = function resetColors() {
+  colors.forEach(function (color) {
+    clockDiods.forEach(function (clockDiode) {
+      clockDiode.classList.remove("".concat(color, "Off"));
+      clockDiode.classList.remove("".concat(color));
+    });
+    texts.forEach(function (text) {
+      text.classList.remove("".concat(color, "Number"));
+    });
+    optionDiods.forEach(function (optionDiod) {
+      optionDiod.classList.remove("".concat(color, "Off"));
+    });
+    menu.classList.remove(color);
+    kiwi.classList.remove("".concat(color, "OffNumber"));
   });
-  menu.addEventListener('touch', function (e) {
-    e.stopPropagation();
-    menuClick();
-  });
+}; //add colors to all (options, clock, weather...)
 
-  var kiwiClick = function kiwiClick() {
-    for (var i = 0; i < colors.length; i++) {
-      kiwi.classList.remove(colors[i] + 'Number');
+
+var addColors = function addColors() {
+  menu.classList.add(colors[draw]);
+  colorSet[draw].classList.add(colors[draw]);
+  kiwi.classList.add("".concat(colors[draw], "OffNumber"));
+  clockDiods.forEach(function (clockDiode) {
+    clockDiode.classList.add("".concat(colors[draw], "Off"));
+  });
+  texts.forEach(function (text) {
+    text.classList.add("".concat(colors[draw], "Number"));
+  });
+  optionDiods.forEach(function (diode) {
+    diode.classList.add("".concat(colors[draw], "Off"));
+  });
+}; //show time at binary and digital clock
+
+
+var showTime = function showTime(variable, section, digitalNumber) {
+  var tens = Math.floor(variable / 10);
+  var unities = variable - tens * 10;
+  digitalNumber[0].textContent = tens;
+  digitalNumber[1].textContent = unities;
+
+  if (unities >= 8) {
+    section[6].classList.add(colors[draw]);
+    unities -= 8;
+  }
+
+  if (unities >= 4) {
+    section[5].classList.add(colors[draw]);
+    unities -= 4;
+  }
+
+  if (unities >= 2) {
+    section[4].classList.add(colors[draw]);
+    unities -= 2;
+  }
+
+  if (unities >= 1) {
+    section[3].classList.add(colors[draw]);
+  }
+
+  if (tens >= 4) {
+    section[2].classList.add(colors[draw]);
+    tens -= 4;
+  }
+
+  if (tens >= 2) {
+    section[1].classList.add(colors[draw]);
+    tens -= 2;
+  }
+
+  if (tens >= 1) {
+    section[0].classList.add(colors[draw]);
+  }
+}; //time interwal 
+
+
+setInterval(function () {
+  currentDate = new Date();
+  hours = currentDate.getHours();
+  minutes = currentDate.getMinutes();
+  seconds = currentDate.getSeconds();
+  resetColors();
+  addColors();
+  showTime(hours, hoursDiodes, hoursNumbers);
+  showTime(minutes, minutesDiodes, minutesNumbers);
+  showTime(seconds, secondsDiodes, secondsNumbers);
+}, 100); //get info from weather API
+
+var weatherApi = function weatherApi() {
+  //get info from API and set information in HTML
+  fetch("https://api.openweathermap.org/data/2.5/weather?q=" + encodeURI(cityInput.value) + "&APPID=18a4fba4ee73407fc5b7e49ba72b3fc4").then(function (resp) {
+    return resp.json();
+  }).then(function (resp) {
+    if (resp.cod == 200) {
+      localStorage.setItem('city', cityInput.value);
     }
 
-    if (tempoColor == 'off') {
-      tempoColor = 'on';
-      discoBirdInterval = setInterval(discoBird, 500);
-      kiwi.classList.add(colors[draw] + 'Number');
-    } else {
-      tempoColor = 'off';
-      clearInterval(discoBirdInterval);
+    var dateSunset = new Date(resp.sys.sunset * 1000);
+    var hoursSunset = dateSunset.getHours();
+    var minutesSunset = dateSunset.getMinutes();
+    var dateSunrise = new Date(resp.sys.sunrise * 1000);
+    var hoursSunrise = dateSunrise.getHours();
+    var minutesSunrise = dateSunrise.getMinutes();
+    var infoTemp = document.querySelector('.info-temp');
+    var infoCity = document.querySelector('.info-city');
+    var fullInfoTemp = document.querySelector('.full-info-temp');
+    var fullInfoWeather = document.querySelector('.full-info-weather');
+    var fullInfoPressure = document.querySelector('.full-info-pressure');
+    var fullInfoHumidity = document.querySelector('.full-info-humidity');
+    var fullInfoCity = document.querySelector('.full-info-city');
+    var fullInfoWind = document.querySelector('.full-info-wind');
+    var fullInfoSunrise = document.querySelector('.full-info-sunrise');
+    var fullInfoSanset = document.querySelector('.full-info-sunset');
+    var fullInfoCord = document.querySelector('.full-info-cord');
+    var fullInfoUpdate = document.querySelector('.full-info-update');
+    infoTemp.textContent = "".concat(round(resp.main.temp - 273.15, 0), "\xB0C");
+    infoCity.textContent = "".concat(resp.name, " , ").concat(resp.sys.country);
+    fullInfoTemp.textContent = "temp: ".concat(round(resp.main.temp - 273.15, 1), "\xB0C , ").concat(round(round(resp.main.temp - 273.15, 1) * 9 / 5 + 32, 1), "\xB0F");
+    fullInfoWeather.textContent = "weather: ".concat(resp.weather[0].description);
+    fullInfoCity.textContent = "".concat(resp.name, ", ").concat(decodeCountry(resp.sys.country));
+    fullInfoPressure.textContent = "pressure: ".concat(resp.main.pressure, "hPa");
+    fullInfoHumidity.textContent = "humidity: ".concat(resp.main.humidity, "%");
+    fullInfoWind.textContent = "wind: ".concat(resp.wind.speed, "m/s").concat(delUndefined(resp.wind.deg, ", ".concat(windDirection(resp.wind.deg), " (").concat(resp.wind.deg, "deg.)")));
+    fullInfoSunrise.textContent = "sunrise: ".concat(addZero(hoursSunrise), ":").concat(addZero(minutesSunrise));
+    fullInfoSanset.textContent = "sunset: ".concat(addZero(hoursSunset), ":").concat(addZero(minutesSunset));
+    fullInfoCord.textContent = "geo coords: [".concat(resp.coord.lat, " , ").concat(resp.coord.lon, "]");
+    fullInfoUpdate.textContent = "last update: ".concat(addZero(hours), ":").concat(addZero(minutes), ":").concat(addZero(seconds));
+    changeIcon(resp.weather[0].icon);
+  });
+};
+
+weatherApi();
+
+if (!weatherSection.classList.contains('none')) {
+  weatherApiUpdate = setInterval(weatherApi, 60000);
+} //automatic change of colors
+
+
+var discoBird = function discoBird() {
+  draw++;
+  if (draw >= colors.length) draw = 0;
+  colorClick(draw);
+}; //////////////////////////////////////// event listeners ////////////////////////////////////////
+
+
+var colorClick = function colorClick(n) {
+  colors.forEach(function (color, index) {
+    colorSet[index].classList.remove(color);
+    optionDiods.forEach(function (option) {
+      option.classList.remove(color);
+    });
+    kiwi.classList.remove("".concat(color, "Number"));
+  });
+  colorSet[n].classList.add(colors[n]);
+  if (tempoColor == 'on') kiwi.classList.add("".concat(colors[n], "Number"));
+  sections.forEach(function (section, index) {
+    if (!section.classList.contains('none')) {
+      optionDiods[index].classList.add(colors[n]);
     }
-  };
+  });
+  localStorage.setItem('color', n);
+  draw = n;
+};
 
-  kiwi.addEventListener('click', function (e) {
+colorSet.forEach(function (diode, index) {
+  diode.addEventListener("click", function (e) {
     e.stopPropagation();
-    kiwiClick();
+    colorClick(index);
   });
-  kiwi.addEventListener('touch', function (e) {
+  diode.addEventListener("touch", function (e) {
     e.stopPropagation();
-    kiwiClick();
+    colorClick(index);
   });
+});
 
-  var numberOptionClick = function numberOptionClick() {
-    optionsLeds[0].classList.toggle(colors[draw]);
-    digitalClock.classList.toggle('none');
-    if (digitalClock.classList.contains('none')) localStorage.setItem('digitalClock', 'off');else localStorage.setItem('digitalClock', 'on');
-  };
+var numberOptionClick = function numberOptionClick(n) {
+  optionDiods[n].classList.toggle(colors[draw]);
+  sections[n].classList.toggle('none');
+  if (sections[n].classList.contains('none')) localStorage.setItem("section".concat(n), 'off');else localStorage.setItem("section".concat(n), 'on');
+};
 
-  var digitalOption = document.querySelector('.option-digital');
-  digitalOption.addEventListener('click', function (e) {
+options.forEach(function (option, index) {
+  option.addEventListener('click', function (e) {
     e.stopPropagation();
-    numberOptionClick();
+    numberOptionClick(index);
   });
-  digitalOption.addEventListener('touch', function (e) {
+  option.addEventListener('touch', function (e) {
     e.stopPropagation();
-    numberOptionClick();
+    numberOptionClick(index);
   });
-  var fullInfo = document.querySelector('.full-info');
-  weatherSection.addEventListener('click', function (e) {
-    e.stopPropagation();
-    fullInfo.classList.toggle('none');
-  });
-  weatherSection.addEventListener('touch', function (e) {
-    e.stopPropagation();
-    fullInfo.classList.toggle('none');
-  });
-  document.addEventListener('click', function (e) {
-    fullInfo.classList.add('none');
-  });
-  document.addEventListener('touch', function (e) {
-    fullInfo.classList.add('none');
-  });
-})();
+});
+cityInput.addEventListener('change', function (e) {
+  weatherApi();
+});
+
+var menuClick = function menuClick() {
+  var menuWrapper = document.querySelector(".menu-wrapper");
+  menuWrapper.classList.toggle('none');
+  if (!menuWrapper.classList.contains('none')) menuWrapper.scrollIntoView();
+};
+
+menu.addEventListener('click', function (e) {
+  e.stopPropagation();
+  menuClick();
+});
+menu.addEventListener('touch', function (e) {
+  e.stopPropagation();
+  menuClick();
+});
+
+var kiwiClick = function kiwiClick() {
+  for (var i = 0; i < colors.length; i++) {
+    kiwi.classList.remove(colors[i] + 'Number');
+  }
+
+  if (tempoColor == 'off') {
+    tempoColor = 'on';
+    discoBirdInterval = setInterval(discoBird, 500);
+    kiwi.classList.add(colors[draw] + 'Number');
+  } else {
+    tempoColor = 'off';
+    clearInterval(discoBirdInterval);
+  }
+};
+
+kiwi.addEventListener('click', function (e) {
+  e.stopPropagation();
+  kiwiClick();
+});
+kiwi.addEventListener('touch', function (e) {
+  e.stopPropagation();
+  kiwiClick();
+});
+var fullInfo = document.querySelector('.full-info');
+weatherSection.addEventListener('click', function (e) {
+  e.stopPropagation();
+  fullInfo.classList.toggle('none');
+});
+weatherSection.addEventListener('touch', function (e) {
+  e.stopPropagation();
+  fullInfo.classList.toggle('none');
+});
+document.addEventListener('click', function (e) {
+  fullInfo.classList.add('none');
+});
+document.addEventListener('touch', function (e) {
+  fullInfo.classList.add('none');
+});

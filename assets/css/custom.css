@@ -2,7 +2,7 @@
 
 html { font-size: 62.5%; font-family: 'Play', sans-serif; }
 
-body { background: black; }
+body { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; background: black; min-height: 100vh; }
 
 button { border: none; outline: none; }
 
@@ -74,7 +74,7 @@ button { border: none; outline: none; }
 
 .red, .yellow, .orange, .mint, .ice, .blue, .purple, .pink { z-index: 1; }
 
-.clock { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin: 18vh auto 0 auto; }
+.clock { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin: 0 auto 0 auto; }
 
 .diode { width: 3rem; height: 3rem; border-radius: 50%; margin: 0.2rem; -webkit-transition: 0.2s linear; transition: 0.2s linear; }
 
@@ -94,9 +94,9 @@ button { border: none; outline: none; }
 
 .menu-wrapper { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-animation: show 0.3s; animation: show 0.3s; }
 
-.option { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-align: center; -ms-flex-align: center; align-items: center; margin: 1.5rem 0 0 0; cursor: pointer; font-size: 2rem; background: transparent; }
+.option { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-align: center; -ms-flex-align: center; align-items: center; margin: 1.5rem 0 0 0; cursor: pointer; font-size: 1.5rem; background: transparent; }
 
-.option-diode { margin: 0 1rem 0 0; }
+.option-diode { margin: 0 1rem 0 0; width: 3rem; height: 3rem; }
 
 .city-input { width: 12rem; height: 3rem; font-size: 2rem; margin: 1.5rem 0 1.5rem 0; background: none; border: 0.1rem solid; border-radius: 2rem; text-align: center; }
 

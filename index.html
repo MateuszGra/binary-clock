@@ -14,61 +14,61 @@
 </head>
 
 <body>
-  <section class="clock">
+  <section class="clock section">
     <div class="clock-column">
       <div class="clock-row">
-        <div class="clock-diode diode" id="oneTensHours"></div>
-        <div class="clock-diode diode" id="twoTensHours"></div>
-        <div class="clock-diode diode" id="fourTensHours"></div>
+        <div class="clock-diode diode" id="hours-diode"></div>
+        <div class="clock-diode diode" id="hours-diode"></div>
+        <div class="clock-diode diode" id="hours-diode"></div>
         <div class="clock-diode diode"></div>
       </div>
       <div class="clock-row">
-        <div class="clock-diode diode" id="oneUnitesHours"></div>
-        <div class="clock-diode diode" id="twoUnitesHours"></div>
-        <div class="clock-diode diode" id="fourUnitesHours"></div>
-        <div class="clock-diode diode" id="eightUnitesHours"></div>
+        <div class="clock-diode diode" id="hours-diode"></div>
+        <div class="clock-diode diode" id="hours-diode"></div>
+        <div class="clock-diode diode" id="hours-diode"></div>
+        <div class="clock-diode diode" id="hours-diode"></div>
       </div>
     </div>
     <div class="clock-column">
       <div class="clock-row">
-        <div class="clock-diode diode" id="oneTensMinutes"></div>
-        <div class="clock-diode diode" id="twoTensMinutes"></div>
-        <div class="clock-diode diode" id="fourTensMinutes"></div>
+        <div class="clock-diode diode" id="minutes-diode"></div>
+        <div class="clock-diode diode" id="minutes-diode"></div>
+        <div class="clock-diode diode" id="minutes-diode"></div>
         <div class="clock-diode diode"></div>
       </div>
       <div class="clock-row">
-        <div class="clock-diode diode" id="oneUnitiesMinutes"></div>
-        <div class="clock-diode diode" id="twoUnitiesMinutes"></div>
-        <div class="clock-diode diode" id="fourUnitiesMinutes"></div>
-        <div class="clock-diode diode" id="eightUnitiesMinutes"></div>
+        <div class="clock-diode diode" id="minutes-diode"></div>
+        <div class="clock-diode diode" id="minutes-diode"></div>
+        <div class="clock-diode diode" id="minutes-diode"></div>
+        <div class="clock-diode diode" id="minutes-diode"></div>
       </div>
     </div>
     <div class="clock-column">
       <div class="clock-row">
-        <div class="clock-diode diode" id="oneTensSeconds"></div>
-        <div class="clock-diode diode" id="twoTensSeconds"></div>
-        <div class="clock-diode diode" id="fourTensSeconds"></div>
+        <div class="clock-diode diode" id="seconds-diode"></div>
+        <div class="clock-diode diode" id="seconds-diode"></div>
+        <div class="clock-diode diode" id="seconds-diode"></div>
         <div class="clock-diode diode"></div>
       </div>
       <div class="clock-row">
-        <div class="clock-diode diode" id="oneUnitiesSeconds"></div>
-        <div class="clock-diode diode" id="twoUnitiesSeconds"></div>
-        <div class="clock-diode diode" id="fourUnitiesSeconds"></div>
-        <div class="clock-diode diode" id="eightUnitiesSeconds"></div>
+        <div class="clock-diode diode" id="seconds-diode"></div>
+        <div class="clock-diode diode" id="seconds-diode"></div>
+        <div class="clock-diode diode" id="seconds-diode"></div>
+        <div class="clock-diode diode" id="seconds-diode"></div>
       </div>
     </div>
   </section>
-  <section class="digital-clock none">
-    <p class="clock-number text" id="tensHours">X</p>
-    <p class="clock-number text" id="unitesHours">X</p>
+  <section class="digital-clock section none">
+    <p class="clock-number text" id="hours">X</p>
+    <p class="clock-number text" id="hours">X</p>
     <p class="clock-number text">:</p>
-    <p class="clock-number text" id="tensMinutes">X</p>
-    <p class="clock-number text" id="unitesMinutes">X</p>
+    <p class="clock-number text" id="minutes">X</p>
+    <p class="clock-number text" id="minutes">X</p>
     <p class="clock-number text">:</p>
-    <p class="clock-number text" id="tensSeconds">X</p>
-    <p class="clock-number text" id="unitesSeconds">X</p>
+    <p class="clock-number text" id="seconds">X</p>
+    <p class="clock-number text" id="seconds">X</p>
   </section>
-  <section class="weather">
+  <section class="weather section">
     <div class="weather-row">
       <p class="text info-temp"></p>
       <i class="text weather-icon fas"></i>
@@ -105,6 +105,10 @@
       <button class="color-set-diode diode pinkOff"></button>
       <i class="fas fa-kiwi-bird"></i>
     </div>
+    <button class="option option-digital">
+      <div class="option-diode diode option-digital-diode"></div>
+      <span class="text">Binary Clock</span>
+    </button>
     <button class="option option-digital">
       <div class="option-diode diode option-digital-diode"></div>
       <span class="text">Digital Clock</span>
