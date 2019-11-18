@@ -35,6 +35,8 @@ let seconds = currentDate.getSeconds();
 
 //load and set local storage options
 const loadOptions = () => {
+    if (!localStorage.getItem(`section0`)) localStorage.setItem(`section0`, 'on');
+
     if (localStorage.getItem('color') != null) {
         draw = localStorage.getItem('color')
         draw = parseInt(draw);
