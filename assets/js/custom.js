@@ -56,9 +56,9 @@ var showAnalogTime = function showAnalogTime(hours, minutes, seconds) {
     }
   };
 
-  var hoursDeg = hours / 12 * 366 + minutes / 60 * 30 + 90;
-  var minutesDeg = minutes / 60 * 366 + 90;
-  var secondsDeg = seconds / 60 * 366 + 90;
+  var hoursDeg = hours / 12 * 360 + minutes / 60 * 30 + 90;
+  var minutesDeg = minutes / 60 * 360 + 90;
+  var secondsDeg = seconds / 60 * 360 + 90;
   secondsHand.style.transform = "translateY(-50%) rotate(".concat(secondsDeg, "deg)");
   changeStyle(secondsHand, secondsDeg);
   minutesHand.style.transform = "translateY(-50%) rotate(".concat(minutesDeg, "deg)");

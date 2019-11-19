@@ -51,9 +51,9 @@ const showAnalogTime = (hours, minutes, seconds) => {
         }
     }
 
-    let hoursDeg = (hours / 12 * 366) + (minutes / 60 * 30) + 90;
-    let minutesDeg = minutes / 60 * 366 + 90;
-    let secondsDeg = seconds / 60 * 366 + 90;
+    let hoursDeg = (hours / 12 * 360) + (minutes / 60 * 30) + 90;
+    let minutesDeg = minutes / 60 * 360 + 90;
+    let secondsDeg = seconds / 60 * 360 + 90;
 
     secondsHand.style.transform = `translateY(-50%) rotate(${secondsDeg}deg)`;
     changeStyle(secondsHand, secondsDeg);
