@@ -209,6 +209,7 @@ loadOptions(); //reset all colors before set new one
 
 var clockDiods = document.querySelectorAll('.clock-diode');
 var texts = document.querySelectorAll('.text');
+var blocks = document.querySelectorAll('.block');
 
 var resetColors = function resetColors() {
   colors.forEach(function (color) {
@@ -218,6 +219,9 @@ var resetColors = function resetColors() {
     });
     texts.forEach(function (text) {
       text.classList.remove("".concat(color, "Number"));
+    });
+    blocks.forEach(function (block) {
+      block.classList.remove("".concat(color));
     });
     optionDiods.forEach(function (optionDiod) {
       optionDiod.classList.remove("".concat(color, "Off"));
@@ -237,6 +241,9 @@ var addColors = function addColors() {
   });
   texts.forEach(function (text) {
     text.classList.add("".concat(colors[draw], "Number"));
+  });
+  blocks.forEach(function (block) {
+    block.classList.add("".concat(colors[draw]));
   });
   optionDiods.forEach(function (diode) {
     diode.classList.add("".concat(colors[draw], "Off"));
@@ -282,6 +289,30 @@ var showTime = function showTime(variable, section, digitalNumber) {
   if (tens >= 1) {
     section[0].classList.add(colors[draw]);
   }
+};
+
+var showAnalogTime = function showAnalogTime(hours, minutes, seconds) {
+  var hoursHand = document.querySelector('.hours-hand');
+  var minutesHand = document.querySelector('.minutes-hand');
+  var secondsHand = document.querySelector('.seconds-hand');
+
+  var changeStyle = function changeStyle(hand, deg) {
+    if (deg != 90) {
+      hand.style.transition = "0.3s";
+      hand.style.transitionTimingFunction = 'cubic-bezier(0.1, 2.7, 0.58, 1)';
+    } else {
+      secondsHand.style.transition = "0s";
+    }
+  };
+
+  var hoursDeg = hours / 12 * 366 + minutes / 60 * 30 + 90;
+  var minutesDeg = minutes / 60 * 366 + 90;
+  var secondsDeg = seconds / 60 * 366 + 90;
+  secondsHand.style.transform = "translateY(-50%) rotate(".concat(secondsDeg, "deg)");
+  changeStyle(secondsHand, secondsDeg);
+  minutesHand.style.transform = "translateY(-50%) rotate(".concat(minutesDeg, "deg)");
+  changeStyle(minutesHand, minutesDeg);
+  hoursHand.style.transform = "translateY(-50%) rotate(".concat(hoursDeg, "deg)");
 }; //time interwal 
 
 
@@ -295,6 +326,7 @@ setInterval(function () {
   showTime(hours, hoursDiodes, hoursNumbers);
   showTime(minutes, minutesDiodes, minutesNumbers);
   showTime(seconds, secondsDiodes, secondsNumbers);
+  showAnalogTime(hours, minutes, seconds);
 }, 100); //get info from weather API
 
 var weatherApi = function weatherApi() {

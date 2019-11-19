@@ -68,6 +68,7 @@ loadOptions();
 //reset all colors before set new one
 const clockDiods = document.querySelectorAll('.clock-diode');
 const texts = document.querySelectorAll('.text');
+const blocks = document.querySelectorAll('.block');
 
 const resetColors = () => {
 
@@ -80,6 +81,10 @@ const resetColors = () => {
 
         texts.forEach((text) => {
             text.classList.remove(`${color}Number`)
+        })
+
+        blocks.forEach((block) => {
+            block.classList.remove(`${color}`)
         })
 
         optionDiods.forEach((optionDiod) => {
@@ -105,6 +110,10 @@ const addColors = () => {
 
     texts.forEach((text) => {
         text.classList.add(`${colors[draw]}Number`)
+    })
+
+    blocks.forEach((block) => {
+        block.classList.add(`${colors[draw]}`)
     })
 
     optionDiods.forEach((diode) => {
@@ -148,6 +157,32 @@ const showTime = (variable, section, digitalNumber) => {
     if (tens >= 1) {
         section[0].classList.add(colors[draw]);
     }
+
+}
+
+const showAnalogTime = (hours, minutes, seconds) => {
+    const hoursHand = document.querySelector('.hours-hand');
+    const minutesHand = document.querySelector('.minutes-hand');
+    const secondsHand = document.querySelector('.seconds-hand');
+
+    const changeStyle = (hand, deg) => {
+        if (deg != 90) {
+            hand.style.transition = `0.3s`;
+            hand.style.transitionTimingFunction = 'cubic-bezier(0.1, 2.7, 0.58, 1)';
+        } else {
+            secondsHand.style.transition = `0s`;
+        }
+    }
+
+    let hoursDeg = (hours / 12 * 366) + (minutes / 60 * 30) + 90;
+    let minutesDeg = minutes / 60 * 366 + 90;
+    let secondsDeg = seconds / 60 * 366 + 90;
+
+    secondsHand.style.transform = `translateY(-50%) rotate(${secondsDeg}deg)`;
+    changeStyle(secondsHand, secondsDeg);
+    minutesHand.style.transform = `translateY(-50%) rotate(${minutesDeg}deg)`;
+    changeStyle(minutesHand, minutesDeg);
+    hoursHand.style.transform = `translateY(-50%) rotate(${hoursDeg}deg)`;
 }
 
 //time interwal 
@@ -162,6 +197,8 @@ setInterval(() => {
     showTime(hours, hoursDiodes, hoursNumbers);
     showTime(minutes, minutesDiodes, minutesNumbers);
     showTime(seconds, secondsDiodes, secondsNumbers);
+
+    showAnalogTime(hours, minutes, seconds);
 }, 100);
 
 //get info from weather API

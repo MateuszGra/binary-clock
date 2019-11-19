@@ -1,0 +1,8 @@
+@mixin hand {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translateY(-50%) rotate(0);
+    transform-origin: 100%;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
