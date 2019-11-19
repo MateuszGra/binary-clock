@@ -92,13 +92,13 @@ button { border: none; outline: none; }
 
 .analog-clock { margin: 3rem 0 0 0; }
 
-.clock-face { position: relative; width: 150px; height: 150px; border-radius: 50%; background: transparent; border: 3px solid; }
+.clock-face { position: relative; width: 150px; height: 150px; border-radius: 50%; background: transparent; border: 3px solid; -webkit-transition: 0.2s linear; transition: 0.2s linear; }
 
-.seconds-hand { position: absolute; top: 50%; right: 50%; -webkit-transform: translateY(-50%) rotate(0); transform: translateY(-50%) rotate(0); -webkit-transform-origin: 100%; transform-origin: 100%; -webkit-transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1); transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1); width: 46%; height: 2px; }
+.seconds-hand { position: absolute; top: 50%; right: 50%; -webkit-transform: translateY(-50%) rotate(0); transform: translateY(-50%) rotate(0); -webkit-transform-origin: 100%; transform-origin: 100%; -webkit-transition: 0.2s; transition: 0.2s; width: 46%; height: 2px; }
 
-.minutes-hand { position: absolute; top: 50%; right: 50%; -webkit-transform: translateY(-50%) rotate(0); transform: translateY(-50%) rotate(0); -webkit-transform-origin: 100%; transform-origin: 100%; -webkit-transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1); transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1); width: 42%; height: 3px; }
+.minutes-hand { position: absolute; top: 50%; right: 50%; -webkit-transform: translateY(-50%) rotate(0); transform: translateY(-50%) rotate(0); -webkit-transform-origin: 100%; transform-origin: 100%; -webkit-transition: 0.2s; transition: 0.2s; width: 42%; height: 3px; }
 
-.hours-hand { position: absolute; top: 50%; right: 50%; -webkit-transform: translateY(-50%) rotate(0); transform: translateY(-50%) rotate(0); -webkit-transform-origin: 100%; transform-origin: 100%; -webkit-transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1); transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1); width: 35%; height: 3px; }
+.hours-hand { position: absolute; top: 50%; right: 50%; -webkit-transform: translateY(-50%) rotate(0); transform: translateY(-50%) rotate(0); -webkit-transform-origin: 100%; transform-origin: 100%; -webkit-transition: 0.2s; transition: 0.2s; width: 35%; height: 3px; }
 
 .colorSet { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; margin: 1.5rem auto 0 auto; -webkit-transition: 0.2s linear; transition: 0.2s linear; }
 
