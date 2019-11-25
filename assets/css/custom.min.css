@@ -1,7 +1,7 @@
-*{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box}
-html{font-size:62.5%;font-family:'Play',sans-serif}
+*{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:'Play',sans-serif}
+html{font-size:62.5%}
 body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;background:black;min-height:100vh}
-button{border:0;outline:0;font-family:'Play',sans-serif}
+button{border:0;outline:0}
 .redOff{background:#240000}
 .yellowOff{background:#222500}
 .orangeOff{background:#281c00}
