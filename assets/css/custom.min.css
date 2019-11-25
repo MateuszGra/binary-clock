@@ -1,7 +1,7 @@
 *{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box}
 html{font-size:62.5%;font-family:'Play',sans-serif}
 body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;background:black;min-height:100vh}
-button{border:0;outline:0}
+button{border:0;outline:0;font-family:'Play',sans-serif}
 .redOff{background:#240000}
 .yellowOff{background:#222500}
 .orangeOff{background:#281c00}
@@ -48,12 +48,13 @@ button{border:0;outline:0}
 .clock-face{position:relative;width:150px;height:150px;border-radius:50%;background:transparent;border:3px solid;-webkit-transition:.2s linear;transition:.2s linear}
 .seconds-hand{position:absolute;top:50%;right:50%;-webkit-transform:translateY(-50%) rotate(0);transform:translateY(-50%) rotate(0);-webkit-transform-origin:100%;transform-origin:100%;-webkit-transition:.2s;transition:.2s;width:46%;height:2px}
 .minutes-hand{position:absolute;top:50%;right:50%;-webkit-transform:translateY(-50%) rotate(0);transform:translateY(-50%) rotate(0);-webkit-transform-origin:100%;transform-origin:100%;-webkit-transition:.2s;transition:.2s;width:42%;height:3px}
-.hours-hand{position:absolute;top:50%;right:50%;-webkit-transform:translateY(-50%) rotate(0);transform:translateY(-50%) rotate(0);-webkit-transform-origin:100%;transform-origin:100%;-webkit-transition:.2s;transition:.2s;width:35%;height:3px}
+.hours-hand{position:absolute;top:50%;right:50%;-webkit-transform:translateY(-50%) rotate(0);transform:translateY(-50%) rotate(0);-webkit-transform-origin:100%;transform-origin:100%;-webkit-transition:.2s;transition:.2s;width:35%;height:3px;-webkit-transition:background-color .2s linear;transition:background-color .2s linear}
 .colorSet{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:1.5rem auto 0 auto;-webkit-transition:.2s linear;transition:.2s linear}
-.menu-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-animation:show .3s;animation:show .3s}
-.option{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:1.5rem 0 0 0;cursor:pointer;font-size:1.5rem;background:transparent}
+.menu-wrapper{width:320px;max-width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-animation:show .3s;animation:show .3s}
+.option{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:1.5rem 0 0 2.5rem;cursor:pointer;font-size:1.5rem;background:transparent}
 .option-diode{margin:0 1rem 0 0;width:3rem;height:3rem}
 .city-input{width:12rem;height:3rem;font-size:2rem;margin:1.5rem 0 1.5rem 0;background:0;border:.1rem solid;border-radius:2rem;text-align:center}
+.secion-options{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;width:100%}
 .weather{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:2rem auto 0 auto;-webkit-transition:.2s linear;transition:.2s linear;cursor:pointer;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;-webkit-animation:show .3s;animation:show .3s}
 .weather-row{display:-webkit-box;display:-ms-flexbox;display:flex}
 .info-temp{font-size:4rem;-webkit-transition:.2s linear;transition:.2s linear}

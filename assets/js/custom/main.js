@@ -206,7 +206,7 @@ const discoBird = () => {
     colorClick(draw);
 }
 
-//////////////////////////////////////// event listeners ////////////////////////////////////////
+//event listeners
 
 const colorClick = n => {
     colors.forEach((color, index) => {

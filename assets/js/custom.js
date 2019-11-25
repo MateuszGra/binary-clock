@@ -48,7 +48,7 @@ var showAnalogTime = function showAnalogTime(hours, minutes, seconds) {
   var secondsHand = document.querySelector('.seconds-hand');
 
   var changeStyle = function changeStyle(hand, deg) {
-    if (deg != 90 && deg != 810) {
+    if (deg != 90 && deg != 450 && deg != 810) {
       hand.style.transition = "0.2s";
       hand.style.transitionTimingFunction = 'cubic-bezier(0.1, 2.7, 0.58, 1)';
     } else {
@@ -385,7 +385,7 @@ var discoBird = function discoBird() {
   draw++;
   if (draw >= colors.length) draw = 0;
   colorClick(draw);
-}; //////////////////////////////////////// event listeners ////////////////////////////////////////
+}; //event listeners
 
 
 var colorClick = function colorClick(n) {

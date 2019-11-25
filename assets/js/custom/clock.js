@@ -43,7 +43,7 @@ const showAnalogTime = (hours, minutes, seconds) => {
     const secondsHand = document.querySelector('.seconds-hand');
 
     const changeStyle = (hand, deg) => {
-        if (deg != 90 && deg != 810) {
+        if (deg != 90 && deg != 450 && deg != 810) {
             hand.style.transition = `0.2s`;
             hand.style.transitionTimingFunction = 'cubic-bezier(0.1, 2.7, 0.58, 1)';
         } else {
