@@ -1,5 +1,53 @@
 "use strict";
 
+var select = document.querySelector('.air-stations');
+
+var createSelect = function createSelect(stations) {
+  stations.forEach(function (station) {
+    var option = document.createElement('option');
+    option.text = station.stationName;
+    option.value = station.id;
+    select.add(option);
+  });
+};
+
+var loadSelectValue = function loadSelectValue() {
+  if (localStorage.getItem('station') != null) {
+    airStacions.value = localStorage.getItem('station');
+  } else {
+    airStacions.value = 129;
+  }
+};
+
+var stationData = function stationData() {
+  var data = new FormData();
+  data.append('id', select.value);
+  fetch('inc/air-data.php', {
+    method: "POST",
+    body: data
+  }).then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    console.log(response);
+  }).catch(function (error) {
+    return console.log(error);
+  });
+};
+
+fetch('inc/air-stations.php', {
+  method: "GET"
+}).then(function (response) {
+  return response.text();
+}).then(function (response) {
+  var stations = JSON.parse(response);
+  createSelect(stations);
+  loadSelectValue();
+  stationData();
+}).catch(function (error) {
+  return console.log(error);
+});
+"use strict";
+
 //show time at binary and digital clock
 var showTime = function showTime(variable, section, digitalNumber) {
   var tens = Math.floor(variable / 10);
@@ -67,12 +115,10 @@ var showAnalogTime = function showAnalogTime(hours, minutes, seconds) {
 };
 "use strict";
 
-//auxiliary function to round results
 var round = function round(n, k) {
   var factor = Math.pow(10, k);
   return Math.round(n * factor) / factor;
-}; //auxiliary function to change country code to full country name
-
+};
 
 var decodeCountry = function decodeCountry(n) {
   var countryCode = ['AF', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BY', 'BE', 'BZ', 'BJ', 'BM', 'BT', 'BO', 'BQ', 'BA', 'BW', 'BV', 'BR', 'IO', 'BN', 'BG', 'BF', 'BI', 'KH', 'CM', 'CA', 'CV', 'KY', 'CF', 'TD', 'CL', 'CN', 'CX', 'CC', 'CO', 'KM', 'CG', 'CD', 'CK', 'CR', 'HR', 'CU', 'CW', 'CY', 'CZ', 'CI', 'DK', 'DJ', 'DM', 'DO', 'EC', 'EG', 'SV', 'GQ', 'ER', 'EE', 'SZ', 'ET', 'FK', 'FO', 'FJ', 'FI', 'FR', 'GF', 'PF', 'TF', 'GA', 'GM', 'GE', 'DE', 'GH', 'GI', 'GR', 'GL', 'GD', 'GP', 'GU', 'GT', 'GG', 'GN', 'GW', 'GY', 'HT', 'HM', 'VA', 'HN', 'HK', 'HU', 'IS', 'IN', 'ID', 'IR', 'IQ', 'IE', 'IM', 'IL', 'IT', 'JM', 'JP', 'JE', 'JO', 'KZ', 'KE', 'KI', 'KP', 'KR', 'KW', 'KG', 'LA', 'LV', 'LB', 'LS', 'LR', 'LY', 'LI', 'LT', 'LU', 'MO', 'MK', 'MG', 'MW', 'MY', 'MV', 'ML', 'MT', 'MH', 'MQ', 'MR', 'MU', 'YT', 'MX', 'FM', 'MD', 'MC', 'MN', 'ME', 'MS', 'MA', 'MZ', 'MM', 'NA', 'NR', 'NP', 'NL', 'NC', 'NZ', 'NI', 'NE', 'NG', 'NU', 'NF', 'MP', 'NO', 'OM', 'PK', 'PW', 'PS', 'PA', 'PG', 'PY', 'PE', 'PH', 'PN', 'PL', 'PT', 'PR', 'QA', 'RO', 'RU', 'RW', 'RE', 'BL', 'SH', 'KN', 'LC', 'MF', 'PM', 'VC', 'WS', 'SM', 'ST', 'SA', 'SN', 'RS', 'SC', 'SL', 'SG', 'SX', 'SK', 'SI', 'SB', 'SO', 'ZA', 'GS', 'SS', 'ES', 'LK', 'SD', 'SR', 'SJ', 'SE', 'CH', 'SY', 'TW', 'TJ', 'TZ', 'TH', 'TL', 'TG', 'TK', 'TO', 'TT', 'TN', 'TR', 'TM', 'TC', 'TV', 'UG', 'UA', 'AE', 'GB', 'US', 'UM', 'UY', 'UZ', 'VU', 'VE', 'VN', 'VG', 'VI', 'WF', 'EH', 'YE', 'ZM', 'ZW', 'AX'];
@@ -83,8 +129,7 @@ var decodeCountry = function decodeCountry(n) {
   }
 
   return n;
-}; //auxiliary function to change wind deg to direction
-
+};
 
 var windDirection = function windDirection(n) {
   if (n > 11.25 && n <= 33.75) {
@@ -120,8 +165,7 @@ var windDirection = function windDirection(n) {
   } else if (n > 348.75 || n <= 11.25) {
     return 'N';
   }
-}; //auxiliary function to delete if some API info is not defined
-
+};
 
 var delUndefined = function delUndefined(n, y) {
   if (n == undefined) {
@@ -129,8 +173,7 @@ var delUndefined = function delUndefined(n, y) {
   }
 
   return y;
-}; //auxiliary function to add zero to result (3am to 03am)
-
+};
 
 var addZero = function addZero(n) {
   if (n < 10) {
@@ -227,7 +270,8 @@ var digitalClock = document.querySelector('.digital-clock');
 var menu = document.querySelector('.menu-button');
 var kiwi = document.querySelector('.fa-kiwi-bird');
 var colorSet = document.querySelectorAll(".color-set-diode");
-var weatherSection = document.querySelector(".weather");
+var weatherSection = document.querySelector('.weather');
+var airStacions = document.querySelector('.air-stations');
 var colors = ['red', 'yellow', 'orange', 'mint', 'ice', 'blue', 'purple', 'pink'];
 var weatherApiUpdate; //weather API (set interval)
 

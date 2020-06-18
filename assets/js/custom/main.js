@@ -16,7 +16,8 @@ const digitalClock = document.querySelector('.digital-clock');
 const menu = document.querySelector('.menu-button');
 const kiwi = document.querySelector('.fa-kiwi-bird');
 const colorSet = document.querySelectorAll(".color-set-diode");
-const weatherSection = document.querySelector(".weather");
+const weatherSection = document.querySelector('.weather');
+const airStacions = document.querySelector('.air-stations');
 
 const colors = [
     'red', 'yellow', 'orange', 'mint', 'ice', 'blue', 'purple', 'pink',
@@ -51,6 +52,7 @@ const loadOptions = () => {
     } else {
         cityInput.value = 'Wrocław';
     }
+
 
     sections.forEach((section, index) => {
         if (localStorage.getItem(`section${index}`) == 'on') {
