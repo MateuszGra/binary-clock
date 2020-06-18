@@ -1,17 +1,17 @@
 {
-  "name": "GulpStarterWP",
-  "description": "Wordpress theme featuring Gulp 4",
-  "version": "2.0.0",
-  "author": "Rafał Kubacki <rafalkubacki7@gmail.com> (https://rafalkubacki.pl/)",
+  "name": "Gulp-starter",
+  "description": "Gulp-starter",
+  "version": "1.0.0",
+  "author": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adCookieDev/gulp-starter-wp"
+    "url": "https://github.com/MateuszGra/starter-gulp"
   },
   "license": "UNLICENSED",
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/register": "^7.0.0",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/register": "^7.10.1",
     "browser-sync": "^2.26.3",
     "del": "^4.1.0",
     "gulp": "^4.0.0",
@@ -23,7 +23,7 @@
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.2.0",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^4.1.0",
     "gulp-sass-glob": "^1.0.9",
     "gulp-uglify": "^3.0.2",
     "gulp-uglifycss": "^1.0.6"
