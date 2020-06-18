@@ -1,53 +1,5 @@
 "use strict";
 
-var select = document.querySelector('.air-stations');
-
-var createSelect = function createSelect(stations) {
-  stations.forEach(function (station) {
-    var option = document.createElement('option');
-    option.text = station.stationName;
-    option.value = station.id;
-    select.add(option);
-  });
-};
-
-var loadSelectValue = function loadSelectValue() {
-  if (localStorage.getItem('station') != null) {
-    airStacions.value = localStorage.getItem('station');
-  } else {
-    airStacions.value = 129;
-  }
-};
-
-var stationData = function stationData() {
-  var data = new FormData();
-  data.append('id', select.value);
-  fetch('inc/air-data.php', {
-    method: "POST",
-    body: data
-  }).then(function (response) {
-    return response.text();
-  }).then(function (response) {
-    console.log(response);
-  }).catch(function (error) {
-    return console.log(error);
-  });
-};
-
-fetch('inc/air-stations.php', {
-  method: "GET"
-}).then(function (response) {
-  return response.text();
-}).then(function (response) {
-  var stations = JSON.parse(response);
-  createSelect(stations);
-  loadSelectValue();
-  stationData();
-}).catch(function (error) {
-  return console.log(error);
-});
-"use strict";
-
 //show time at binary and digital clock
 var showTime = function showTime(variable, section, digitalNumber) {
   var tens = Math.floor(variable / 10);

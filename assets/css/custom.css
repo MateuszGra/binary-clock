@@ -110,10 +110,6 @@ button { border: none; outline: none; }
 
 .city-input { width: 12rem; height: 3rem; font-size: 2rem; margin: 1.5rem 0 1.5rem 0; background: none; border: 0.1rem solid; border-radius: 2rem; text-align: center; }
 
-.air-stations { margin: 0 0 1.5rem 0; background: none; border: 0.1rem solid; border-radius: 2rem; font-size: 2rem; outline: none; padding: 0 1rem; max-width: 20rem; }
-
-.air-stations option { background: black; }
-
 .secion-options { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; width: 100%; }
 
 .weather { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-align: center; -ms-flex-align: center; align-items: center; margin: 2rem auto 0 auto; -webkit-transition: 0.2s linear; transition: 0.2s linear; cursor: pointer; width: -webkit-fit-content; width: -moz-fit-content; width: fit-content; -webkit-animation: show 0.3s; animation: show 0.3s; }
